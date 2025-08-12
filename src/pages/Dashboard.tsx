@@ -1,11 +1,27 @@
 import Navigation from "@/components/shared/Navigation";
+import GreetingHero from "@/components/dashboard/GreetingHero";
+import QuickStats from "@/components/dashboard/QuickStats";
+import WealthGrowthChart from "@/components/dashboard/WealthGrowthChart";
+import AssetAllocationChart from "@/components/dashboard/AssetAllocationChart";
+import ActionItems from "@/components/dashboard/ActionItems";
+import ActivityFeed from "@/components/dashboard/ActivityFeed";
+import UpcomingEvents from "@/components/dashboard/UpcomingEvents";
 
 const Dashboard = () => (
-  <div className="min-h-screen bg-background">
+  <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
     <Navigation />
-    <main className="container mx-auto px-4 py-12">
-    <h1 className="font-display text-3xl mb-4">Your Dashboard</h1>
-    <p className="text-muted-foreground">Quick stats, appointments, and recommendations coming soon.</p>
+    <main className="container mx-auto px-4 py-10 space-y-8">
+      <GreetingHero />
+      <QuickStats />
+      <div className="grid gap-4 lg:grid-cols-2">
+        <WealthGrowthChart />
+        <AssetAllocationChart />
+      </div>
+      <ActionItems />
+      <div className="grid gap-4 lg:grid-cols-2">
+        <ActivityFeed />
+        <UpcomingEvents />
+      </div>
     </main>
   </div>
 );
