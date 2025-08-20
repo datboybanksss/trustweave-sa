@@ -36,6 +36,13 @@ All colors MUST be HSL.
     --destructive-foreground: 210 40% 98%;
 
     --success: 159 84% 43%;
+    
+    /* Crypto colors */
+    --bitcoin: 25 95% 53%;
+    --ethereum: 232 79% 66%;
+    --crypto-verified: 159 84% 43%;
+    --crypto-pending: 40 96% 56%;
+    --crypto-unverified: 0 84% 60%;
 
     --border: 214 32% 91%;
     --input: 214 32% 91%;

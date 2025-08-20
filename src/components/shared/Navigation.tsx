@@ -12,10 +12,8 @@ export const Navigation = () => (
       </div>
       <div className="hidden md:flex items-center gap-6">
         <NavLink to="/" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Home</NavLink>
-        <NavLink to="/dashboard" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Dashboard</NavLink>
-        <NavLink to="/trust-builder" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Trust Builder</NavLink>
-        <NavLink to="/education" className="hover:text-primary transition-colors">Education</NavLink>
-        <NavLink to="/consultation" className="hover:text-primary transition-colors">Consultation</NavLink>
+        <NavLink to="/pricing" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Pricing</NavLink>
+        <NavLink to="/consultation" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Consultation</NavLink>
       </div>
       <div className="flex items-center gap-3">
         <LanguageSelector />

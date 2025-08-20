@@ -69,6 +69,19 @@ export default {
 				success: {
 					DEFAULT: 'hsl(var(--success))',
 					foreground: 'hsl(var(--primary-foreground))'
+				},
+				bitcoin: {
+					DEFAULT: 'hsl(var(--bitcoin))',
+					foreground: 'hsl(var(--primary-foreground))'
+				},
+				ethereum: {
+					DEFAULT: 'hsl(var(--ethereum))',
+					foreground: 'hsl(var(--primary-foreground))'
+				},
+				crypto: {
+					verified: 'hsl(var(--crypto-verified))',
+					pending: 'hsl(var(--crypto-pending))',
+					unverified: 'hsl(var(--crypto-unverified))'
 				}
 			},
 			borderRadius: {
