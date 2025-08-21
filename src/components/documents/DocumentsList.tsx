@@ -20,7 +20,7 @@ import {
 interface Document {
   id: string;
   name: string;
-  category: string;
+  category: 'asset' | 'identity' | 'debt';
   subCategory: string;
   uploadDate: string;
   size: string;
@@ -34,6 +34,17 @@ interface Document {
     zarValue: number;
     blockchain: string;
   };
+  // Additional crypto properties
+  cryptoType?: 'bitcoin' | 'ethereum' | 'other';
+  walletType?: 'exchange' | 'cold' | 'hot';
+  exchangeName?: string;
+  kycStatus?: 'verified' | 'pending' | 'unverified';
+  cryptoAmount?: number;
+  cryptoCurrency?: string;
+  blockchainNetwork?: string;
+  ownershipProof?: string;
+  lastTransactionDate?: string;
+  blockchainExplorerUrl?: string;
 }
 
 interface DocumentsListProps {

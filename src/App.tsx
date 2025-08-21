@@ -7,6 +7,9 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
 import TrustBuilder from "./pages/TrustBuilder";
+import Pricing from "./pages/Pricing";
+import Consultation from "./pages/Consultation";
+import Education from "./pages/Education";
 
 const queryClient = new QueryClient();
 
@@ -18,9 +21,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/pricing" element={<div className="min-h-screen bg-background p-8"><h1 className="font-display text-3xl">Pricing Plans Coming Soon</h1></div>} />
-          <Route path="/consultation" element={<div className="min-h-screen bg-background p-8"><h1 className="font-display text-3xl">Book Consultation - Calendly Integration Coming Soon</h1></div>} />
-          <Route path="/education" element={<div className="min-h-screen bg-background p-8"><h1 className="font-display text-3xl">Education Modules Coming Soon</h1></div>} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/consultation" element={<Consultation />} />
+          <Route path="/education" element={<Education />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

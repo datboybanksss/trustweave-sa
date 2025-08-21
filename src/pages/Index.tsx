@@ -8,13 +8,14 @@ import { EnhancedWealthMetrics } from "@/components/dashboard/EnhancedWealthMetr
 import { TrustBuilderSection } from "@/components/dashboard/TrustBuilderSection";
 import { FileUp, BookOpen, Calendar, Play } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
+import { Document } from "@/types";
 
 // Sample data with crypto holdings
 const sampleDocuments = [
   {
     id: '1',
     name: 'Property_Valuation_Sandton.pdf',
-    category: 'asset',
+    category: 'asset' as const,
     subCategory: 'Property valuations',
     uploadDate: '2024-01-15',
     size: '2.3 MB',
@@ -24,7 +25,7 @@ const sampleDocuments = [
   {
     id: '2',
     name: 'Bitcoin_Wallet_Verified',
-    category: 'asset',
+    category: 'asset' as const,
     subCategory: 'Cryptocurrency holdings',
     uploadDate: '2024-01-10',
     size: 'N/A',
@@ -41,7 +42,7 @@ const sampleDocuments = [
   {
     id: '3',
     name: 'Home_Mortgage_FNB.pdf',
-    category: 'debt',
+    category: 'debt' as const,
     subCategory: 'Home mortgage statements',
     uploadDate: '2024-01-12',
     size: '1.8 MB',
@@ -52,12 +53,12 @@ const sampleDocuments = [
 
 const Index = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
-  const [documents, setDocuments] = useState(sampleDocuments);
+  const [documents, setDocuments] = useState<Document[]>(sampleDocuments);
   const [activeTrusts, setActiveTrusts] = useState(3);
   
   const portfolio = useCountUp(4700000, 1500);
 
-  const handleDocumentUpload = (files: File[], category: string, subCategory: string, cryptoData?: any) => {
+  const handleDocumentUpload = (files: File[], category: 'asset' | 'identity' | 'debt', subCategory: string, cryptoData?: any) => {
     const newDocs = files.map((file, index) => ({
       id: Date.now() + index.toString(),
       name: file.name,
@@ -66,12 +67,8 @@ const Index = () => {
       uploadDate: new Date().toISOString(),
       size: `${(file.size / 1024 / 1024).toFixed(1)} MB`,
       type: file.type,
-      extractedValue: Math.floor(Math.random() * 1000000) + 100000
-    }));
-
-    if (cryptoData) {
-      newDocs[0] = {
-        ...newDocs[0],
+      extractedValue: Math.floor(Math.random() * 1000000) + 100000,
+      ...(cryptoData && {
         verificationStatus: 'pending' as const,
         cryptoData: {
           walletAddress: cryptoData.walletAddress,
@@ -80,8 +77,8 @@ const Index = () => {
           zarValue: cryptoData.currentValueZAR,
           blockchain: cryptoData.blockchain
         }
-      };
-    }
+      })
+    }));
 
     setDocuments(prev => [...prev, ...newDocs]);
   };
