@@ -101,8 +101,7 @@ export const TrustBuilderSection = ({ activeTrusts, onTrustCreated }: TrustBuild
     <>
       {/* Trust Management Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="bg-card/80 backdrop-blur hover:shadow-lg transition-shadow cursor-pointer" 
-              onClick={() => setShowTrustWizard(true)}>
+        <Card className="bg-card/80 backdrop-blur">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>

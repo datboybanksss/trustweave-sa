@@ -5,6 +5,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Landing from "./pages/Landing";
+import Signup from "./pages/Signup";
+import Payment from "./pages/Payment";
+import ThankYou from "./pages/ThankYou";
 import Dashboard from "./pages/Dashboard";
 import TrustBuilder from "./pages/TrustBuilder";
 import Pricing from "./pages/Pricing";
@@ -20,7 +24,11 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/dashboard" element={<Index />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/education" element={<Education />} />
