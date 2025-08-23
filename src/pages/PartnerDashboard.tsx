@@ -19,6 +19,7 @@ import { Document } from "@/types";
 import AssetAllocationChart from "@/components/dashboard/AssetAllocationChart";
 import WealthGrowthChart from "@/components/dashboard/WealthGrowthChart";
 import DebtAllocationChart from "@/components/dashboard/DebtAllocationChart";
+import CryptoHoldingsChart from "@/components/dashboard/CryptoHoldingsChart";
 
 interface Client {
   id: string;
@@ -265,6 +266,9 @@ const PartnerDashboard = () => {
             <AssetAllocationChart />
           </div>
 
+          {/* Client Crypto Holdings */}
+          <CryptoHoldingsChart />
+
           {/* Client Debt Section */}
           <DebtAllocationChart />
 
@@ -459,6 +463,11 @@ const PartnerDashboard = () => {
           <div className="grid gap-4 md:grid-cols-2 mb-6">
             <WealthGrowthChart />
             <AssetAllocationChart />
+          </div>
+
+          {/* Overview Crypto Holdings */}
+          <div className="mb-6">
+            <CryptoHoldingsChart />
           </div>
 
           {/* Overview Debt Section */}

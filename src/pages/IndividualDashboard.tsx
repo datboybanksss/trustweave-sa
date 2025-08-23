@@ -17,6 +17,7 @@ import { Document } from "@/types";
 import AssetAllocationChart from "@/components/dashboard/AssetAllocationChart";
 import WealthGrowthChart from "@/components/dashboard/WealthGrowthChart";
 import DebtAllocationChart from "@/components/dashboard/DebtAllocationChart";
+import CryptoHoldingsChart from "@/components/dashboard/CryptoHoldingsChart";
 
 // Sample data with crypto holdings
 const sampleDocuments = [
@@ -256,6 +257,9 @@ const IndividualDashboard = () => {
           <WealthGrowthChart />
           <AssetAllocationChart />
         </div>
+
+        {/* Crypto Holdings Section */}
+        <CryptoHoldingsChart />
 
         {/* Debt Section */}
         <DebtAllocationChart />
