@@ -252,11 +252,13 @@ const IndividualDashboard = () => {
         </div>
 
         {/* Charts Section */}
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2">
           <WealthGrowthChart />
           <AssetAllocationChart />
-          <DebtAllocationChart />
         </div>
+
+        {/* Debt Section */}
+        <DebtAllocationChart />
 
         {/* Your Active Trusts - Display Only */}
         <section className="rounded-xl border bg-card/80 backdrop-blur p-6">

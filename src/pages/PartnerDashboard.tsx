@@ -260,11 +260,13 @@ const PartnerDashboard = () => {
           </div>
 
           {/* Client Charts */}
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2">
             <WealthGrowthChart />
             <AssetAllocationChart />
-            <DebtAllocationChart />
           </div>
+
+          {/* Client Debt Section */}
+          <DebtAllocationChart />
 
           {/* Client Documents */}
           <section>
@@ -454,9 +456,13 @@ const PartnerDashboard = () => {
           </div>
 
           {/* Overview Charts */}
-          <div className="grid gap-4 md:grid-cols-3 mb-6">
+          <div className="grid gap-4 md:grid-cols-2 mb-6">
             <WealthGrowthChart />
             <AssetAllocationChart />
+          </div>
+
+          {/* Overview Debt Section */}
+          <div className="mb-6">
             <DebtAllocationChart />
           </div>
 
