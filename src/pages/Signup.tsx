@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Shield, Users, Building } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import legacyLogo from "@/assets/legacy-builder-logo.png";
+import { setUserSession } from "@/lib/userSession";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -46,6 +47,13 @@ const Signup = () => {
 
   const handleContinue = () => {
     if (canProceed()) {
+      // Store user session for dashboard routing
+      setUserSession(formData.userType as any, {
+        fullName: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        firmName: formData.firmName || undefined
+      });
+      
       // Store signup data in sessionStorage for payment page
       sessionStorage.setItem('signupData', JSON.stringify({
         ...formData,

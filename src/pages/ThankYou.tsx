@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Calendar, CreditCard, DollarSign, ArrowRight, BookOpen, HelpCircle, Phone, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import legacyLogo from "@/assets/legacy-builder-logo.png";
+import { getUserType, getUserData } from "@/lib/userSession";
 
 const ThankYou = () => {
   const navigate = useNavigate();
@@ -14,8 +15,11 @@ const ThankYou = () => {
 
   useEffect(() => {
     const data = sessionStorage.getItem('paymentData');
+    const userType = getUserType();
+    const userData = getUserData();
+    
     if (data) {
-      setPaymentData(JSON.parse(data));
+      setPaymentData({...JSON.parse(data), userType, userData});
     } else {
       navigate('/');
     }
@@ -167,7 +171,7 @@ const ThankYou = () => {
                 <div className="flex flex-col sm:flex-row gap-3 mt-6">
                   <Button className="flex-1" onClick={() => navigate('/dashboard')}>
                     <ArrowRight className="h-4 w-4 mr-2" />
-                    Go to {paymentData.userType === 'partner' || paymentData.userType === 'lawyer' ? 'Client Dashboard' : 'Legacy Vault'}
+                    Go to Dashboard
                   </Button>
                   <Button variant="outline" className="flex-1" onClick={() => navigate('/education')}>
                     <BookOpen className="h-4 w-4 mr-2" />
