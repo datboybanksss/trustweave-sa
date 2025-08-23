@@ -9,7 +9,8 @@ import legacyLogo from "@/assets/legacy-logo.png";
 const ThankYou = () => {
   const navigate = useNavigate();
   const [paymentData, setPaymentData] = useState<any>(null);
-  const [showConfetti, setShowConfetti] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
+  const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
     const data = sessionStorage.getItem('paymentData');
@@ -22,12 +23,19 @@ const ThankYou = () => {
     // Check if animation was already shown
     const animationShown = sessionStorage.getItem('thankYouAnimationShown');
     if (!animationShown) {
-      setShowConfetti(true);
-      sessionStorage.setItem('thankYouAnimationShown', 'true');
-      
-      // Hide confetti after animation
-      const timer = setTimeout(() => setShowConfetti(false), 3000);
-      return () => clearTimeout(timer);
+      // Slight delay to ensure page is ready
+      setTimeout(() => {
+        setShowAnimation(true);
+        sessionStorage.setItem('thankYouAnimationShown', 'true');
+        
+        // Mark animation as complete after it finishes
+        setTimeout(() => {
+          setAnimationComplete(true);
+          setShowAnimation(false);
+        }, 2000);
+      }, 100);
+    } else {
+      setAnimationComplete(true);
     }
   }, [navigate]);
 
@@ -51,18 +59,21 @@ const ThankYou = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
-      {/* Confetti Effect */}
-      {showConfetti && (
+      {/* Success Animation - Shows only once */}
+      {showAnimation && (
         <div className="fixed inset-0 pointer-events-none z-50">
-          <div className="absolute inset-0 animate-pulse">
-            {Array.from({ length: 50 }).map((_, i) => (
+          <div className="absolute inset-0">
+            {Array.from({ length: 30 }).map((_, i) => (
               <div
                 key={i}
-                className="absolute w-2 h-2 bg-primary rounded-full animate-bounce"
+                className="absolute w-3 h-3 rounded-full animate-fade-in"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 2}s`
+                  backgroundColor: i % 3 === 0 ? 'hsl(var(--primary))' : i % 3 === 1 ? 'hsl(var(--accent))' : 'hsl(var(--success))',
+                  animationDelay: `${Math.random() * 1.5}s`,
+                  animationDuration: '1.5s',
+                  animationFillMode: 'both'
                 }}
               />
             ))}
@@ -88,8 +99,11 @@ const ThankYou = () => {
           {/* Success Animation */}
           <div className="text-center mb-12">
             <div className="relative mb-6">
-              <CheckCircle className="h-20 w-20 text-success mx-auto animate-scale-in" />
-              <div className="absolute inset-0 bg-success/20 rounded-full animate-ping" />
+              <CheckCircle className={`h-20 w-20 text-success mx-auto ${!animationComplete ? 'animate-scale-in' : ''}`} />
+              {!animationComplete && (
+                <div className="absolute inset-0 bg-success/20 rounded-full animate-ping" 
+                     style={{ animationDuration: '1s', animationIterationCount: '2' }} />
+              )}
             </div>
             
             <h1 className="font-display text-4xl font-bold mb-4">
