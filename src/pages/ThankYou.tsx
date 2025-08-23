@@ -84,9 +84,8 @@ const ThankYou = () => {
       {/* Header */}
       <header className="border-b bg-background/80 backdrop-blur">
         <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-3">
-            <img src={legacyLogo} alt="Legacy Builder logo" className="h-8 w-8" />
-            <span className="font-display text-lg">Legacy Builder</span>
+          <div className="flex items-center">
+            <img src={legacyLogo} alt="Legacy Builder logo" className="h-10 w-auto" />
           </div>
           <Badge className="bg-success text-white">
             Account Created Successfully
