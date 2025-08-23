@@ -7,7 +7,7 @@ export const Navigation = () => (
   <header className="sticky top-0 z-30 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
     <nav className="container mx-auto flex h-16 items-center justify-between">
       <div className="flex items-center">
-        <img src={legacyLogo} alt="Legacy Builder logo - tree with roots" className="h-10 w-auto" loading="eager"/>
+        <img src="/lovable-uploads/cc72f08d-4a6e-4679-8640-1bd71690917f.png" alt="Legacy Builder logo - tree with roots" className="h-10 w-auto" loading="eager"/>
       </div>
       <div className="hidden md:flex items-center gap-6">
         <NavLink to="/" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Home</NavLink>
