@@ -3,7 +3,6 @@ import PublicNavigation from "@/components/shared/PublicNavigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star, Phone, Mail, MessageCircle, Clock, Users, Shield } from "lucide-react";
-
 const Consultation = () => {
   useEffect(() => {
     // Load Calendly script
@@ -11,50 +10,34 @@ const Consultation = () => {
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
     document.body.appendChild(script);
-
     return () => {
       document.body.removeChild(script);
     };
   }, []);
-
-  const experts = [
-    {
-      name: "Sarah Mitchell",
-      title: "CFP, Wealth Management Specialist",
-      experience: "20 years in wealth management",
-      rating: 4.9,
-      reviews: 152,
-      specialties: ["Trust Planning", "Tax Optimization", "Estate Planning"]
-    },
-    {
-      name: "Johan van der Merwe",
-      title: "Trust Law Specialist",
-      experience: "Expert in SA trust law",
-      rating: 4.8,
-      reviews: 98,
-      specialties: ["Trust Structures", "Legal Compliance", "Beneficiary Rights"]
-    },
-    {
-      name: "Thandiwe Ngwenya",
-      title: "Tax & Cross-Border Advisor",
-      experience: "Cross-border wealth specialist",
-      rating: 4.9,
-      reviews: 76,
-      specialties: ["International Tax", "Offshore Trusts", "SARS Compliance"]
-    }
-  ];
-
-  const preparationItems = [
-    "List of assets and current values",
-    "Existing will or trust documents",
-    "Recent financial statements",
-    "Questions about your legacy goals",
-    "Family structure information",
-    "Current tax situation overview"
-  ];
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
+  const experts = [{
+    name: "Sarah Mitchell",
+    title: "CFP, Wealth Management Specialist",
+    experience: "20 years in wealth management",
+    rating: 4.9,
+    reviews: 152,
+    specialties: ["Trust Planning", "Tax Optimization", "Estate Planning"]
+  }, {
+    name: "Johan van der Merwe",
+    title: "Trust Law Specialist",
+    experience: "Expert in SA trust law",
+    rating: 4.8,
+    reviews: 98,
+    specialties: ["Trust Structures", "Legal Compliance", "Beneficiary Rights"]
+  }, {
+    name: "Thandiwe Ngwenya",
+    title: "Tax & Cross-Border Advisor",
+    experience: "Cross-border wealth specialist",
+    rating: 4.9,
+    reviews: 76,
+    specialties: ["International Tax", "Offshore Trusts", "SARS Compliance"]
+  }];
+  const preparationItems = ["List of assets and current values", "Existing will or trust documents", "Recent financial statements", "Questions about your legacy goals", "Family structure information", "Current tax situation overview"];
+  return <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
       <PublicNavigation />
       <main className="container mx-auto px-4 py-16">
         {/* Hero Section */}
@@ -116,12 +99,10 @@ const Consultation = () => {
                 <h3 className="font-display text-xl font-semibold mb-4">Preparation Checklist</h3>
                 <p className="text-muted-foreground mb-4">Bring these to your consultation:</p>
                 <ul className="space-y-2">
-                  {preparationItems.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
+                  {preparationItems.map((item, index) => <li key={index} className="flex items-start gap-3">
                       <div className="h-2 w-2 bg-primary rounded-full mt-2 flex-shrink-0" />
                       <span className="text-sm">{item}</span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </CardContent>
             </Card>
@@ -131,8 +112,7 @@ const Consultation = () => {
               <CardContent className="p-6">
                 <h3 className="font-display text-xl font-semibold mb-4">Meet Our Experts</h3>
                 <div className="space-y-4">
-                  {experts.map((expert, index) => (
-                    <div key={index} className="border rounded-lg p-4">
+                  {experts.map((expert, index) => <div key={index} className="border rounded-lg p-4">
                       <div className="flex justify-between items-start mb-2">
                         <div>
                           <h4 className="font-medium">{expert.name}</h4>
@@ -146,14 +126,11 @@ const Consultation = () => {
                       </div>
                       <p className="text-sm text-muted-foreground mb-2">{expert.experience}</p>
                       <div className="flex flex-wrap gap-1">
-                        {expert.specialties.map((specialty, idx) => (
-                          <Badge key={idx} variant="secondary" className="text-xs">
+                        {expert.specialties.map((specialty, idx) => <Badge key={idx} variant="secondary" className="text-xs">
                             {specialty}
-                          </Badge>
-                        ))}
+                          </Badge>)}
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </CardContent>
             </Card>
@@ -166,8 +143,8 @@ const Consultation = () => {
                   <div className="flex items-center gap-3">
                     <Phone className="h-5 w-5 text-primary" />
                     <div>
-                      <div className="font-medium">0800 LEGACY</div>
-                      <div className="text-sm text-muted-foreground">(0800 534 229)</div>
+                      <div className="font-medium">082 377 2008</div>
+                      <div className="text-sm text-muted-foreground">(082 377 2008)</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -193,11 +170,10 @@ const Consultation = () => {
           <div className="lg:col-span-3">
             <Card className="h-full">
               <CardContent className="p-0">
-                <div 
-                  className="calendly-inline-widget w-full"
-                  data-url="https://calendly.com/legacybuilder/wealth-consultation"
-                  style={{ minWidth: '320px', height: '700px' }}
-                />
+                <div className="calendly-inline-widget w-full" data-url="https://calendly.com/legacybuilder/wealth-consultation" style={{
+                minWidth: '320px',
+                height: '700px'
+              }} />
               </CardContent>
             </Card>
           </div>
@@ -207,32 +183,25 @@ const Consultation = () => {
         <div className="mt-16">
           <h2 className="font-display text-3xl font-bold text-center mb-8">What Our Clients Say</h2>
           <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                name: "Michael Thompson",
-                role: "Business Owner",
-                quote: "The consultation helped us structure our family trust perfectly. Sarah's expertise saved us thousands in tax.",
-                rating: 5
-              },
-              {
-                name: "Dr. Linda Patel",
-                role: "Medical Professional",
-                quote: "Johan explained trust law in simple terms. We finally understood how to protect our assets properly.",
-                rating: 5
-              },
-              {
-                name: "James & Helen Foster",
-                role: "Retirees",
-                quote: "Thandiwe's advice on offshore planning was invaluable. Our estate is now optimally structured.",
-                rating: 5
-              }
-            ].map((testimonial, index) => (
-              <Card key={index}>
+            {[{
+            name: "Michael Thompson",
+            role: "Business Owner",
+            quote: "The consultation helped us structure our family trust perfectly. Sarah's expertise saved us thousands in tax.",
+            rating: 5
+          }, {
+            name: "Dr. Linda Patel",
+            role: "Medical Professional",
+            quote: "Johan explained trust law in simple terms. We finally understood how to protect our assets properly.",
+            rating: 5
+          }, {
+            name: "James & Helen Foster",
+            role: "Retirees",
+            quote: "Thandiwe's advice on offshore planning was invaluable. Our estate is now optimally structured.",
+            rating: 5
+          }].map((testimonial, index) => <Card key={index}>
                 <CardContent className="p-6">
                   <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    ))}
+                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
                   </div>
                   <p className="text-muted-foreground mb-4">"{testimonial.quote}"</p>
                   <div>
@@ -240,13 +209,10 @@ const Consultation = () => {
                     <div className="text-sm text-muted-foreground">{testimonial.role}</div>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default Consultation;
