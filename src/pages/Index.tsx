@@ -465,7 +465,7 @@ const Index = () => {
           <div className="grid gap-8 md:grid-cols-4">
             <div className="md:col-span-2">
       <div className="flex items-center">
-        <img src="/lovable-uploads/cc72f08d-4a6e-4679-8640-1bd71690917f.png" alt="Legacy Builder" className="h-10 w-auto" />
+        <img src={legacyLogo} alt="Legacy Builder" className="h-10 w-auto" />
       </div>
               <p className="text-muted-foreground mb-4 max-w-md">
                 Empowering South African families and legal professionals to build, 
