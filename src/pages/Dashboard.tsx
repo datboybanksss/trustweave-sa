@@ -9,16 +9,21 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get user type from localStorage (will be from database later)
+    // Get user type from localStorage (set during signup)
     const storedUserType = localStorage.getItem('userType');
     const userData = JSON.parse(localStorage.getItem('userData') || '{}');
     
+    console.log('Dashboard - User Type:', storedUserType); // Debug log
+    console.log('Dashboard - User Data:', userData); // Debug log
+    
+    // If no userType found, don't redirect to landing - might be partner/individual
     if (!storedUserType) {
-      navigate('/landing');
-      return;
+      // Default to individual if no type specified
+      setUserType('individual');
+    } else {
+      setUserType(storedUserType);
     }
     
-    setUserType(storedUserType);
     setLoading(false);
   }, [navigate]);
 
