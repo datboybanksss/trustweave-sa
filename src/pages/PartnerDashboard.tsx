@@ -1,162 +1,112 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Progress } from "@/components/ui/progress";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { 
-  Users, Building, TrendingUp, FileText, Plus, ChevronDown, 
-  ArrowLeft, Search, MoreHorizontal, Calendar, Upload, PieChart, BarChart3 
+  TrendingUp, 
+  FileText, 
+  Shield, 
+  Users, 
+  DollarSign, 
+  Calendar, 
+  Building, 
+  Plus,
+  Upload,
+  Phone,
+  Landmark,
+  ChevronRight,
+  Search,
+  Filter,
+  MoreVertical,
+  Eye,
+  BarChart3,
+  PieChart,
+  UserPlus,
+  RotateCcw
 } from "lucide-react";
 import DashboardNavigation from "@/components/shared/DashboardNavigation";
-import { DocumentUploadModal } from "@/components/documents/DocumentUploadModal";
-import { DocumentsList } from "@/components/documents/DocumentsList";
-import { toast } from "@/hooks/use-toast";
-import { Document } from "@/types";
-import AssetAllocationChart from "@/components/dashboard/AssetAllocationChart";
 import WealthGrowthChart from "@/components/dashboard/WealthGrowthChart";
-import DebtAllocationChart from "@/components/dashboard/DebtAllocationChart";
+import AssetAllocationChart from "@/components/dashboard/AssetAllocationChart";
 import CryptoHoldingsChart from "@/components/dashboard/CryptoHoldingsChart";
-
-interface Client {
-  id: string;
-  name: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  netWorth: number;
-  totalAssets: number;
-  totalDebts: number;
-  services: string[];
-  joinDate: string;
-  lastUpdated: string;
-  monthlyChange: number;
-  documents: Document[];
-  trusts: number;
-}
-
-const sampleClients: Client[] = [
-  {
-    id: '1',
-    name: 'Sarah Johnson',
-    firstName: 'Sarah',
-    lastName: 'Johnson',
-    email: 'sarah@example.com',
-    phone: '+27 82 123 4567',
-    netWorth: 8500000,
-    totalAssets: 12300000,
-    totalDebts: 3800000,
-    services: ['Trust Planning', 'Tax Optimization'],
-    joinDate: '2023-03-15',
-    lastUpdated: '2024-01-20',
-    monthlyChange: 8.2,
-    documents: [],
-    trusts: 2
-  },
-  {
-    id: '2',
-    name: 'Michael Chen',
-    firstName: 'Michael',
-    lastName: 'Chen',
-    email: 'michael@example.com',
-    phone: '+27 83 987 6543',
-    netWorth: 15200000,
-    totalAssets: 18900000,
-    totalDebts: 3700000,
-    services: ['Estate Planning', 'Business Succession'],
-    joinDate: '2022-11-08',
-    lastUpdated: '2024-01-18',
-    monthlyChange: 12.1,
-    documents: [],
-    trusts: 3
-  },
-  {
-    id: '3',
-    name: 'Lisa van der Merwe',
-    firstName: 'Lisa',
-    lastName: 'van der Merwe',
-    email: 'lisa@example.com',
-    phone: '+27 84 555 1234',
-    netWorth: 6200000,
-    totalAssets: 8100000,
-    totalDebts: 1900000,
-    services: ['Will Drafting'],
-    joinDate: '2024-01-10',
-    lastUpdated: '2024-01-22',
-    monthlyChange: 3.5,
-    documents: [],
-    trusts: 1
-  }
-];
+import DebtAllocationChart from "@/components/dashboard/DebtAllocationChart";
+import { toast } from "sonner";
+import { getUserData, getGreetingName } from "@/lib/userSession";
+import { loadPartnerDemo, savePartnerDemo, resetPartnerDemo, type DemoClient } from "@/lib/partnerDemo";
 
 const PartnerDashboard = () => {
-  const [clients, setClients] = useState<Client[]>(sampleClients);
-  const [selectedClient, setSelectedClient] = useState<Client | null>(null);
-  const [showAddClientModal, setShowAddClientModal] = useState(false);
-  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [clients, setClients] = useState<DemoClient[]>([]);
+  const [selectedClient, setSelectedClient] = useState<DemoClient | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  
+  const [showAddClientModal, setShowAddClientModal] = useState(false);
+  const [totalAUM, setTotalAUM] = useState(0);
   const [newClient, setNewClient] = useState({
-    firstName: '',
-    lastName: '',
+    fullName: '',
     idNumber: '',
     email: '',
-    phone: '',
-    netWorth: '',
-    primaryService: '',
-    notes: ''
+    phone: ''
   });
 
-  const firmName = localStorage.getItem('firmName') || "van der Merwe & Associates";
-  const userName = localStorage.getItem('userName') || 'Partner';
-  const totalAUM = clients.reduce((sum, client) => sum + client.netWorth, 0);
-  const totalTrusts = clients.reduce((sum, client) => sum + client.trusts, 0);
-  const totalDocuments = clients.reduce((sum, client) => sum + client.documents.length, 0);
+  const userData = getUserData();
+  const greetingName = getGreetingName();
+  const firmName = userData?.firmName || 'Law Firm';
 
-  const filteredClients = clients.filter(client => 
-    client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Load partner demo data on mount
+  useEffect(() => {
+    const demoClients = loadPartnerDemo();
+    setClients(demoClients);
+    const total = demoClients.reduce((sum, client) => sum + client.netWorth, 0);
+    setTotalAUM(total);
+  }, []);
+
+  // Recalculate AUM when clients change
+  useEffect(() => {
+    const total = clients.reduce((sum, client) => sum + client.netWorth, 0);
+    setTotalAUM(total);
+  }, [clients]);
 
   const handleAddClient = () => {
-    if (!newClient.firstName || !newClient.lastName || !newClient.email) {
-      toast({ title: "Error", description: "Please fill in required fields" });
-      return;
+    if (newClient.fullName && newClient.idNumber) {
+      const client: DemoClient = {
+        id: `client_${Date.now()}`,
+        name: newClient.fullName,
+        idNumber: newClient.idNumber,
+        netWorth: 0,
+        totalAssets: 0,
+        totalDebts: 0,
+        trustCount: 0,
+        documentCount: 0,
+        compliance: 25,
+        joinDate: new Date().toISOString().slice(0, 10),
+        lastUpdated: new Date().toISOString().slice(0, 10),
+        documents: [],
+        trusts: []
+      };
+      
+      const updatedClients = [...clients, client];
+      setClients(updatedClients);
+      savePartnerDemo(updatedClients);
+      
+      setNewClient({ fullName: '', idNumber: '', email: '', phone: '' });
+      setShowAddClientModal(false);
+      
+      toast.success(`Client ${newClient.fullName} added successfully`);
     }
+  };
 
-    const client: Client = {
-      id: Date.now().toString(),
-      name: `${newClient.firstName} ${newClient.lastName}`,
-      firstName: newClient.firstName,
-      lastName: newClient.lastName,
-      email: newClient.email,
-      phone: newClient.phone,
-      netWorth: parseInt(newClient.netWorth) || 0,
-      totalAssets: parseInt(newClient.netWorth) || 0,
-      totalDebts: 0,
-      services: newClient.primaryService ? [newClient.primaryService] : [],
-      joinDate: new Date().toISOString().split('T')[0],
-      lastUpdated: new Date().toISOString().split('T')[0],
-      monthlyChange: 0,
-      documents: [],
-      trusts: 0
-    };
-
-    setClients(prev => [...prev, client]);
-    setShowAddClientModal(false);
-    setNewClient({
-      firstName: '', lastName: '', idNumber: '', email: '', phone: '', 
-      netWorth: '', primaryService: '', notes: ''
-    });
-    
-    toast({
-      title: "✓ Client Added",
-      description: `${client.name} has been added to your client portfolio`
-    });
+  const handleResetDemo = () => {
+    resetPartnerDemo();
+    const newDemoClients = loadPartnerDemo();
+    setClients(newDemoClients);
+    setSelectedClient(null);
+    const total = newDemoClients.reduce((sum, client) => sum + client.netWorth, 0);
+    setTotalAUM(total);
+    toast.success('Demo data reset successfully');
   };
 
   const switchToClient = (clientId: string) => {
@@ -164,425 +114,455 @@ const PartnerDashboard = () => {
     setSelectedClient(client || null);
   };
 
-  if (selectedClient) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
-        <DashboardNavigation />
-        <main className="container mx-auto px-4 py-10 space-y-8">
-          {/* Client Header */}
-          <section className="relative overflow-hidden rounded-xl border bg-card/80 backdrop-blur shadow-lg p-6">
-            <Button 
-              variant="ghost" 
-              onClick={() => setSelectedClient(null)}
-              className="mb-4"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to All Clients
-            </Button>
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="font-display text-2xl mb-1">{selectedClient.name}</h1>
-                <p className="text-muted-foreground">
-                  Client since {new Date(selectedClient.joinDate).toLocaleDateString()}
-                </p>
-                <Badge className="mt-2">
-                  {selectedClient.services.join(', ') || 'General Planning'}
-                </Badge>
-              </div>
-              <div className="text-right">
-                <div className="text-3xl font-semibold">R {selectedClient.netWorth.toLocaleString()}</div>
-                <span className="text-sm text-muted-foreground">Net Worth</span>
-              </div>
-            </div>
-          </section>
+  const filteredClients = clients.filter(client =>
+    client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    client.idNumber.includes(searchTerm)
+  );
 
-          {/* Client Actions */}
-          <section className="rounded-xl border bg-card/80 backdrop-blur p-4">
-            <h2 className="font-display text-lg mb-3">Client Actions</h2>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              <Button variant="hero">
-                <Plus className="h-4 w-4 mr-2" />
-                Create Trust for {selectedClient.firstName}
-              </Button>
-              <Button variant="outline" onClick={() => setShowUploadModal(true)}>
-                <Upload className="h-4 w-4 mr-2" />
-                Upload Client Documents
-              </Button>
-              <Button variant="outline">
-                <Calendar className="h-4 w-4 mr-2" />
-                Schedule Client Meeting
-              </Button>
-              <Button variant="premium">
-                <FileText className="h-4 w-4 mr-2" />
-                Generate Report
-              </Button>
-            </div>
-          </section>
-
-          {/* Client Metrics */}
-          <div className="grid gap-4 md:grid-cols-3">
-            <Card className="bg-card/80 backdrop-blur">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Net Worth</p>
-                    <p className="text-2xl font-bold">R {selectedClient.netWorth.toLocaleString()}</p>
-                    <p className="text-xs text-success">+{selectedClient.monthlyChange}% this month</p>
-                  </div>
-                  <TrendingUp className="h-8 w-8 text-success" />
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card/80 backdrop-blur">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Total Assets</p>
-                    <p className="text-2xl font-bold">R {selectedClient.totalAssets.toLocaleString()}</p>
-                  </div>
-                  <PieChart className="h-8 w-8 text-primary" />
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card/80 backdrop-blur">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Total Debts</p>
-                    <p className="text-2xl font-bold">R {selectedClient.totalDebts.toLocaleString()}</p>
-                  </div>
-                  <BarChart3 className="h-8 w-8 text-accent" />
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Client Charts */}
-          <div className="grid gap-4 md:grid-cols-2">
-            <WealthGrowthChart />
-            <AssetAllocationChart />
-          </div>
-
-          {/* Client Crypto Holdings */}
-          <CryptoHoldingsChart />
-
-          {/* Client Debt Section */}
-          <DebtAllocationChart />
-
-          {/* Client Documents */}
-          <section>
-            <h2 className="font-display text-xl mb-4">Client Documents</h2>
-            <DocumentsList
-              documents={selectedClient.documents}
-              onDelete={(id) => {
-                const updatedClients = clients.map(c => 
-                  c.id === selectedClient.id 
-                    ? { ...c, documents: c.documents.filter(d => d.id !== id) }
-                    : c
-                );
-                setClients(updatedClients);
-                setSelectedClient(prev => prev ? { 
-                  ...prev, 
-                  documents: prev.documents.filter(d => d.id !== id) 
-                } : null);
-              }}
-              onView={(doc) => toast({ title: "Viewing Document", description: doc.name })}
-            />
-          </section>
-        </main>
-
-        <DocumentUploadModal
-          open={showUploadModal}
-          onOpenChange={setShowUploadModal}
-          onUpload={(files, category, subCategory, cryptoData) => {
-            // Add documents to selected client
-            const newDocs: Document[] = files.map((file, index) => ({
-              id: Date.now() + index.toString(),
-              name: file.name,
-              category: category as 'asset' | 'identity' | 'debt',
-              subCategory: subCategory || '',
-              uploadDate: new Date().toISOString(),
-              size: `${(file.size / 1024 / 1024).toFixed(1)} MB`,
-              type: file.type,
-              extractedValue: Math.floor(Math.random() * 1000000) + 100000,
-              ...(cryptoData && {
-                verificationStatus: 'pending' as const,
-                cryptoAmount: cryptoData.cryptoAmount,
-                cryptoCurrency: cryptoData.cryptoCurrency,
-                walletAddress: cryptoData.walletAddress,
-                blockchainNetwork: cryptoData.blockchain
-              })
-            }));
-
-            const updatedClients = clients.map(c => 
-              c.id === selectedClient.id 
-                ? { ...c, documents: [...c.documents, ...newDocs] }
-                : c
-            );
-            setClients(updatedClients);
-            setSelectedClient(prev => prev ? { 
-              ...prev, 
-              documents: [...prev.documents, ...newDocs] 
-            } : null);
-
-            toast({ title: "✓ Documents Added", description: `${files.length} document(s) added to ${selectedClient.name}'s vault` });
-          }}
-        />
-      </div>
-    );
-  }
+  const totalTrusts = clients.reduce((sum, client) => sum + client.trustCount, 0);
+  const totalDocuments = clients.reduce((sum, client) => sum + client.documentCount, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
       <DashboardNavigation />
-      <main className="container mx-auto px-4 py-10 space-y-8">
+      
+      <div className="container mx-auto px-4 py-8">
         {/* Partner Header */}
-        <section className="relative overflow-hidden rounded-xl border bg-card/80 backdrop-blur shadow-lg p-6">
-          <div className="absolute inset-0 -z-10 opacity-20" style={{background:"var(--gradient-primary)"}} />
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h1 className="font-display text-2xl mb-1">Good day, {userName}</h1>
-              <p className="text-lg">{firmName}</p>
-              <p className="text-sm text-muted-foreground">
-                Total AUM: R {(totalAUM / 1000000).toFixed(1)}M
-              </p>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+          <div className="text-center md:text-left">
+            <div className="flex items-center gap-2 mb-2">
+              <h1 className="text-2xl md:text-3xl font-bold">Good day, {greetingName}!</h1>
+              <Badge variant="secondary" className="bg-primary/10 text-primary">
+                Partner Portal
+              </Badge>
             </div>
-            
-            {/* Client Switcher */}
-            <div className="flex items-center gap-4">
-              <label className="text-sm text-muted-foreground">Current Client:</label>
-              <Select 
-                value={selectedClient?.id || 'overview'} 
-                onValueChange={(value) => {
-                  if (value === 'add-new') {
-                    setShowAddClientModal(true);
-                  } else if (value === 'overview') {
-                    setSelectedClient(null);
-                  } else {
-                    const client = clients.find(c => c.id === value);
-                    setSelectedClient(client || null);
-                  }
-                }}
-              >
-                <SelectTrigger className="w-[300px]">
-                  <SelectValue placeholder="📊 All Clients Overview" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="overview">📊 All Clients Overview</SelectItem>
-                  <SelectItem value="add-new">➕ Add New Client</SelectItem>
-                  {clients.map(client => (
-                    <SelectItem key={client.id} value={client.id}>
-                      {client.name} - R{(client.netWorth / 1000000).toFixed(1)}M
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+            <p className="text-lg text-muted-foreground mb-2">{firmName}</p>
+            <p className="text-muted-foreground">
+              Professional client management and wealth oversight
+            </p>
           </div>
-        </section>
-
-        {/* Client Management */}
-        <section className="rounded-xl border bg-card/80 backdrop-blur p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="font-display text-lg">Client Portfolio</h2>
-            <Button onClick={() => setShowAddClientModal(true)}>
-              <Plus className="h-4 w-4 mr-2" />
-              Add New Client
+          <div className="text-center md:text-right">
+            <p className="text-sm text-muted-foreground mb-1">Total AUM</p>
+            <p className="text-2xl md:text-3xl font-bold text-primary">
+              R {totalAUM.toLocaleString()}
+            </p>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={handleResetDemo}
+              className="text-xs text-muted-foreground hover:text-foreground"
+            >
+              <RotateCcw className="h-3 w-3 mr-1" />
+              Reset Demo Data
             </Button>
           </div>
+        </div>
 
-          <div className="flex items-center gap-4 mb-6">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search clients..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
+        {/* Client Switcher */}
+        <div className="mb-8">
+          <Card>
+            <CardContent className="p-4">
+              <div className="flex items-center gap-4">
+                <label className="text-sm text-muted-foreground">Current Client:</label>
+                <Select 
+                  value={selectedClient?.id || 'overview'} 
+                  onValueChange={(value) => {
+                    if (value === 'add-new') {
+                      setShowAddClientModal(true);
+                    } else if (value === 'overview') {
+                      setSelectedClient(null);
+                    } else {
+                      const client = clients.find(c => c.id === value);
+                      setSelectedClient(client || null);
+                    }
+                  }}
+                >
+                  <SelectTrigger className="w-64">
+                    <SelectValue placeholder="📊 All Clients Overview" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="overview">📊 All Clients Overview</SelectItem>
+                    <SelectItem value="add-new">➕ Add New Client</SelectItem>
+                    {clients.map(client => (
+                      <SelectItem key={client.id} value={client.id}>
+                        👤 {client.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {!selectedClient ? (
+          // Overview Mode - All Clients
+          <div className="space-y-8">
+            {/* Metrics Overview */}
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <Card>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Total Clients</p>
+                      <p className="text-2xl font-bold">{clients.length}</p>
+                    </div>
+                    <Users className="h-8 w-8 text-primary" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Assets Under Management</p>
+                      <p className="text-2xl font-bold text-success">R {totalAUM.toLocaleString()}</p>
+                    </div>
+                    <TrendingUp className="h-8 w-8 text-success" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Active Trusts</p>
+                      <p className="text-2xl font-bold">{totalTrusts}</p>
+                    </div>
+                    <Shield className="h-8 w-8 text-primary" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Documents Managed</p>
+                      <p className="text-2xl font-bold">{totalDocuments}</p>
+                    </div>
+                    <FileText className="h-8 w-8 text-accent" />
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Users className="h-4 w-4" />
-                {clients.length} Clients
-              </div>
-              <div className="flex items-center gap-2">
-                <FileText className="h-4 w-4" />
-                {totalTrusts} Active Trusts
-              </div>
-              <div className="flex items-center gap-2">
-                <Building className="h-4 w-4" />
-                {totalDocuments} Documents
-              </div>
+
+            {/* Client Portfolio Table */}
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5" />
+                  Client Portfolio
+                </CardTitle>
+                <div className="flex items-center gap-2">
+                  <div className="relative">
+                    <Search className="h-4 w-4 absolute left-3 top-3 text-muted-foreground" />
+                    <Input
+                      placeholder="Search clients..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-9 w-64"
+                    />
+                  </div>
+                  <Button onClick={() => setShowAddClientModal(true)}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Client
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b text-left">
+                        <th className="pb-3 text-sm font-medium text-muted-foreground">Client</th>
+                        <th className="pb-3 text-sm font-medium text-muted-foreground">ID Number</th>
+                        <th className="pb-3 text-sm font-medium text-muted-foreground">Net Worth</th>
+                        <th className="pb-3 text-sm font-medium text-muted-foreground">Trusts</th>
+                        <th className="pb-3 text-sm font-medium text-muted-foreground">Compliance</th>
+                        <th className="pb-3 text-sm font-medium text-muted-foreground">Last Updated</th>
+                        <th className="pb-3 text-sm font-medium text-muted-foreground">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredClients.map((client) => (
+                        <tr key={client.id} className="border-b">
+                          <td className="py-4">
+                            <div>
+                              <p className="font-medium">{client.name}</p>
+                              <p className="text-sm text-muted-foreground">Joined {client.joinDate}</p>
+                            </div>
+                          </td>
+                          <td className="py-4 text-sm font-mono">{client.idNumber}</td>
+                          <td className="py-4">
+                            <p className="font-medium">R {client.netWorth.toLocaleString()}</p>
+                          </td>
+                          <td className="py-4">{client.trustCount}</td>
+                          <td className="py-4">
+                            <div className="flex items-center gap-2">
+                              <Progress value={client.compliance} className="w-12 h-2" />
+                              <span className="text-sm">{client.compliance}%</span>
+                            </div>
+                          </td>
+                          <td className="py-4 text-sm text-muted-foreground">{client.lastUpdated}</td>
+                          <td className="py-4">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => switchToClient(client.id)}
+                            >
+                              Manage
+                              <ChevronRight className="h-4 w-4 ml-1" />
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Overview Charts */}
+            <div className="grid gap-6 lg:grid-cols-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <BarChart3 className="h-5 w-5" />
+                    Portfolio Performance
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <WealthGrowthChart />
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <PieChart className="h-5 w-5" />
+                    Asset Distribution
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <AssetAllocationChart />
+                </CardContent>
+              </Card>
             </div>
           </div>
-
-          {/* Quick Stats */}
-          <div className="grid gap-4 md:grid-cols-3 mb-6">
-            <Card className="bg-muted/30">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
+        ) : (
+          // Client Detail View
+          <div className="space-y-8">
+            {/* Client Header */}
+            <Card className="bg-gradient-to-r from-primary/10 via-primary/5 to-accent/10 border-primary/20">
+              <CardContent className="p-6">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Client Distribution</p>
-                    <p className="text-lg font-bold">{clients.length} Active</p>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setSelectedClient(null)}
+                      >
+                        <Eye className="h-4 w-4 mr-1" />
+                        Back to Overview
+                      </Button>
+                    </div>
+                    <h2 className="text-2xl font-bold mb-1">{selectedClient.name}</h2>
+                    <p className="text-muted-foreground mb-1">ID: {selectedClient.idNumber}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Client since {selectedClient.joinDate} • Last updated {selectedClient.lastUpdated}
+                    </p>
                   </div>
-                  <Users className="h-6 w-6 text-primary" />
+                  <div className="text-center lg:text-right">
+                    <p className="text-sm text-muted-foreground mb-1">Net Worth</p>
+                    <p className="text-3xl font-bold text-primary">
+                      R {selectedClient.netWorth.toLocaleString()}
+                    </p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-muted/30">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">AUM Growth</p>
-                    <p className="text-lg font-bold text-success">+15.2%</p>
+            {/* Client Quick Actions */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <Button 
+                variant="outline" 
+                className="h-24 flex flex-col gap-2 bg-card hover:bg-primary/10 border-primary/20"
+                onClick={() => toast.success("Trust creation coming soon!")}
+              >
+                <Shield className="h-6 w-6 text-primary" />
+                <span className="text-sm">Create Trust</span>
+              </Button>
+
+              <Button 
+                variant="outline" 
+                className="h-24 flex flex-col gap-2 bg-card hover:bg-accent/10 border-accent/20"
+                onClick={() => toast.success("Document upload coming soon!")}
+              >
+                <Upload className="h-6 w-6 text-accent" />
+                <span className="text-sm">Upload Document</span>
+              </Button>
+
+              <Button 
+                variant="outline" 
+                className="h-24 flex flex-col gap-2 bg-card hover:bg-success/10 border-success/20"
+                onClick={() => toast.success("Report generation coming soon!")}
+              >
+                <FileText className="h-6 w-6 text-success" />
+                <span className="text-sm">Generate Report</span>
+              </Button>
+
+              <Button 
+                variant="outline" 
+                className="h-24 flex flex-col gap-2 bg-card hover:bg-destructive/10 border-destructive/20"
+                onClick={() => toast.success("Meeting scheduler coming soon!")}
+              >
+                <Calendar className="h-6 w-6 text-destructive" />
+                <span className="text-sm">Schedule Meeting</span>
+              </Button>
+            </div>
+
+            {/* Client Metrics */}
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <Card>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Total Assets</p>
+                      <p className="text-2xl font-bold text-success">
+                        R {selectedClient.totalAssets.toLocaleString()}
+                      </p>
+                    </div>
+                    <TrendingUp className="h-8 w-8 text-success" />
                   </div>
-                  <TrendingUp className="h-6 w-6 text-success" />
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
 
-            <Card className="bg-muted/30">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Service Breakdown</p>
-                    <p className="text-lg font-bold">Mixed Portfolio</p>
+              <Card>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Total Debts</p>
+                      <p className="text-2xl font-bold text-destructive">
+                        R {selectedClient.totalDebts.toLocaleString()}
+                      </p>
+                    </div>
+                    <DollarSign className="h-8 w-8 text-destructive" />
                   </div>
-                  <BarChart3 className="h-6 w-6 text-accent" />
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                </CardContent>
+              </Card>
 
-          {/* Overview Charts */}
-          <div className="grid gap-4 md:grid-cols-2 mb-6">
-            <WealthGrowthChart />
-            <AssetAllocationChart />
-          </div>
+              <Card>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Active Trusts</p>
+                      <p className="text-2xl font-bold">{selectedClient.trustCount}</p>
+                    </div>
+                    <Shield className="h-8 w-8 text-primary" />
+                  </div>
+                </CardContent>
+              </Card>
 
-          {/* Overview Crypto Holdings */}
-          <div className="mb-6">
-            <CryptoHoldingsChart />
-          </div>
+              <Card>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Compliance</p>
+                      <p className="text-2xl font-bold">{selectedClient.compliance}%</p>
+                    </div>
+                    <FileText className="h-8 w-8 text-accent" />
+                  </div>
+                  <Progress value={selectedClient.compliance} className="mt-2" />
+                </CardContent>
+              </Card>
+            </div>
 
-          {/* Overview Debt Section */}
-          <div className="mb-6">
-            <DebtAllocationChart />
-          </div>
+            {/* Client Charts */}
+            <div className="grid gap-6 lg:grid-cols-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Wealth Growth</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <WealthGrowthChart />
+                </CardContent>
+              </Card>
 
-          {/* Client Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left py-3 px-4 font-medium">Client Name</th>
-                  <th className="text-left py-3 px-4 font-medium">Net Worth</th>
-                  <th className="text-left py-3 px-4 font-medium">Services</th>
-                  <th className="text-left py-3 px-4 font-medium">Last Updated</th>
-                  <th className="text-left py-3 px-4 font-medium">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredClients.map((client) => (
-                  <tr key={client.id} className="border-b hover:bg-muted/30">
-                    <td className="py-3 px-4">
-                      <div>
-                        <p className="font-medium">{client.name}</p>
-                        <p className="text-sm text-muted-foreground">{client.email}</p>
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      <div>
-                        <p className="font-medium">R {client.netWorth.toLocaleString()}</p>
-                        <p className="text-sm text-success">+{client.monthlyChange}%</p>
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex flex-wrap gap-1">
-                        {client.services.slice(0, 2).map((service, index) => (
-                          <Badge key={index} variant="secondary" className="text-xs">
-                            {service}
-                          </Badge>
-                        ))}
-                        {client.services.length > 2 && (
-                          <Badge variant="secondary" className="text-xs">
-                            +{client.services.length - 2}
-                          </Badge>
-                        )}
-                      </div>
-                    </td>
-                    <td className="py-3 px-4 text-sm text-muted-foreground">
-                      {new Date(client.lastUpdated).toLocaleDateString()}
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-2">
-                        <Button 
-                          variant="outline" 
-                          size="sm"
-                          onClick={() => switchToClient(client.id)}
-                        >
-                          Manage
-                        </Button>
-                        <Button variant="ghost" size="sm">
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </main>
+              <Card>
+                <CardHeader>
+                  <CardTitle>Asset Allocation</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <AssetAllocationChart />
+                </CardContent>
+              </Card>
 
-      {/* Add New Client Modal */}
-      <Dialog open={showAddClientModal} onOpenChange={setShowAddClientModal}>
-        <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Add New Client</DialogTitle>
-          </DialogHeader>
-          
-          <div className="space-y-6">
-            <div className="grid gap-4 sm:grid-cols-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Crypto Holdings</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CryptoHoldingsChart />
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Debt Allocation</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <DebtAllocationChart />
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        )}
+
+        {/* Add Client Modal */}
+        <Dialog open={showAddClientModal} onOpenChange={setShowAddClientModal}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                <UserPlus className="h-5 w-5" />
+                Add New Client
+              </DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
               <div>
-                <Label htmlFor="firstName">First Name *</Label>
+                <Label htmlFor="fullName">Full Name *</Label>
                 <Input
-                  id="firstName"
-                  value={newClient.firstName}
-                  onChange={(e) => setNewClient(prev => ({ ...prev, firstName: e.target.value }))}
-                  placeholder="Enter first name"
+                  id="fullName"
+                  value={newClient.fullName}
+                  onChange={(e) => setNewClient(prev => ({ ...prev, fullName: e.target.value }))}
+                  placeholder="John Smith"
                 />
               </div>
-              
+
               <div>
-                <Label htmlFor="lastName">Last Name *</Label>
+                <Label htmlFor="idNumber">ID Number *</Label>
                 <Input
-                  id="lastName"
-                  value={newClient.lastName}
-                  onChange={(e) => setNewClient(prev => ({ ...prev, lastName: e.target.value }))}
-                  placeholder="Enter last name"
+                  id="idNumber"
+                  value={newClient.idNumber}
+                  onChange={(e) => setNewClient(prev => ({ ...prev, idNumber: e.target.value }))}
+                  placeholder="8001015800087"
                 />
               </div>
-            </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <Label htmlFor="email">Email Address *</Label>
+                <Label htmlFor="email">Email Address</Label>
                 <Input
                   id="email"
                   type="email"
                   value={newClient.email}
                   onChange={(e) => setNewClient(prev => ({ ...prev, email: e.target.value }))}
-                  placeholder="client@example.com"
+                  placeholder="john@example.com"
                 />
               </div>
-              
+
               <div>
                 <Label htmlFor="phone">Phone Number</Label>
                 <Input
@@ -592,60 +572,27 @@ const PartnerDashboard = () => {
                   placeholder="+27 82 123 4567"
                 />
               </div>
-            </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <Label htmlFor="netWorth">Estimated Net Worth (ZAR)</Label>
-                <Input
-                  id="netWorth"
-                  type="number"
-                  value={newClient.netWorth}
-                  onChange={(e) => setNewClient(prev => ({ ...prev, netWorth: e.target.value }))}
-                  placeholder="5000000"
-                />
-              </div>
-              
-              <div>
-                <Label htmlFor="primaryService">Primary Service Needed</Label>
-                <Select 
-                  value={newClient.primaryService} 
-                  onValueChange={(value) => setNewClient(prev => ({ ...prev, primaryService: value }))}
+              <div className="pt-4 flex gap-3">
+                <Button 
+                  onClick={handleAddClient}
+                  disabled={!newClient.fullName || !newClient.idNumber}
+                  className="flex-1"
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select service" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Trust Planning">Trust Planning</SelectItem>
-                    <SelectItem value="Will Drafting">Will Drafting</SelectItem>
-                    <SelectItem value="Estate Administration">Estate Administration</SelectItem>
-                    <SelectItem value="Tax Planning">Tax Planning</SelectItem>
-                  </SelectContent>
-                </Select>
+                  Add Client
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowAddClientModal(false)}
+                  className="flex-1"
+                >
+                  Cancel
+                </Button>
               </div>
             </div>
-
-            <div>
-              <Label htmlFor="notes">Initial Notes</Label>
-              <Textarea
-                id="notes"
-                value={newClient.notes}
-                onChange={(e) => setNewClient(prev => ({ ...prev, notes: e.target.value }))}
-                placeholder="Any important information about this client..."
-              />
-            </div>
-
-            <div className="flex justify-between">
-              <Button variant="outline" onClick={() => setShowAddClientModal(false)}>
-                Cancel
-              </Button>
-              <Button onClick={handleAddClient}>
-                Add Client
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+          </DialogContent>
+        </Dialog>
+      </div>
     </div>
   );
 };

@@ -68,8 +68,9 @@ const Signup = () => {
       {/* Header */}
       <header className="border-b bg-background/80 backdrop-blur">
         <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center">
-            <img src={legacyLogo} alt="Legacy Builder logo" className="h-10 w-auto" />
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">🌳</span>
+            <span className="font-bold text-lg">Legacy Vault</span>
           </div>
           <Button variant="ghost" onClick={() => navigate('/')}>
             <ArrowLeft className="h-4 w-4 mr-2" />

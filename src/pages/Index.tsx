@@ -1,35 +1,13 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight } from "lucide-react";
 import legacyLogo from "@/assets/legacy-builder-logo.png";
 import PublicNavigation from "@/components/shared/PublicNavigation";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Check if user is logged in and redirect to dashboard
-    const userType = localStorage.getItem('userType');
-    
-    if (userType) {
-      // User is logged in, redirect to dashboard
-      navigate('/dashboard');
-    }
-    // If not logged in, stay on this page (home/landing)
-  }, [navigate]);
-
-  // If user is logged in, show loading while redirecting
-  const userType = localStorage.getItem('userType');
-  if (userType) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
 
   // Show landing page content for non-logged-in users
   return (

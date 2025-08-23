@@ -18,8 +18,8 @@ export const DashboardNavigation = () => {
     <header className="sticky top-0 z-30 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
-          <img src={legacyLogo} alt="Legacy Vault logo - tree with roots" className="h-10 w-auto" loading="eager"/>
-          <span className="font-display text-xl font-bold text-primary">Legacy Vault 🌳</span>
+          <span className="text-2xl">🌳</span>
+          <span className="font-display text-xl font-bold text-primary">Legacy Vault</span>
         </div>
         
         <div className="hidden md:flex items-center gap-6">

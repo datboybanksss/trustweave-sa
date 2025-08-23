@@ -88,8 +88,9 @@ const ThankYou = () => {
       {/* Header */}
       <header className="border-b bg-background/80 backdrop-blur">
         <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center">
-            <img src={legacyLogo} alt="Legacy Builder logo" className="h-10 w-auto" />
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">🌳</span>
+            <span className="font-bold text-lg">Legacy Vault</span>
           </div>
           <Badge className="bg-success text-white">
             Account Created Successfully
@@ -110,7 +111,7 @@ const ThankYou = () => {
             </div>
             
             <h1 className="font-display text-4xl font-bold mb-4">
-              Welcome to Legacy Builder!
+              Welcome to Legacy Vault!
             </h1>
             <p className="text-xl text-muted-foreground mb-2">
               Your {paymentData.planName} trial has been activated
