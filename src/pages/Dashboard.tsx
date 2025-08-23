@@ -1,25 +1,41 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import IndividualDashboard from "./IndividualDashboard";
 import PartnerDashboard from "./PartnerDashboard";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const userType = localStorage.getItem('userType');
+  const [userType, setUserType] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in
-    if (!userType) {
+    // Get user type from localStorage (will be from database later)
+    const storedUserType = localStorage.getItem('userType');
+    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+    
+    if (!storedUserType) {
       navigate('/landing');
       return;
     }
-  }, [userType, navigate]);
+    
+    setUserType(storedUserType);
+    setLoading(false);
+  }, [navigate]);
 
-  // Show appropriate dashboard based on user type
-  if (userType === 'partner' || userType === 'lawyer') {
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  // Route to appropriate dashboard based on user type
+  if (userType === 'partner' || userType === 'lawyer' || userType === 'fiduciary') {
     return <PartnerDashboard />;
   }
 
+  // Default to individual dashboard
   return <IndividualDashboard />;
 };
 

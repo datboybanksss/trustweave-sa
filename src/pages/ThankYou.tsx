@@ -154,7 +154,7 @@ const ThankYou = () => {
                 <div className="flex flex-col sm:flex-row gap-3 mt-6">
                   <Button className="flex-1" onClick={() => navigate('/dashboard')}>
                     <ArrowRight className="h-4 w-4 mr-2" />
-                    Go to {paymentData.userType === 'partner' ? 'Client Dashboard' : 'Legacy Vault'}
+                    Go to {paymentData.userType === 'partner' || paymentData.userType === 'lawyer' ? 'Client Dashboard' : 'Legacy Vault'}
                   </Button>
                   <Button variant="outline" className="flex-1" onClick={() => navigate('/education')}>
                     <BookOpen className="h-4 w-4 mr-2" />

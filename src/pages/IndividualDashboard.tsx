@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Banknote, TrendingUp, Shield, PieChart, Calendar } from "lucide-react";
+import { Banknote, TrendingUp, Shield, PieChart, Calendar, ChevronDown, FileText, Plus, Users, MoreHorizontal } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useCountUp } from "@/hooks/useCountUp";
 import { Document } from "@/types";
@@ -58,12 +58,22 @@ const IndividualDashboard = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [showBankModal, setShowBankModal] = useState(false);
   const [documents, setDocuments] = useState<Document[]>(sampleDocuments);
-  const [activeTrusts, setActiveTrusts] = useState(3);
+  const [trusts, setTrusts] = useState([
+    { id: 1, name: 'Family Trust', value: 3500000, beneficiaries: 3, creationDate: '2023-05-15', lastReview: 'Today', assetsValue: 3500000, trustees: ['John Smith', 'Sarah Smith'], documentUrl: '/trust-docs/family-trust.pdf' },
+    { id: 2, name: 'Business Trust', value: 2100000, beneficiaries: 2, creationDate: '2023-08-20', lastReview: '2024-01-10', assetsValue: 2100000, trustees: ['John Smith'], documentUrl: '/trust-docs/business-trust.pdf' }
+  ]);
+  const [beneficiaries, setBeneficiaries] = useState([
+    { id: 1, name: 'Sarah Smith', relationship: 'Spouse', percentage: 50 },
+    { id: 2, name: 'John Smith Jr', relationship: 'Child', percentage: 25 },
+    { id: 3, name: 'Emma Smith', relationship: 'Child', percentage: 25 }
+  ]);
   const [bankAccounts, setBankAccounts] = useState([]);
   const [netWorth, setNetWorth] = useState(0);
   const [complianceScore, setComplianceScore] = useState(0);
+  const [expandedTrusts, setExpandedTrusts] = useState<Record<number, boolean>>({});
   
-  const userName = localStorage.getItem('userName') || 'Jonathan van der Merwe';
+  const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+  const userName = userData.name || userData.fullName || 'User';
   const portfolio = useCountUp(netWorth, 1500);
 
   // Calculate live net worth and compliance
@@ -84,16 +94,23 @@ const IndividualDashboard = () => {
     // Calculate compliance score
     const checks = {
       hasID: documents.some(d => d.category === 'identity'),
-      hasTrustDocs: activeTrusts > 0,
+      hasTrustDocs: trusts.length > 0,
       hasAssetProof: documents.some(d => d.category === 'asset'),
-      hasBeneficiaryInfo: true, // placeholder
-      allTrustsVerified: true // placeholder
+      hasBeneficiaryInfo: beneficiaries.length > 0,
+      allTrustsVerified: trusts.length > 0
     };
     
     const completed = Object.values(checks).filter(Boolean).length;
     const total = Object.keys(checks).length;
     setComplianceScore(Math.round((completed / total) * 100));
-  }, [documents, bankAccounts, activeTrusts]);
+  }, [documents, bankAccounts, trusts, beneficiaries]);
+
+  const toggleTrustExpansion = (trustId: number) => {
+    setExpandedTrusts(prev => ({
+      ...prev,
+      [trustId]: !prev[trustId]
+    }));
+  };
 
   const handleDocumentUpload = (files: File[], category: 'asset' | 'identity' | 'debt', subCategory: string, cryptoData?: any) => {
     const newDocs = files.map((file, index) => ({
@@ -152,7 +169,7 @@ const IndividualDashboard = () => {
         <section className="rounded-xl border bg-card/80 backdrop-blur p-4">
           <h2 className="font-display text-lg mb-3">Quick Actions</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <Button variant="hero" onClick={() => setActiveTrusts(prev => prev + 1)}>
+            <Button variant="hero">
               <Shield className="h-4 w-4 mr-2" />
               Create New Trust
             </Button>
@@ -201,17 +218,17 @@ const IndividualDashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-card/80 backdrop-blur">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">Trust Assets</p>
-                  <p className="text-2xl font-bold">R 2,100,000</p>
+            <Card className="bg-card/80 backdrop-blur">
+              <CardContent className="pt-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">Active Trusts</p>
+                    <p className="text-2xl font-bold">{trusts.length}</p>
+                  </div>
+                  <Shield className="h-8 w-8 text-success" />
                 </div>
-                <Shield className="h-8 w-8 text-success" />
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
           <Card className="bg-card/80 backdrop-blur">
             <CardContent className="pt-6">
@@ -231,14 +248,106 @@ const IndividualDashboard = () => {
           </Card>
         </div>
 
-        {/* Wealth Metrics */}
-        <EnhancedWealthMetrics documents={documents} />
+        {/* Your Active Trusts - Display Only */}
+        <section className="rounded-xl border bg-card/80 backdrop-blur p-6">
+          <h2 className="font-display text-xl mb-4">Your Active Trusts</h2>
+          {trusts.length === 0 ? (
+            <div className="text-center py-8 text-muted-foreground">
+              <Shield className="h-12 w-12 mx-auto mb-3 opacity-50" />
+              <p>No trusts created yet. Use the "Create New Trust" button above to get started.</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {trusts.map(trust => (
+                <Card key={trust.id} className="bg-muted/30">
+                  <CardContent className="p-4">
+                    <div 
+                      className="flex items-center justify-between cursor-pointer"
+                      onClick={() => toggleTrustExpansion(trust.id)}
+                    >
+                      <div>
+                        <h3 className="font-semibold text-lg">{trust.name}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          {trust.beneficiaries} beneficiaries • Created {trust.creationDate}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          <p className="text-xl font-bold">R {trust.value.toLocaleString()}</p>
+                          <p className="text-xs text-muted-foreground">Last review: {trust.lastReview}</p>
+                        </div>
+                        <ChevronDown className={`h-5 w-5 transition-transform ${expandedTrusts[trust.id] ? 'rotate-180' : ''}`} />
+                      </div>
+                    </div>
+                    
+                    {expandedTrusts[trust.id] && (
+                      <div className="mt-4 pt-4 border-t">
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <h4 className="font-medium mb-2">Trust Details</h4>
+                            <div className="space-y-1 text-sm">
+                              <p><span className="text-muted-foreground">Trustees:</span> {trust.trustees.join(', ')}</p>
+                              <p><span className="text-muted-foreground">Assets Value:</span> R {trust.assetsValue.toLocaleString()}</p>
+                              <p><span className="text-muted-foreground">Last Review:</span> {trust.lastReview}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-center">
+                            <Button variant="outline" size="sm">
+                              <FileText className="h-4 w-4 mr-2" />
+                              View Trust Document
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+        </section>
 
-        {/* Trust Builder Section */}
-        <TrustBuilderSection 
-          activeTrusts={activeTrusts} 
-          onTrustCreated={() => setActiveTrusts(prev => prev + 1)} 
-        />
+        {/* Beneficiaries Section */}
+        <section className="rounded-xl border bg-card/80 backdrop-blur p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-display text-xl">Beneficiaries ({beneficiaries.length})</h2>
+            <Button>
+              <Plus className="h-4 w-4 mr-2" />
+              Add Beneficiary
+            </Button>
+          </div>
+          
+          {beneficiaries.length === 0 ? (
+            <div className="text-center py-8 text-muted-foreground">
+              <Users className="h-12 w-12 mx-auto mb-3 opacity-50" />
+              <p>No beneficiaries added yet. Add your first beneficiary to get started.</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {beneficiaries.map(beneficiary => (
+                <Card key={beneficiary.id} className="bg-muted/30">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">{beneficiary.name}</p>
+                        <p className="text-sm text-muted-foreground">{beneficiary.relationship}</p>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          <p className="text-lg font-semibold">{beneficiary.percentage}%</p>
+                          <p className="text-xs text-muted-foreground">Allocation</p>
+                        </div>
+                        <Button variant="ghost" size="sm">
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+        </section>
 
         {/* Documents List */}
         <section>
