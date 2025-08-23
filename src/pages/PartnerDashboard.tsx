@@ -11,10 +11,7 @@ import {
   Users, Building, TrendingUp, FileText, Plus, ChevronDown, 
   ArrowLeft, Search, MoreHorizontal, Calendar, Upload, PieChart, BarChart3 
 } from "lucide-react";
-import Navigation from "@/components/shared/Navigation";
-import { ActionItems } from "@/components/dashboard/ActionItems";
-import { EnhancedWealthMetrics } from "@/components/dashboard/EnhancedWealthMetrics";
-import { TrustBuilderSection } from "@/components/dashboard/TrustBuilderSection";
+import DashboardNavigation from "@/components/shared/DashboardNavigation";
 import { DocumentUploadModal } from "@/components/documents/DocumentUploadModal";
 import { DocumentsList } from "@/components/documents/DocumentsList";
 import { toast } from "@/hooks/use-toast";
@@ -110,7 +107,8 @@ const PartnerDashboard = () => {
     notes: ''
   });
 
-  const firmName = "van der Merwe & Associates";
+  const firmName = localStorage.getItem('firmName') || "van der Merwe & Associates";
+  const userName = localStorage.getItem('userName') || 'Partner';
   const totalAUM = clients.reduce((sum, client) => sum + client.netWorth, 0);
   const totalTrusts = clients.reduce((sum, client) => sum + client.trusts, 0);
   const totalDocuments = clients.reduce((sum, client) => sum + client.documents.length, 0);
@@ -165,7 +163,7 @@ const PartnerDashboard = () => {
   if (selectedClient) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
-        <Navigation />
+        <DashboardNavigation />
         <main className="container mx-auto px-4 py-10 space-y-8">
           {/* Client Header */}
           <section className="relative overflow-hidden rounded-xl border bg-card/80 backdrop-blur shadow-lg p-6">
@@ -323,19 +321,49 @@ const PartnerDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
-      <Navigation />
+      <DashboardNavigation />
       <main className="container mx-auto px-4 py-10 space-y-8">
         {/* Partner Header */}
         <section className="relative overflow-hidden rounded-xl border bg-card/80 backdrop-blur shadow-lg p-6">
           <div className="absolute inset-0 -z-10 opacity-20" style={{background:"var(--gradient-primary)"}} />
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="font-display text-2xl mb-1">{firmName}</h1>
-              <p className="text-muted-foreground mb-4">Professional Client Management Dashboard</p>
+              <h1 className="font-display text-2xl mb-1">Good day, {userName}</h1>
+              <p className="text-lg">{firmName}</p>
+              <p className="text-sm text-muted-foreground">
+                Total AUM: R {(totalAUM / 1000000).toFixed(1)}M
+              </p>
             </div>
-            <div className="text-right">
-              <div className="text-3xl font-semibold">R {totalAUM.toLocaleString()}</div>
-              <span className="text-sm text-muted-foreground">Total Assets Under Management</span>
+            
+            {/* Client Switcher */}
+            <div className="flex items-center gap-4">
+              <label className="text-sm text-muted-foreground">Current Client:</label>
+              <Select 
+                value={selectedClient?.id || ''} 
+                onValueChange={(value) => {
+                  if (value === 'add-new') {
+                    setShowAddClientModal(true);
+                  } else if (value === '') {
+                    setSelectedClient(null);
+                  } else {
+                    const client = clients.find(c => c.id === value);
+                    setSelectedClient(client || null);
+                  }
+                }}
+              >
+                <SelectTrigger className="w-[300px]">
+                  <SelectValue placeholder="📊 All Clients Overview" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">📊 All Clients Overview</SelectItem>
+                  <SelectItem value="add-new">➕ Add New Client</SelectItem>
+                  {clients.map(client => (
+                    <SelectItem key={client.id} value={client.id}>
+                      {client.name} - R{(client.netWorth / 1000000).toFixed(1)}M
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </section>

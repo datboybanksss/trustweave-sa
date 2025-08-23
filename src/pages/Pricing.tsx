@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import Navigation from "@/components/shared/Navigation";
+import PublicNavigation from "@/components/shared/PublicNavigation";
 import { Check, X } from "lucide-react";
 
 const Pricing = () => {
@@ -100,7 +100,7 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
-      <Navigation />
+      <PublicNavigation />
       <main className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-16">

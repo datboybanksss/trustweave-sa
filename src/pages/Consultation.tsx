@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Navigation from "@/components/shared/Navigation";
+import PublicNavigation from "@/components/shared/PublicNavigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star, Phone, Mail, MessageCircle, Clock, Users, Shield } from "lucide-react";
@@ -55,7 +55,7 @@ const Consultation = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
-      <Navigation />
+      <PublicNavigation />
       <main className="container mx-auto px-4 py-16">
         {/* Hero Section */}
         <div className="text-center mb-12">
@@ -173,14 +173,14 @@ const Consultation = () => {
                   <div className="flex items-center gap-3">
                     <Mail className="h-5 w-5 text-primary" />
                     <div>
-                      <div className="font-medium">consult@legacybuilder.co.za</div>
+                      <div className="font-medium">legacybuilder@mybusinesswill.co.za</div>
                       <div className="text-sm text-muted-foreground">Email us your questions</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <MessageCircle className="h-5 w-5 text-primary" />
                     <div>
-                      <div className="font-medium">+27 82 LEGACY</div>
+                      <div className="font-medium">+27 82 377 2008</div>
                       <div className="text-sm text-muted-foreground">WhatsApp support</div>
                     </div>
                   </div>

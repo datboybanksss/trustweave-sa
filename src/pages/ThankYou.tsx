@@ -9,7 +9,7 @@ import legacyLogo from "@/assets/legacy-logo.png";
 const ThankYou = () => {
   const navigate = useNavigate();
   const [paymentData, setPaymentData] = useState<any>(null);
-  const [showConfetti, setShowConfetti] = useState(true);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
     const data = sessionStorage.getItem('paymentData');
@@ -19,9 +19,16 @@ const ThankYou = () => {
       navigate('/');
     }
 
-    // Hide confetti after animation
-    const timer = setTimeout(() => setShowConfetti(false), 3000);
-    return () => clearTimeout(timer);
+    // Check if animation was already shown
+    const animationShown = sessionStorage.getItem('thankYouAnimationShown');
+    if (!animationShown) {
+      setShowConfetti(true);
+      sessionStorage.setItem('thankYouAnimationShown', 'true');
+      
+      // Hide confetti after animation
+      const timer = setTimeout(() => setShowConfetti(false), 3000);
+      return () => clearTimeout(timer);
+    }
   }, [navigate]);
 
   if (!paymentData) {
@@ -145,9 +152,9 @@ const ThankYou = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 mt-6">
-                  <Button className="flex-1" onClick={() => navigate('/')}>
+                  <Button className="flex-1" onClick={() => navigate('/dashboard')}>
                     <ArrowRight className="h-4 w-4 mr-2" />
-                    Go to Dashboard
+                    Go to {paymentData.userType === 'partner' ? 'Client Dashboard' : 'Legacy Vault'}
                   </Button>
                   <Button variant="outline" className="flex-1" onClick={() => navigate('/education')}>
                     <BookOpen className="h-4 w-4 mr-2" />

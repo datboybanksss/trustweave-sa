@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Navigation from "@/components/shared/Navigation";
+import DashboardNavigation from "@/components/shared/DashboardNavigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -133,7 +133,7 @@ const Education = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
-      <Navigation />
+      <DashboardNavigation />
       <main className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-12">

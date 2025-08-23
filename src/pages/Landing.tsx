@@ -5,32 +5,14 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight } from "lucide-react";
 import legacyLogo from "@/assets/legacy-logo.png";
 import { useNavigate } from "react-router-dom";
+import PublicNavigation from "@/components/shared/PublicNavigation";
 
 const Landing = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
-      {/* Navigation */}
-      <header className="sticky top-0 z-30 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-3">
-            <img src={legacyLogo} alt="Legacy Builder logo" className="h-8 w-8" loading="eager"/>
-            <span className="font-display text-lg">Legacy Builder</span>
-          </div>
-          <div className="hidden md:flex items-center gap-6">
-            <a href="#features" className="hover:text-primary transition-colors">Features</a>
-            <a href="#pricing" className="hover:text-primary transition-colors">Pricing</a>
-            <a href="#testimonials" className="hover:text-primary transition-colors">Reviews</a>
-          </div>
-          <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm">Sign In</Button>
-            <Button variant="premium" size="sm" onClick={() => navigate('/signup')}>
-              Get Started Free
-            </Button>
-          </div>
-        </nav>
-      </header>
+      <PublicNavigation />
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">

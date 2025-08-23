@@ -1,33 +1,26 @@
-import Navigation from "@/components/shared/Navigation";
-import GreetingHero from "@/components/dashboard/GreetingHero";
-import QuickStats from "@/components/dashboard/QuickStats";
-import WealthGrowthChart from "@/components/dashboard/WealthGrowthChart";
-import AssetAllocationChart from "@/components/dashboard/AssetAllocationChart";
-import ActionItems from "@/components/dashboard/ActionItems";
-import ActivityFeed from "@/components/dashboard/ActivityFeed";
-import UpcomingEvents from "@/components/dashboard/UpcomingEvents";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import IndividualDashboard from "./IndividualDashboard";
+import PartnerDashboard from "./PartnerDashboard";
 
-const Dashboard = () => (
-  <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
-    <Navigation />
-    <main className="container mx-auto px-4 py-10 space-y-8">
-      <GreetingHero />
-      <QuickStats />
-      <div className="grid gap-4 lg:grid-cols-2">
-        <WealthGrowthChart />
-        <AssetAllocationChart />
-      </div>
-      <ActionItems 
-        onCreateTrust={() => {}}
-        onUploadDocument={() => {}}
-        onBookConsultation={() => window.location.href = '/consultation'}
-        onStartLearning={() => window.location.href = '/education'}
-      />
-      <div className="grid gap-4 lg:grid-cols-2">
-        <ActivityFeed />
-        <UpcomingEvents />
-      </div>
-    </main>
-  </div>
-);
+const Dashboard = () => {
+  const navigate = useNavigate();
+  const userType = localStorage.getItem('userType');
+
+  useEffect(() => {
+    // Check if user is logged in
+    if (!userType) {
+      navigate('/landing');
+      return;
+    }
+  }, [userType, navigate]);
+
+  // Show appropriate dashboard based on user type
+  if (userType === 'partner' || userType === 'lawyer') {
+    return <PartnerDashboard />;
+  }
+
+  return <IndividualDashboard />;
+};
+
 export default Dashboard;
