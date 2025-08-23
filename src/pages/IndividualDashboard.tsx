@@ -14,6 +14,9 @@ import { Banknote, TrendingUp, Shield, PieChart, Calendar, ChevronDown, FileText
 import { toast } from "@/hooks/use-toast";
 import { useCountUp } from "@/hooks/useCountUp";
 import { Document } from "@/types";
+import AssetAllocationChart from "@/components/dashboard/AssetAllocationChart";
+import WealthGrowthChart from "@/components/dashboard/WealthGrowthChart";
+import DebtAllocationChart from "@/components/dashboard/DebtAllocationChart";
 
 // Sample data with crypto holdings
 const sampleDocuments = [
@@ -246,6 +249,13 @@ const IndividualDashboard = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Charts Section */}
+        <div className="grid gap-4 md:grid-cols-3">
+          <WealthGrowthChart />
+          <AssetAllocationChart />
+          <DebtAllocationChart />
         </div>
 
         {/* Your Active Trusts - Display Only */}

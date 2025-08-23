@@ -16,6 +16,9 @@ import { DocumentUploadModal } from "@/components/documents/DocumentUploadModal"
 import { DocumentsList } from "@/components/documents/DocumentsList";
 import { toast } from "@/hooks/use-toast";
 import { Document } from "@/types";
+import AssetAllocationChart from "@/components/dashboard/AssetAllocationChart";
+import WealthGrowthChart from "@/components/dashboard/WealthGrowthChart";
+import DebtAllocationChart from "@/components/dashboard/DebtAllocationChart";
 
 interface Client {
   id: string;
@@ -256,6 +259,13 @@ const PartnerDashboard = () => {
             </Card>
           </div>
 
+          {/* Client Charts */}
+          <div className="grid gap-4 md:grid-cols-3">
+            <WealthGrowthChart />
+            <AssetAllocationChart />
+            <DebtAllocationChart />
+          </div>
+
           {/* Client Documents */}
           <section>
             <h2 className="font-display text-xl mb-4">Client Documents</h2>
@@ -441,6 +451,13 @@ const PartnerDashboard = () => {
                 </div>
               </CardContent>
             </Card>
+          </div>
+
+          {/* Overview Charts */}
+          <div className="grid gap-4 md:grid-cols-3 mb-6">
+            <WealthGrowthChart />
+            <AssetAllocationChart />
+            <DebtAllocationChart />
           </div>
 
           {/* Client Table */}
