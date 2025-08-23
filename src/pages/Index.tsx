@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight } from "lucide-react";
-import legacyLogo from "@/assets/legacy-logo.png";
+import legacyLogo from "@/assets/legacy-builder-logo.png";
 import PublicNavigation from "@/components/shared/PublicNavigation";
 
 const Index = () => {

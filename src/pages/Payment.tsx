@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Lock, Shield, CreditCard, Smartphone } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import legacyLogo from "@/assets/legacy-logo.png";
+import legacyLogo from "@/assets/legacy-builder-logo.png";
 
 const Payment = () => {
   const navigate = useNavigate();

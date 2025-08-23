@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import legacyLogo from "@/assets/legacy-logo.png";
+import legacyLogo from "@/assets/legacy-builder-logo.png";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "./LanguageSelector";
 

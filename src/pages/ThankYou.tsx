@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Calendar, CreditCard, DollarSign, ArrowRight, BookOpen, HelpCircle, Phone, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import legacyLogo from "@/assets/legacy-logo.png";
+import legacyLogo from "@/assets/legacy-builder-logo.png";
 
 const ThankYou = () => {
   const navigate = useNavigate();
