@@ -355,11 +355,11 @@ const PartnerDashboard = () => {
             <div className="flex items-center gap-4">
               <label className="text-sm text-muted-foreground">Current Client:</label>
               <Select 
-                value={selectedClient?.id || ''} 
+                value={selectedClient?.id || 'overview'} 
                 onValueChange={(value) => {
                   if (value === 'add-new') {
                     setShowAddClientModal(true);
-                  } else if (value === '') {
+                  } else if (value === 'overview') {
                     setSelectedClient(null);
                   } else {
                     const client = clients.find(c => c.id === value);
@@ -371,7 +371,7 @@ const PartnerDashboard = () => {
                   <SelectValue placeholder="📊 All Clients Overview" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">📊 All Clients Overview</SelectItem>
+                  <SelectItem value="overview">📊 All Clients Overview</SelectItem>
                   <SelectItem value="add-new">➕ Add New Client</SelectItem>
                   {clients.map(client => (
                     <SelectItem key={client.id} value={client.id}>
