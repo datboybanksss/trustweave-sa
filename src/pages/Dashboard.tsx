@@ -17,7 +17,12 @@ const Dashboard = () => (
         <WealthGrowthChart />
         <AssetAllocationChart />
       </div>
-      <ActionItems />
+      <ActionItems 
+        onCreateTrust={() => {}}
+        onUploadDocument={() => {}}
+        onBookConsultation={() => window.location.href = '/consultation'}
+        onStartLearning={() => window.location.href = '/education'}
+      />
       <div className="grid gap-4 lg:grid-cols-2">
         <ActivityFeed />
         <UpcomingEvents />

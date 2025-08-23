@@ -285,15 +285,22 @@ const PartnerDashboard = () => {
           onOpenChange={setShowUploadModal}
           onUpload={(files, category, subCategory, cryptoData) => {
             // Add documents to selected client
-            const newDocs = files.map((file, index) => ({
+            const newDocs: Document[] = files.map((file, index) => ({
               id: Date.now() + index.toString(),
               name: file.name,
-              category,
-              subCategory,
-              uploadDate: new Date(),
+              category: category as 'asset' | 'identity' | 'debt',
+              subCategory: subCategory || '',
+              uploadDate: new Date().toISOString(),
               size: `${(file.size / 1024 / 1024).toFixed(1)} MB`,
               type: file.type,
-              value: Math.floor(Math.random() * 1000000) + 100000
+              extractedValue: Math.floor(Math.random() * 1000000) + 100000,
+              ...(cryptoData && {
+                verificationStatus: 'pending' as const,
+                cryptoAmount: cryptoData.cryptoAmount,
+                cryptoCurrency: cryptoData.cryptoCurrency,
+                walletAddress: cryptoData.walletAddress,
+                blockchainNetwork: cryptoData.blockchain
+              })
             }));
 
             const updatedClients = clients.map(c => 
