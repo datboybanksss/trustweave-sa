@@ -6,12 +6,9 @@ import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight } from "
 import legacyLogo from "@/assets/legacy-logo.png";
 import { useNavigate } from "react-router-dom";
 import PublicNavigation from "@/components/shared/PublicNavigation";
-
 const Landing = () => {
   const navigate = useNavigate();
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
+  return <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
       <PublicNavigation />
 
       {/* Hero Section */}
@@ -343,7 +340,7 @@ const Landing = () => {
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl font-bold mb-4">Trusted by South African Families</h2>
           <div className="flex items-center justify-center gap-1 mb-4">
-            {[1,2,3,4,5].map(i => <Star key={i} className="h-5 w-5 fill-accent text-accent" />)}
+            {[1, 2, 3, 4, 5].map(i => <Star key={i} className="h-5 w-5 fill-accent text-accent" />)}
             <span className="ml-2 text-muted-foreground">4.9/5 from 500+ reviews</span>
           </div>
         </div>
@@ -352,7 +349,7 @@ const Landing = () => {
           <Card className="bg-card/80 backdrop-blur">
             <CardContent className="pt-6">
               <div className="flex items-center gap-1 mb-3">
-                {[1,2,3,4,5].map(i => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
+                {[1, 2, 3, 4, 5].map(i => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
               </div>
               <p className="text-muted-foreground mb-4">
                 "Legacy Builder helped us create a comprehensive family trust structure. 
@@ -373,7 +370,7 @@ const Landing = () => {
           <Card className="bg-card/80 backdrop-blur">
             <CardContent className="pt-6">
               <div className="flex items-center gap-1 mb-3">
-                {[1,2,3,4,5].map(i => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
+                {[1, 2, 3, 4, 5].map(i => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
               </div>
               <p className="text-muted-foreground mb-4">
                 "As a legal professional, the client management features are exceptional. 
@@ -394,7 +391,7 @@ const Landing = () => {
           <Card className="bg-card/80 backdrop-blur">
             <CardContent className="pt-6">
               <div className="flex items-center gap-1 mb-3">
-                {[1,2,3,4,5].map(i => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
+                {[1, 2, 3, 4, 5].map(i => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
               </div>
               <p className="text-muted-foreground mb-4">
                 "The education modules were invaluable. I learned so much about trust planning 
@@ -434,9 +431,7 @@ const Landing = () => {
                 Book a Consultation
               </Button>
             </div>
-            <p className="text-sm text-muted-foreground mt-4">
-              7-day free trial • No credit card required • Cancel anytime
-            </p>
+            <p className="text-sm text-muted-foreground mt-4">7-day free trial • Cancel anytime</p>
           </CardContent>
         </Card>
       </section>
@@ -492,8 +487,6 @@ const Landing = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Landing;
