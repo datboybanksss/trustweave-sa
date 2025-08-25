@@ -35,6 +35,7 @@ import WealthGrowthChart from "@/components/dashboard/WealthGrowthChart";
 import AssetAllocationChart from "@/components/dashboard/AssetAllocationChart";
 import CryptoHoldingsChart from "@/components/dashboard/CryptoHoldingsChart";
 import DebtAllocationChart from "@/components/dashboard/DebtAllocationChart";
+import { DocumentUploadModal } from "@/components/documents/DocumentUploadModal";
 import { toast } from "sonner";
 import { getUserData, getGreetingName } from "@/lib/userSession";
 import { loadPartnerDemo, savePartnerDemo, resetPartnerDemo, type DemoClient } from "@/lib/partnerDemo";
@@ -46,6 +47,7 @@ const PartnerDashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddClientModal, setShowAddClientModal] = useState(false);
   const [showReportPreview, setShowReportPreview] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState(false);
   const [totalAUM, setTotalAUM] = useState(0);
   const [newClient, setNewClient] = useState({
     fullName: '',
@@ -109,6 +111,41 @@ const PartnerDashboard = () => {
     const total = newDemoClients.reduce((sum, client) => sum + client.netWorth, 0);
     setTotalAUM(total);
     toast.success('Demo data reset successfully');
+  };
+
+  const handleDocumentUpload = (files: File[], category: 'asset' | 'identity' | 'debt', subCategory: string, cryptoData?: any) => {
+    if (!selectedClient) return;
+
+    const newDocuments = files.map((file, index) => ({
+      id: crypto.randomUUID(),
+      name: file.name,
+      category: category as 'asset' | 'debt',
+      value: category === 'debt' ? Math.floor(Math.random() * 500000) + 50000 : Math.floor(Math.random() * 1000000) + 100000,
+    }));
+
+    // Update the selected client's documents and recalculate totals
+    const updatedClient = {
+      ...selectedClient,
+      documents: [...selectedClient.documents, ...newDocuments],
+      documentCount: selectedClient.documentCount + files.length
+    };
+
+    // Recalculate totals
+    const assets = updatedClient.documents.filter(d => d.category === 'asset').reduce((sum, d) => sum + d.value, 0);
+    const debts = updatedClient.documents.filter(d => d.category === 'debt').reduce((sum, d) => sum + d.value, 0);
+    updatedClient.totalAssets = assets;
+    updatedClient.totalDebts = debts;
+    updatedClient.netWorth = assets - debts;
+    updatedClient.lastUpdated = new Date().toISOString().slice(0, 10);
+
+    // Update clients list
+    const updatedClients = clients.map(c => c.id === selectedClient.id ? updatedClient : c);
+    setClients(updatedClients);
+    setSelectedClient(updatedClient);
+    savePartnerDemo(updatedClients);
+
+    setShowUploadModal(false);
+    toast.success(`${files.length} document(s) uploaded successfully for ${selectedClient.name}`);
   };
 
   const switchToClient = (clientId: string) => {
@@ -402,7 +439,7 @@ const PartnerDashboard = () => {
               <Button 
                 variant="outline" 
                 className="h-24 flex flex-col gap-2 bg-card hover:bg-primary/10 border-primary/20"
-                onClick={() => toast.info("Document upload coming soon!")}
+                onClick={() => setShowUploadModal(true)}
               >
                 <Upload className="h-6 w-6 text-primary" />
                 <span className="text-sm font-medium">Upload Document</span>
@@ -594,6 +631,15 @@ const PartnerDashboard = () => {
             </div>
             </DialogContent>
         </Dialog>
+
+        {/* Document Upload Modal */}
+        {selectedClient && (
+          <DocumentUploadModal
+            open={showUploadModal}
+            onOpenChange={setShowUploadModal}
+            onUpload={handleDocumentUpload}
+          />
+        )}
 
         {/* PDF Report Preview Modal */}
         {selectedClient && (
