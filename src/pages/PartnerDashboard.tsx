@@ -38,12 +38,14 @@ import DebtAllocationChart from "@/components/dashboard/DebtAllocationChart";
 import { toast } from "sonner";
 import { getUserData, getGreetingName } from "@/lib/userSession";
 import { loadPartnerDemo, savePartnerDemo, resetPartnerDemo, type DemoClient } from "@/lib/partnerDemo";
+import { PdfReportPreview } from "@/components/reports/PdfReportPreview";
 
 const PartnerDashboard = () => {
   const [clients, setClients] = useState<DemoClient[]>([]);
   const [selectedClient, setSelectedClient] = useState<DemoClient | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddClientModal, setShowAddClientModal] = useState(false);
+  const [showReportPreview, setShowReportPreview] = useState(false);
   const [totalAUM, setTotalAUM] = useState(0);
   const [newClient, setNewClient] = useState({
     fullName: '',
@@ -391,37 +393,37 @@ const PartnerDashboard = () => {
               <Button 
                 variant="outline" 
                 className="h-24 flex flex-col gap-2 bg-card hover:bg-primary/10 border-primary/20"
-                onClick={() => toast.success("Trust creation coming soon!")}
+                onClick={() => toast.info("Trust creation coming soon!")}
               >
                 <Shield className="h-6 w-6 text-primary" />
-                <span className="text-sm">Create Trust</span>
+                <span className="text-sm font-medium">Create Trust</span>
               </Button>
 
               <Button 
                 variant="outline" 
-                className="h-24 flex flex-col gap-2 bg-card hover:bg-accent/10 border-accent/20"
-                onClick={() => toast.success("Document upload coming soon!")}
+                className="h-24 flex flex-col gap-2 bg-card hover:bg-primary/10 border-primary/20"
+                onClick={() => toast.info("Document upload coming soon!")}
               >
-                <Upload className="h-6 w-6 text-accent" />
-                <span className="text-sm">Upload Document</span>
+                <Upload className="h-6 w-6 text-primary" />
+                <span className="text-sm font-medium">Upload Document</span>
               </Button>
 
               <Button 
                 variant="outline" 
-                className="h-24 flex flex-col gap-2 bg-card hover:bg-success/10 border-success/20"
-                onClick={() => toast.success("Report generation coming soon!")}
+                className="h-24 flex flex-col gap-2 bg-card hover:bg-primary/10 border-primary/20"
+                onClick={() => setShowReportPreview(true)}
               >
-                <FileText className="h-6 w-6 text-success" />
-                <span className="text-sm">Generate Report</span>
+                <FileText className="h-6 w-6 text-primary" />
+                <span className="text-sm font-medium">Generate Report</span>
               </Button>
 
               <Button 
                 variant="outline" 
-                className="h-24 flex flex-col gap-2 bg-card hover:bg-destructive/10 border-destructive/20"
-                onClick={() => toast.success("Meeting scheduler coming soon!")}
+                className="h-24 flex flex-col gap-2 bg-card hover:bg-primary/10 border-primary/20"
+                onClick={() => toast.info("Meeting scheduler coming soon!")}
               >
-                <Calendar className="h-6 w-6 text-destructive" />
-                <span className="text-sm">Schedule Meeting</span>
+                <Calendar className="h-6 w-6 text-primary" />
+                <span className="text-sm font-medium">Schedule Meeting</span>
               </Button>
             </div>
 
@@ -431,7 +433,7 @@ const PartnerDashboard = () => {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-muted-foreground">Total Assets</p>
+                      <p className="text-sm text-muted-foreground">{selectedClient.name.split(' ')[0]}'s Total Assets</p>
                       <p className="text-2xl font-bold text-success">
                         R {selectedClient.totalAssets.toLocaleString()}
                       </p>
@@ -445,7 +447,7 @@ const PartnerDashboard = () => {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-muted-foreground">Total Debts</p>
+                      <p className="text-sm text-muted-foreground">{selectedClient.name.split(' ')[0]}'s Current Debts</p>
                       <p className="text-2xl font-bold text-destructive">
                         R {selectedClient.totalDebts.toLocaleString()}
                       </p>
@@ -485,7 +487,7 @@ const PartnerDashboard = () => {
             <div className="grid gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle>Wealth Growth</CardTitle>
+                  <CardTitle>{selectedClient.name.split(' ')[0]}'s Wealth Growth</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <WealthGrowthChart />
@@ -494,7 +496,7 @@ const PartnerDashboard = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Asset Allocation</CardTitle>
+                  <CardTitle>{selectedClient.name.split(' ')[0]}'s Asset Allocation</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <AssetAllocationChart />
@@ -503,7 +505,7 @@ const PartnerDashboard = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Crypto Holdings</CardTitle>
+                  <CardTitle>{selectedClient.name.split(' ')[0]}'s Crypto Holdings</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CryptoHoldingsChart />
@@ -512,7 +514,7 @@ const PartnerDashboard = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Debt Allocation</CardTitle>
+                  <CardTitle>{selectedClient.name.split(' ')[0]}'s Debt Allocation</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <DebtAllocationChart />
@@ -590,8 +592,17 @@ const PartnerDashboard = () => {
                 </Button>
               </div>
             </div>
-          </DialogContent>
+            </DialogContent>
         </Dialog>
+
+        {/* PDF Report Preview Modal */}
+        {selectedClient && (
+          <PdfReportPreview
+            isOpen={showReportPreview}
+            onClose={() => setShowReportPreview(false)}
+            client={selectedClient}
+          />
+        )}
       </div>
     </div>
   );
