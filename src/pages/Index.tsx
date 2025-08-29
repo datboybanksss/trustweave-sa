@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight } from "lucide-react";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import legacyLogo from "@/assets/legacy-builder-logo.png";
 import PublicNavigation from "@/components/shared/PublicNavigation";
 import { useNavigate } from "react-router-dom";
@@ -139,115 +140,50 @@ const Index = () => {
         </BentoGrid>
       </section>
 
-      {/* Pricing Preview */}
-      <section id="pricing" className="container mx-auto px-4 py-20">
+      {/* Our Team Section */}
+      <section id="team" className="container mx-auto px-4 py-20">
         <div className="text-center mb-12">
-          <h2 className="font-display text-3xl font-bold mb-4">Simple, Transparent Pricing</h2>
-          <p className="text-muted-foreground">Choose the plan that fits your needs</p>
+          <h2 className="font-display text-3xl font-bold mb-4">Meet Our Team</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Meet the passionate professionals behind Legacy Vault, dedicated to protecting and growing your family's wealth
+          </p>
         </div>
-
-        <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
-          <Card className="bg-card/80 backdrop-blur">
-            <CardHeader>
-              <CardTitle>Essential</CardTitle>
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-bold">R 500</span>
-                <span className="text-muted-foreground">/month</span>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">Perfect for individuals starting their wealth journey</p>
-              <Button variant="outline" className="w-full mb-4" onClick={() => navigate('/signup?plan=essential')}>
-                Start Free Trial
-              </Button>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Document vault (10GB)
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Basic trust builder
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  1 consultation/year
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/80 backdrop-blur border-primary relative">
-            <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground">
-              Most Popular
-            </Badge>
-            <CardHeader>
-              <CardTitle>Professional</CardTitle>
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-bold">R 1,500</span>
-                <span className="text-muted-foreground">/month</span>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">Complete solution for serious wealth builders</p>
-              <Button className="w-full mb-4" onClick={() => navigate('/signup?plan=professional')}>
-                Start Free Trial
-              </Button>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Document vault (50GB)
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Advanced trust builder
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Crypto verification
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  4 consultations/year
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/80 backdrop-blur">
-            <CardHeader>
-              <CardTitle>Enterprise</CardTitle>
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-bold">R 5,000</span>
-                <span className="text-muted-foreground">/month</span>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">For legal professionals managing multiple clients</p>
-              <Button variant="outline" className="w-full mb-4" onClick={() => navigate('/signup?plan=enterprise')}>
-                Start Free Trial
-              </Button>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Unlimited storage
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Client management
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Unlimited consultations
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  5 family accounts
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
+        
+        <AnimatedTestimonials
+          autoplay={true}
+          testimonials={[
+            {
+              quote: "Leading Legacy Vault's vision to democratize wealth management for South African families. With over 15 years in fintech and estate planning, I'm passionate about creating tools that make complex financial planning accessible to everyone.",
+              name: "Jonathan van der Merwe",
+              designation: "Founder & CEO",
+              src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            },
+            {
+              quote: "Ensuring our platform meets the highest standards of South African legal compliance. My expertise in trust law and estate planning helps families navigate complex regulations while securing their legacy.",
+              name: "Priya Sharma",
+              designation: "Chief Legal Officer",
+              src: "https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            },
+            {
+              quote: "Building secure, scalable solutions that protect your most sensitive financial data. Our platform leverages cutting-edge technology to ensure your wealth information remains safe while being easily accessible to you.",
+              name: "David Chen",
+              designation: "Chief Technology Officer",
+              src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            },
+            {
+              quote: "Crafting intuitive experiences that make wealth management feel simple and empowering. Every interface decision is made with your financial success and peace of mind in focus.",
+              name: "Sarah Mitchell",
+              designation: "Head of Product Design",
+              src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            },
+            {
+              quote: "Supporting families throughout their wealth-building journey with personalized guidance and education. My goal is to ensure every client feels confident and informed about their financial decisions.",
+              name: "Michael Okonkwo",
+              designation: "Client Success Manager",
+              src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            }
+          ]}
+        />
       </section>
 
       {/* Testimonials */}
