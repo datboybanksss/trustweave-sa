@@ -23,6 +23,11 @@ export const AnimatedTestimonials = ({
 }) => {
   const [active, setActive] = useState(0);
 
+  // Early return if no testimonials
+  if (!testimonials || testimonials.length === 0) {
+    return null;
+  }
+
   const handleNext = () => {
     setActive((prev) => (prev + 1) % testimonials.length);
   };
@@ -41,6 +46,14 @@ export const AnimatedTestimonials = ({
       return () => clearInterval(interval);
     }
   }, [autoplay]);
+
+  // Ensure active index is within bounds
+  const safeActive = active < testimonials.length ? active : 0;
+  const currentTestimonial = testimonials[safeActive];
+
+  if (!currentTestimonial) {
+    return null;
+  }
 
   const randomRotateY = () => {
     return Math.floor(Math.random() * 21) - 10;
@@ -96,7 +109,7 @@ export const AnimatedTestimonials = ({
         </div>
         <div className="flex justify-between flex-col py-4">
           <motion.div
-            key={active}
+            key={safeActive}
             initial={{
               y: 20,
               opacity: 0,
@@ -115,13 +128,13 @@ export const AnimatedTestimonials = ({
             }}
           >
             <h3 className="text-2xl font-bold text-foreground">
-              {testimonials[active].name}
+              {currentTestimonial.name}
             </h3>
             <p className="text-sm text-muted-foreground">
-              {testimonials[active].designation}
+              {currentTestimonial.designation}
             </p>
             <motion.p className="text-lg text-muted-foreground mt-8">
-              {testimonials[active].quote.split(" ").map((word, index) => (
+              {currentTestimonial.quote.split(" ").map((word, index) => (
                 <motion.span
                   key={index}
                   initial={{
