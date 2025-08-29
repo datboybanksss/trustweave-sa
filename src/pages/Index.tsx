@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight } from "lucide-react";
+import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import legacyLogo from "@/assets/legacy-builder-logo.png";
 import PublicNavigation from "@/components/shared/PublicNavigation";
 import { useNavigate } from "react-router-dom";
@@ -65,166 +66,77 @@ const Index = () => {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <Card className="bg-card/80 backdrop-blur">
-            <CardHeader>
-              <Shield className="h-8 w-8 text-primary mb-2" />
-              <CardTitle>Trust Builder</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Step-by-step trust creation wizard with legal templates and compliance checks.
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Living & Testamentary Trusts
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Legal Document Generation
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Compliance Monitoring
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/80 backdrop-blur">
-            <CardHeader>
-              <FileText className="h-8 w-8 text-accent mb-2" />
-              <CardTitle>Document Vault</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Secure storage for all your wealth documents with automatic value extraction.
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Crypto Wallet Verification
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Property & Investment Tracking
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Automated Calculations
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/80 backdrop-blur">
-            <CardHeader>
-              <TrendingUp className="h-8 w-8 text-success mb-2" />
-              <CardTitle>Wealth Tracking</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Real-time portfolio monitoring with professional-grade analytics and reporting.
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Net Worth Calculations
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Asset Allocation Charts
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Growth Projections
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/80 backdrop-blur">
-            <CardHeader>
-              <Users className="h-8 w-8 text-primary mb-2" />
-              <CardTitle>Client Management</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                For legal professionals: manage multiple clients from one powerful dashboard.
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Client Portfolios
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  AUM Tracking
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Professional Reports
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/80 backdrop-blur border-primary">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <FileText className="h-8 w-8 text-crypto-bitcoin mb-2" />
-                <Badge className="bg-crypto-bitcoin/10 text-crypto-bitcoin">New</Badge>
-              </div>
-              <CardTitle>Crypto Verification</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Advanced cryptocurrency holdings verification to prevent fraud and ensure accuracy.
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Wallet Address Validation
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  KYC Integration
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Ownership Proof
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/80 backdrop-blur">
-            <CardHeader>
-              <Star className="h-8 w-8 text-accent mb-2" />
-              <CardTitle>Education Academy</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Comprehensive learning modules to master wealth planning and trust management.
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  6 Video Modules
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Interactive Quizzes
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-success" />
-                  Completion Certificates
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
+        <BentoGrid className="lg:grid-rows-3">
+          <BentoCard
+            name="Trust Builder"
+            description="Step-by-step trust creation wizard with legal templates and compliance checks. Generate living & testamentary trusts with automated document generation."
+            href="/trust-builder"
+            cta="Build Trust"
+            background={<div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5" />}
+            Icon={Shield}
+            className="lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3"
+          />
+          
+          <BentoCard
+            name="Document Vault"
+            description="Secure storage for all your wealth documents with automatic value extraction, crypto verification, and property tracking."
+            href="/documents"
+            cta="View Vault"
+            background={<div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent/5" />}
+            Icon={FileText}
+            className="lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2"
+          />
+          
+          <BentoCard
+            name="Wealth Tracking"
+            description="Real-time portfolio monitoring with professional analytics, net worth calculations, asset allocation charts, and growth projections."
+            href="/wealth"
+            cta="Track Wealth"
+            background={<div className="absolute inset-0 bg-gradient-to-br from-success/10 to-success/5" />}
+            Icon={TrendingUp}
+            className="lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2"
+          />
+          
+          <BentoCard
+            name="Client Management"
+            description="For legal professionals: manage multiple client portfolios, track AUM, and generate professional reports from one powerful dashboard."
+            href="/partner"
+            cta="Manage Clients"
+            background={<div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5" />}
+            Icon={Users}
+            className="lg:col-start-2 lg:col-end-3 lg:row-start-2 lg:row-end-4"
+          />
+          
+          <BentoCard
+            name="Crypto Verification"
+            description="Advanced cryptocurrency holdings verification with wallet address validation, KYC integration, and ownership proof to prevent fraud."
+            href="/crypto"
+            cta="Verify Holdings"
+            background={<div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-orange-500/5" />}
+            Icon={FileText}
+            className="lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-3"
+          />
+          
+          <BentoCard
+            name="Education Academy"
+            description="Master wealth planning with 6 comprehensive video modules, interactive quizzes, and completion certificates for trust management."
+            href="/education"
+            cta="Start Learning"
+            background={<div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent/5" />}
+            Icon={Star}
+            className="lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4"
+          />
+          
+          <BentoCard
+            name="Professional Reports"
+            description="Generate comprehensive PDF reports with wealth summaries, trust structures, and compliance documentation for clients."
+            href="/reports"
+            cta="Generate Report"
+            background={<div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-purple-500/5" />}
+            Icon={FileText}
+            className="lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4"
+          />
+        </BentoGrid>
       </section>
 
       {/* Pricing Preview */}
