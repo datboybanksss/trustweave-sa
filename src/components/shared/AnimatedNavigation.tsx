@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { HoveredLink, Menu, MenuItem, IconProductItem } from "@/components/ui/navbar-menu";
 import { cn } from "@/lib/utils";
-import { Shield, TrendingUp, FileText, Star } from "lucide-react";
-import { LanguageToggle } from "@/components/i18n/LanguageToggle";
+import { Shield, TrendingUp, FileText, Star, Globe } from "lucide-react";
 import { useI18n } from "@/components/i18n/I18nProvider";
+import { LANGUAGES } from "@/lib/i18n";
 
 export function AnimatedNavigation() {
   return (
@@ -16,7 +16,7 @@ export function AnimatedNavigation() {
 
 function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
-  const { t } = useI18n();
+  const { t, lang, setLang } = useI18n();
   
   return (
     <div
@@ -67,9 +67,30 @@ function Navbar({ className }: { className?: string }) {
             <HoveredLink to="/support">Help & Support</HoveredLink>
           </div>
         </MenuItem>
-        <div className="flex items-center ml-6">
-          <LanguageToggle />
-        </div>
+        <MenuItem setActive={setActive} active={active} item="Language">
+          <div className="flex flex-col space-y-2 text-sm p-2 min-w-[180px]">
+            <div className="flex items-center gap-2 px-3 py-2 mb-2 border-b border-muted">
+              <Globe className="h-4 w-4" />
+              <span className="font-medium">Select Language</span>
+            </div>
+            {LANGUAGES.map(language => (
+              <button
+                key={language.code}
+                onClick={() => setLang(language.code)}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2 rounded-md text-left hover:bg-muted/50 transition-colors",
+                  lang === language.code && "bg-muted text-primary font-medium"
+                )}
+              >
+                <span className="text-lg">{language.flag}</span>
+                <span>{language.label}</span>
+                {lang === language.code && (
+                  <span className="ml-auto text-xs text-primary">✓</span>
+                )}
+              </button>
+            ))}
+          </div>
+        </MenuItem>
       </Menu>
     </div>
   );
