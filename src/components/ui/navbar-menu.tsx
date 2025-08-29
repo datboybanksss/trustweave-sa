@@ -121,15 +121,15 @@ export const IconProductItem = ({
   Icon: LucideIcon;
 }) => {
   return (
-    <Link to={href} className="flex space-x-3 p-3 hover:bg-muted/50 rounded-lg transition-colors">
-      <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-        <Icon className="h-5 w-5 text-primary" />
+    <Link to={href} className="flex space-x-3">
+      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-md flex items-center justify-center">
+        <Icon className="h-6 w-6 text-primary" />
       </div>
       <div>
-        <h4 className="text-base font-semibold mb-1 text-black dark:text-white">
+        <h4 className="text-xl font-bold mb-1 text-black dark:text-white">
           {title}
         </h4>
-        <p className="text-neutral-700 text-sm max-w-[12rem] dark:text-neutral-300">
+        <p className="text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300">
           {description}
         </p>
       </div>

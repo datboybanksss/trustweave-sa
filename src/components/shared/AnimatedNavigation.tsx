@@ -20,7 +20,7 @@ function Navbar({ className }: { className?: string }) {
     >
       <Menu setActive={setActive}>
         <MenuItem setActive={setActive} active={active} item="Platform">
-          <div className="text-sm flex flex-col space-y-2 p-4 min-w-[300px]">
+          <div className="text-sm grid grid-cols-2 gap-6 p-4">
             <IconProductItem
               title="Trust Builder"
               href="/trust-builder"
