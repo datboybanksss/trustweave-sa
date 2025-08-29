@@ -1,0 +1,72 @@
+{
+  "app": {
+    "brand": "TRANSLATE_ME"
+  },
+  "nav": {
+    "home": "TRANSLATE_ME",
+    "dashboard": "TRANSLATE_ME",
+    "education": "TRANSLATE_ME",
+    "login": "TRANSLATE_ME",
+    "signup": "TRANSLATE_ME",
+    "platform": "TRANSLATE_ME",
+    "solutions": "TRANSLATE_ME",
+    "resources": "TRANSLATE_ME",
+    "consultation": "TRANSLATE_ME",
+    "pricing": "TRANSLATE_ME"
+  },
+  "greeting": {
+    "goodDay": "TRANSLATE_ME",
+    "yourLegacy": "TRANSLATE_ME"
+  },
+  "cta": {
+    "getStarted": "TRANSLATE_ME",
+    "goToDashboard": "TRANSLATE_ME",
+    "startLearning": "TRANSLATE_ME",
+    "createTrust": "TRANSLATE_ME",
+    "uploadDocument": "TRANSLATE_ME",
+    "bookConsultation": "TRANSLATE_ME"
+  },
+  "thankyou": {
+    "partnerMsg": "TRANSLATE_ME",
+    "individualMsg": "TRANSLATE_ME",
+    "trial": "TRANSLATE_ME"
+  },
+  "partner": {
+    "portal": "TRANSLATE_ME",
+    "totalAUM": "TRANSLATE_ME",
+    "allClients": "TRANSLATE_ME",
+    "addNewClient": "TRANSLATE_ME"
+  },
+  "individual": {
+    "netWorth": "TRANSLATE_ME",
+    "assets": "TRANSLATE_ME",
+    "debts": "TRANSLATE_ME",
+    "trusts": "TRANSLATE_ME",
+    "compliance": "TRANSLATE_ME",
+    "totalPortfolio": "TRANSLATE_ME"
+  },
+  "actions": {
+    "createTrust": "TRANSLATE_ME",
+    "uploadDocument": "TRANSLATE_ME",
+    "bookConsultation": "TRANSLATE_ME",
+    "connectBank": "TRANSLATE_ME",
+    "generateReport": "TRANSLATE_ME",
+    "scheduleMeeting": "TRANSLATE_ME"
+  },
+  "dashboard": {
+    "recentActivity": "TRANSLATE_ME",
+    "assetAllocation": "TRANSLATE_ME",
+    "upcomingEvents": "TRANSLATE_ME",
+    "quickStats": "TRANSLATE_ME"
+  },
+  "platform": {
+    "trustBuilder": "TRANSLATE_ME",
+    "trustBuilderDesc": "TRANSLATE_ME",
+    "wealthTracking": "TRANSLATE_ME", 
+    "wealthTrackingDesc": "TRANSLATE_ME",
+    "documentVault": "TRANSLATE_ME",
+    "documentVaultDesc": "TRANSLATE_ME",
+    "compliance": "TRANSLATE_ME",
+    "complianceDesc": "TRANSLATE_ME"
+  }
+}

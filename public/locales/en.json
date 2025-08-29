@@ -1,0 +1,72 @@
+{
+  "app": {
+    "brand": "Legacy Vault 🌳"
+  },
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "education": "Education",
+    "login": "Sign in",
+    "signup": "Sign up",
+    "platform": "Platform",
+    "solutions": "Solutions",
+    "resources": "Resources",
+    "consultation": "Consultation",
+    "pricing": "Pricing"
+  },
+  "greeting": {
+    "goodDay": "Good day, {name}",
+    "yourLegacy": "Your legacy at a glance"
+  },
+  "cta": {
+    "getStarted": "Get Started",
+    "goToDashboard": "Go to Dashboard",
+    "startLearning": "Start Learning",
+    "createTrust": "Create New Trust",
+    "uploadDocument": "Upload Document",
+    "bookConsultation": "Book Consultation"
+  },
+  "thankyou": {
+    "partnerMsg": "Your partner account has been created successfully. You can now manage multiple client portfolios.",
+    "individualMsg": "Your personal account has been created successfully. Start building your legacy today.",
+    "trial": "Your 7-day free trial has started! You have full access to all features until {date}."
+  },
+  "partner": {
+    "portal": "Partner Portal",
+    "totalAUM": "Total AUM",
+    "allClients": "All Clients Overview",
+    "addNewClient": "Add New Client"
+  },
+  "individual": {
+    "netWorth": "Net Worth",
+    "assets": "Total Assets",
+    "debts": "Total Debts",
+    "trusts": "Active Trusts",
+    "compliance": "Compliance",
+    "totalPortfolio": "Total portfolio"
+  },
+  "actions": {
+    "createTrust": "Create Trust",
+    "uploadDocument": "Upload Document",
+    "bookConsultation": "Book Consultation",
+    "connectBank": "Connect Bank",
+    "generateReport": "Generate Report",
+    "scheduleMeeting": "Schedule Meeting"
+  },
+  "dashboard": {
+    "recentActivity": "Recent Activity",
+    "assetAllocation": "Asset Allocation",
+    "upcomingEvents": "Upcoming Events",
+    "quickStats": "Quick Statistics"
+  },
+  "platform": {
+    "trustBuilder": "Trust Builder",
+    "trustBuilderDesc": "Create and manage family trusts with guided workflows",
+    "wealthTracking": "Wealth Tracking", 
+    "wealthTrackingDesc": "Monitor your assets and portfolio performance",
+    "documentVault": "Document Vault",
+    "documentVaultDesc": "Secure storage for all your important documents",
+    "compliance": "Compliance",
+    "complianceDesc": "Stay compliant with regulatory requirements"
+  }
+}
