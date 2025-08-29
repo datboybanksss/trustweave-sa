@@ -5,7 +5,7 @@ import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight } from "
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import legacyLogo from "@/assets/legacy-builder-logo.png";
-import PublicNavigation from "@/components/shared/PublicNavigation";
+import { AnimatedNavigation } from "@/components/shared/AnimatedNavigation";
 import { useNavigate } from "react-router-dom";
 import WealthCalculatorDemo from "@/components/ui/wealth-calculator-demo";
 
@@ -15,7 +15,7 @@ const Index = () => {
   // Show landing page content for non-logged-in users
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
-      <PublicNavigation />
+      <AnimatedNavigation />
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
