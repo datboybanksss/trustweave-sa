@@ -197,19 +197,12 @@ const Index = () => {
           </Button>
           
           {/* Responsive Dashboard Images */}
-          <div className="w-full max-w-6xl">
-            {/* Desktop/Laptop View */}
-            <img 
-              src="/lovable-uploads/e348a56f-53ab-4ea7-bb34-5bf685035918.png"
-              alt="Dashboard - Desktop View"
-              className="hidden lg:block w-full h-auto rounded-lg shadow-2xl border border-border"
-            />
-            
-            {/* Tablet View */}
+          <div className="w-full max-w-6xl">            
+            {/* Tablet & Desktop View */}
             <img 
               src="/lovable-uploads/b4acf58a-1d8d-4777-a1f1-120bc08963b2.png"
-              alt="Dashboard - Tablet View"
-              className="hidden md:block lg:hidden w-full h-auto rounded-lg shadow-2xl border border-border"
+              alt="Dashboard - Desktop & Tablet View"
+              className="hidden md:block w-full h-auto rounded-lg shadow-2xl border border-border"
             />
             
             {/* Mobile View */}
