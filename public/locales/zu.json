@@ -1,72 +1,28 @@
 {
-  "app": {
-    "brand": "TRANSLATE_ME"
-  },
-  "nav": {
-    "home": "TRANSLATE_ME",
-    "dashboard": "TRANSLATE_ME",
-    "education": "TRANSLATE_ME",
-    "login": "TRANSLATE_ME",
-    "signup": "TRANSLATE_ME",
-    "platform": "TRANSLATE_ME",
-    "solutions": "TRANSLATE_ME",
-    "resources": "TRANSLATE_ME",
-    "consultation": "TRANSLATE_ME",
-    "pricing": "TRANSLATE_ME"
-  },
-  "greeting": {
-    "goodDay": "TRANSLATE_ME",
-    "yourLegacy": "TRANSLATE_ME"
-  },
-  "cta": {
-    "getStarted": "TRANSLATE_ME",
-    "goToDashboard": "TRANSLATE_ME",
-    "startLearning": "TRANSLATE_ME",
-    "createTrust": "TRANSLATE_ME",
-    "uploadDocument": "TRANSLATE_ME",
-    "bookConsultation": "TRANSLATE_ME"
-  },
-  "thankyou": {
-    "partnerMsg": "TRANSLATE_ME",
-    "individualMsg": "TRANSLATE_ME",
-    "trial": "TRANSLATE_ME"
-  },
-  "partner": {
-    "portal": "TRANSLATE_ME",
-    "totalAUM": "TRANSLATE_ME",
-    "allClients": "TRANSLATE_ME",
-    "addNewClient": "TRANSLATE_ME"
-  },
-  "individual": {
-    "netWorth": "TRANSLATE_ME",
-    "assets": "TRANSLATE_ME",
-    "debts": "TRANSLATE_ME",
-    "trusts": "TRANSLATE_ME",
-    "compliance": "TRANSLATE_ME",
-    "totalPortfolio": "TRANSLATE_ME"
-  },
-  "actions": {
-    "createTrust": "TRANSLATE_ME",
-    "uploadDocument": "TRANSLATE_ME",
-    "bookConsultation": "TRANSLATE_ME",
-    "connectBank": "TRANSLATE_ME",
-    "generateReport": "TRANSLATE_ME",
-    "scheduleMeeting": "TRANSLATE_ME"
-  },
-  "dashboard": {
-    "recentActivity": "TRANSLATE_ME",
-    "assetAllocation": "TRANSLATE_ME",
-    "upcomingEvents": "TRANSLATE_ME",
-    "quickStats": "TRANSLATE_ME"
-  },
-  "platform": {
-    "trustBuilder": "TRANSLATE_ME",
-    "trustBuilderDesc": "TRANSLATE_ME",
-    "wealthTracking": "TRANSLATE_ME", 
-    "wealthTrackingDesc": "TRANSLATE_ME",
-    "documentVault": "TRANSLATE_ME",
-    "documentVaultDesc": "TRANSLATE_ME",
-    "compliance": "TRANSLATE_ME",
-    "complianceDesc": "TRANSLATE_ME"
+  "home": {
+    "hero.trial": "Isivivinyo samahhala sezinsuku ezi-7 • Asidingi ikhadi lesikweletu",
+    "hero.title": "Akhe ilifa lomndeni wakho",
+    "hero.subtitle": "Inkundla ephelele yemindeni yaseNingizimu Afrika nochwepheshe bezomthetho yokwakha ama-trust, ukuphatha ingcebo, nokuvikela inotho yezizukulwane.",
+    "cta.startTrial": "Qala isivivinyo sakho samahhala",
+    "cta.watchDemo": "Buka ividiyo yokudemo",
+    "trust.bankSecurity": "Ukuvikeleka kwezinga lebhange",
+    "trust.familiesServed": "Imindeni engaphezu kuka-500 isizanywe",
+    "trust.legalCompliance": "Ukuhambisana nomthetho",
+    "features.title": "Konke okudingayo",
+    "features.subtitle": "Amathuluzi agcwele okuphathwa kwengcebo nokuhlelwa kwama-trust akhelwe imindeni yaseNingizimu Afrika",
+    "features.trustBuilder": "Umakhi we-Trust",
+    "features.trustBuilderDesc": "Umhlahlandlela wesinyathelo ngesinyathelo wokwakha i-trust onamathemplethi omthetho nezibheko zokuhambisana. Khiqiza ama-trust aphilayo nawasefa ngemibhalo ezenzakalelayo.",
+    "features.documentVault": "Ithala lemibhalo eliphephile",
+    "features.documentVaultDesc": "Ukugcinwa okuphephile kwamadokhumenti onke engcebo ngokukhipha inani ngokuzenzakalela, ukuqinisekiswa kwe-crypto, nokulandelela impahla.",
+    "features.wealthTracking": "Ukulandelela ingcebo",
+    "features.wealthTrackingDesc": "Ukuqapha i-phothifoliyo ngesikhathi sangempela ngezibalo zobungcweti, ukubalwa kwe-net worth, amashadi okusatshalaliswa kwezimpahla, nezibikezelo zokukhula.",
+    "features.clientManagement": "Ukuphathwa kwamakhasimende",
+    "features.clientManagementDesc": "Kwabachwepheshe bezomthetho: phatha ama-phothifoliyo amakhasimende amaningi, landela i-AUM, futhi ukhiqize imibiko yobungcweti kusuka kukhasibhodi elilodwa elinamandla.",
+    "features.cryptoVerification": "Ukuqinisekiswa kwe-crypto",
+    "features.cryptoVerificationDesc": "Ukuqinisekisa okuthuthukisiwe kwezimali ze-cryptocurrency ngokuhlola amakheli e-wallet, ukuhlanganiswa kwe-KYC, nobufakazi bobunikazi ukuvimbela inkohliso.",
+    "features.educationAcademy": "I-Academy Yemfundo",
+    "features.educationAcademyDesc": "Funda kahle ukuhlelela ingcebo ngamamojula ayi-6 e-vidiyo, ama-quiz anokusebenzisana, nezitifiketi zokuqeda zokuphathwa kwe-trust.",
+    "features.professionalReports": "Imibiko yobungcweti",
+    "features.professionalReportsDesc": "Khiqiza imibiko ye-PDF ebanzi enezifingqo zengcebo, izakhiwo zama-trust, kanye nemibhalo yokuhambisana yamakhasimende."
   }
 }
