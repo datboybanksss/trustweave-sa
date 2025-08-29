@@ -13,6 +13,7 @@ import TrustBuilder from "./pages/TrustBuilder";
 import Pricing from "./pages/Pricing";
 import Consultation from "./pages/Consultation";
 import Education from "./pages/Education";
+import HomeDemo from "./pages/HomeDemo";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/education" element={<Education />} />
+          <Route path="/home-demo" element={<HomeDemo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
