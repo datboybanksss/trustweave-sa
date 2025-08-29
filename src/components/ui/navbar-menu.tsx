@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { LucideIcon } from "lucide-react";
 
 const transition = {
   type: "spring" as const,
@@ -101,6 +102,34 @@ export const ProductItem = ({
           {title}
         </h4>
         <p className="text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300">
+          {description}
+        </p>
+      </div>
+    </Link>
+  );
+};
+
+export const IconProductItem = ({
+  title,
+  description,
+  href,
+  Icon,
+}: {
+  title: string;
+  description: string;
+  href: string;
+  Icon: LucideIcon;
+}) => {
+  return (
+    <Link to={href} className="flex space-x-3 p-3 hover:bg-muted/50 rounded-lg transition-colors">
+      <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+        <Icon className="h-5 w-5 text-primary" />
+      </div>
+      <div>
+        <h4 className="text-base font-semibold mb-1 text-black dark:text-white">
+          {title}
+        </h4>
+        <p className="text-neutral-700 text-sm max-w-[12rem] dark:text-neutral-300">
           {description}
         </p>
       </div>

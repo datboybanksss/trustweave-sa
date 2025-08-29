@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { HoveredLink, Menu, MenuItem, ProductItem } from "@/components/ui/navbar-menu";
+import { HoveredLink, Menu, MenuItem, IconProductItem } from "@/components/ui/navbar-menu";
 import { cn } from "@/lib/utils";
-import legacyLogo from "@/assets/legacy-builder-logo.png";
+import { Shield, TrendingUp, FileText, Star } from "lucide-react";
 
 export function AnimatedNavigation() {
   return (
@@ -20,29 +20,29 @@ function Navbar({ className }: { className?: string }) {
     >
       <Menu setActive={setActive}>
         <MenuItem setActive={setActive} active={active} item="Platform">
-          <div className="text-sm grid grid-cols-2 gap-6 p-4">
-            <ProductItem
+          <div className="text-sm flex flex-col space-y-2 p-4 min-w-[300px]">
+            <IconProductItem
               title="Trust Builder"
               href="/trust-builder"
-              src="/lovable-uploads/cc72f08d-4a6e-4679-8640-1bd71690917f.png"
+              Icon={Shield}
               description="Create comprehensive family trusts with legal templates and compliance checks."
             />
-            <ProductItem
+            <IconProductItem
               title="Wealth Tracking"
               href="/dashboard"
-              src="/lovable-uploads/b4acf58a-1d8d-4777-a1f1-120bc08963b2.png"
+              Icon={TrendingUp}
               description="Real-time portfolio monitoring with professional analytics and growth projections."
             />
-            <ProductItem
+            <IconProductItem
               title="Document Vault"
               href="/documents"
-              src="/lovable-uploads/e348a56f-53ab-4ea7-bb34-5bf685035918.png"
+              Icon={FileText}
               description="Secure storage with automatic value extraction and crypto verification."
             />
-            <ProductItem
+            <IconProductItem
               title="Education Academy"
               href="/education"
-              src="/lovable-uploads/e5f9ed14-62be-4a1f-87aa-59845dddbf5f.png"
+              Icon={Star}
               description="Master wealth planning with comprehensive video modules and certificates."
             />
           </div>
