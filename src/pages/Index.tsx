@@ -36,9 +36,12 @@ const Index = () => {
           <Button size="lg" className="min-w-48" onClick={() => navigate('/signup')}>
             Start Your Free Trial
           </Button>
-          <Button variant="outline" size="lg" className="min-w-48">
-            Watch Demo Video
-          </Button>
+          <button
+            className="h-12 w-48 rounded-full bg-secondary flex items-center justify-center gap-2 group/button transition-all duration-300 hover:bg-secondary/80"
+          >
+            <ChevronRight className="h-5 w-5 text-foreground group-hover/button:-rotate-12 transition-transform duration-300" />
+            <span className="text-foreground font-medium">Watch Demo Video</span>
+          </button>
         </div>
 
         {/* Trust Badges */}
