@@ -153,34 +153,22 @@ const Index = () => {
           autoplay={true}
           testimonials={[
             {
-              quote: "Leading Legacy Vault's vision to democratize wealth management for South African families. With over 15 years in fintech and estate planning, I'm passionate about creating tools that make complex financial planning accessible to everyone.",
-              name: "Jonathan van der Merwe",
+              quote: "Visionary entrepreneur passionate about democratizing wealth management for South African families. With extensive experience in fintech and financial planning, I founded Legacy Vault to bridge the gap between complex financial instruments and everyday investors, ensuring every family can build and protect generational wealth.",
+              name: "Israel Noko",
               designation: "Founder & CEO",
-              src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src: "/lovable-uploads/d8b8bfa5-3945-48a8-92c5-44b16eff24d9.png"
             },
             {
-              quote: "Ensuring our platform meets the highest standards of South African legal compliance. My expertise in trust law and estate planning helps families navigate complex regulations while securing their legacy.",
-              name: "Priya Sharma",
-              designation: "Chief Legal Officer",
-              src: "https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              quote: "Expert wealth manager dedicated to creating personalized financial strategies for high-net-worth families. With deep knowledge of South African investment markets and trust structures, I help clients optimize their portfolios while ensuring compliance with local regulations and tax efficiency.",
+              name: "Mark Waspe",
+              designation: "Co-founder & Wealth Manager",
+              src: "/lovable-uploads/f998ca84-e406-4ed6-bc3b-f98340ecba2c.png"
             },
             {
-              quote: "Building secure, scalable solutions that protect your most sensitive financial data. Our platform leverages cutting-edge technology to ensure your wealth information remains safe while being easily accessible to you.",
-              name: "David Chen",
-              designation: "Chief Technology Officer",
-              src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            },
-            {
-              quote: "Crafting intuitive experiences that make wealth management feel simple and empowering. Every interface decision is made with your financial success and peace of mind in focus.",
-              name: "Sarah Mitchell",
-              designation: "Head of Product Design",
-              src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            },
-            {
-              quote: "Supporting families throughout their wealth-building journey with personalized guidance and education. My goal is to ensure every client feels confident and informed about their financial decisions.",
-              name: "Michael Okonkwo",
-              designation: "Client Success Manager",
-              src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              quote: "Innovative product strategist focused on building cutting-edge financial technology solutions. I lead our development team in creating intuitive, secure platforms that transform complex wealth management processes into seamless user experiences, always prioritizing data security and user privacy.",
+              name: "Kgosi Noko",
+              designation: "Head of Product Development",
+              src: "/lovable-uploads/4922c87b-b7f0-4e04-acaa-280ec6c455c1.png"
             }
           ]}
         />
