@@ -20,59 +20,57 @@ function Navbar({ className }: { className?: string }) {
   
   return (
     <div
-      className={cn("fixed top-10 inset-x-0 max-w-5xl mx-auto z-[100]", className)}
+      className={cn("fixed top-10 inset-x-0 max-w-4xl mx-auto z-[100]", className)}
     >
-      <div className="flex items-center justify-between">
-        <Menu setActive={setActive}>
-          <MenuItem setActive={setActive} active={active} item={t('nav.platform')}>
-            <div className="text-sm grid grid-cols-2 gap-6 p-4">
-              <IconProductItem
-                title={t('platform.trustBuilder')}
-                href="/trust-builder"
-                Icon={Shield}
-                description={t('platform.trustBuilderDesc')}
-              />
-              <IconProductItem
-                title={t('platform.wealthTracking')}
-                href="/dashboard"
-                Icon={TrendingUp}
-                description={t('platform.wealthTrackingDesc')}
-              />
-              <IconProductItem
-                title={t('platform.documentVault')}
-                href="/documents"
-                Icon={FileText}
-                description={t('platform.documentVaultDesc')}
-              />
-              <IconProductItem
-                title="Education Academy"
-                href="/education"
-                Icon={Star}
-                description="Master wealth planning with comprehensive video modules and certificates."
-              />
-            </div>
-          </MenuItem>
-          <MenuItem setActive={setActive} active={active} item={t('nav.solutions')}>
-            <div className="flex flex-col space-y-4 text-sm">
-              <HoveredLink to="/individual">Individual Families</HoveredLink>
-              <HoveredLink to="/partner">Legal Professionals</HoveredLink>
-              <HoveredLink to="/consultation">Wealth Consultation</HoveredLink>
-              <HoveredLink to="/crypto">Crypto Verification</HoveredLink>
-            </div>
-          </MenuItem>
-          <MenuItem setActive={setActive} active={active} item={t('nav.resources')}>
-            <div className="flex flex-col space-y-4 text-sm">
-              <HoveredLink to="/education">{t('nav.education')}</HoveredLink>
-              <HoveredLink to="/pricing">{t('nav.pricing')}</HoveredLink>
-              <HoveredLink to="/consultation">{t('nav.consultation')}</HoveredLink>
-              <HoveredLink to="/support">Help & Support</HoveredLink>
-            </div>
-          </MenuItem>
-        </Menu>
-        <div className="ml-8">
+      <Menu setActive={setActive}>
+        <MenuItem setActive={setActive} active={active} item={t('nav.platform')}>
+          <div className="text-sm grid grid-cols-2 gap-6 p-4">
+            <IconProductItem
+              title={t('platform.trustBuilder')}
+              href="/trust-builder"
+              Icon={Shield}
+              description={t('platform.trustBuilderDesc')}
+            />
+            <IconProductItem
+              title={t('platform.wealthTracking')}
+              href="/dashboard"
+              Icon={TrendingUp}
+              description={t('platform.wealthTrackingDesc')}
+            />
+            <IconProductItem
+              title={t('platform.documentVault')}
+              href="/documents"
+              Icon={FileText}
+              description={t('platform.documentVaultDesc')}
+            />
+            <IconProductItem
+              title="Education Academy"
+              href="/education"
+              Icon={Star}
+              description="Master wealth planning with comprehensive video modules and certificates."
+            />
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item={t('nav.solutions')}>
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink to="/individual">Individual Families</HoveredLink>
+            <HoveredLink to="/partner">Legal Professionals</HoveredLink>
+            <HoveredLink to="/consultation">Wealth Consultation</HoveredLink>
+            <HoveredLink to="/crypto">Crypto Verification</HoveredLink>
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item={t('nav.resources')}>
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink to="/education">{t('nav.education')}</HoveredLink>
+            <HoveredLink to="/pricing">{t('nav.pricing')}</HoveredLink>
+            <HoveredLink to="/consultation">{t('nav.consultation')}</HoveredLink>
+            <HoveredLink to="/support">Help & Support</HoveredLink>
+          </div>
+        </MenuItem>
+        <div className="flex items-center ml-6">
           <LanguageToggle />
         </div>
-      </div>
+      </Menu>
     </div>
   );
 }
