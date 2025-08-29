@@ -7,6 +7,7 @@ import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import legacyLogo from "@/assets/legacy-builder-logo.png";
 import PublicNavigation from "@/components/shared/PublicNavigation";
 import { useNavigate } from "react-router-dom";
+import WealthCalculatorDemo from "@/components/ui/wealth-calculator-demo";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -188,13 +189,7 @@ const Index = () => {
         </div>
         
         <div className="flex flex-col items-center gap-8">
-          <Button 
-            size="lg" 
-            className="bg-primary hover:bg-primary/90 text-primary-foreground"
-            onClick={() => navigate('/dashboard')}
-          >
-            Click me !
-          </Button>
+          <WealthCalculatorDemo />
           
           {/* Responsive Dashboard Images */}
           <div className="w-full max-w-6xl">            
