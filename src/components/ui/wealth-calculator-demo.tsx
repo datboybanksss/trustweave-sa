@@ -14,7 +14,7 @@ export default function WealthCalculatorDemo() {
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const handleShuffle = () => {
+  const handleCalculate = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % numbers.length)
   }
 
@@ -35,11 +35,11 @@ export default function WealthCalculatorDemo() {
       
       <div className="flex gap-4">
         <button
-          onClick={handleShuffle}
+          onClick={handleCalculate}
           className="duration-[.16s] ease-[cubic-bezier(.4,0,.2,1)] active:duration-[25ms] flex h-11 w-fit items-center gap-2 rounded-full bg-zinc-900 px-5 text-sm font-medium text-zinc-50 transition hover:brightness-125 active:scale-[98%] active:brightness-[98%]"
         >
           <RefreshCcw className="size-5" />
-          Shuffle
+          Calculate
         </button>
         
         <Button 
