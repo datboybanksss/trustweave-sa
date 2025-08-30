@@ -6,6 +6,7 @@ import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import legacyLogo from "@/assets/legacy-builder-logo.png";
 import { ResponsiveNavigation } from "@/components/shared/ResponsiveNavigation";
+import { Hero } from "@/components/ui/animated-hero";
 import { useNavigate } from "react-router-dom";
 import WealthCalculatorDemo from "@/components/ui/wealth-calculator-demo";
 
@@ -16,51 +17,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
       <ResponsiveNavigation />
-
+      
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 text-center">
-        <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-          🚀 7-Day Free Trial • No Credit Card Required
-        </Badge>
-        
-        <h1 className="font-display text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto">
-          Build Your Family's
-          <span className="text-gradient bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Legacy</span>
-        </h1>
-        
-        <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          The complete platform for South African families and legal professionals 
-          to create trusts, manage wealth, and secure generational prosperity.
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Button size="lg" className="min-w-48" onClick={() => navigate('/signup')}>
-            Start Your Free Trial
-          </Button>
-          <button
-            className="h-12 w-48 rounded-full bg-secondary flex items-center justify-center gap-2 group/button transition-all duration-300 hover:bg-secondary/80"
-          >
-            <ChevronRight className="h-5 w-5 text-foreground group-hover/button:-rotate-12 transition-transform duration-300" />
-            <span className="text-foreground font-medium">Watch Demo Video</span>
-          </button>
-        </div>
-
-        {/* Trust Badges */}
-        <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <Shield className="h-4 w-4 text-success" />
-            Bank-Grade Security
-          </div>
-          <div className="flex items-center gap-2">
-            <Users className="h-4 w-4 text-success" />
-            500+ Families Served
-          </div>
-          <div className="flex items-center gap-2">
-            <FileText className="h-4 w-4 text-success" />
-            Legal Compliance
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       {/* Features Section */}
       <section id="features" className="container mx-auto px-4 py-20">
