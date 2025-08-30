@@ -24,7 +24,7 @@ export default function WealthCalculatorDemo() {
         variant="outline"
         className="rounded-[14px] border border-black/10 text-base text-neutral-800"
       >
-        <Shell className="fill-[#EEBDE0] stroke-1 text-neutral-800" />
+        <img src="/lovable-uploads/37114d14-7351-474d-a6a9-a8174ba90e72.png" alt="Tree icon" className="w-5 h-5" />
         &nbsp;Live Wealth Calculator
       </Badge>
       
