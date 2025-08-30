@@ -24,7 +24,7 @@ const Index = () => {
       {/* Features Section */}
       <section id="features" className="container mx-auto px-4 py-20">
         <div className="text-center mb-12">
-          <h2 className="font-display text-3xl font-bold mb-4">Everything You Need</h2>
+          <h2 className="font-regular text-3xl font-bold mb-4">Everything You Need</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Comprehensive wealth management and trust planning tools designed for South African families
           </p>
@@ -106,7 +106,7 @@ const Index = () => {
       {/* Wealth Calculator Section */}
       <section id="wealth-calculator" className="container mx-auto px-4 py-20">
         <div className="text-center mb-12">
-          <h2 className="font-display text-3xl font-bold mb-4">Wealth Calculator</h2>
+          <h2 className="font-regular text-3xl font-bold mb-4">Wealth Calculator</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             A key feature within wealth planning is understanding your current financial position. 
             We have a live wealth calculator on our dashboard that provides real-time insights into your financial health.
@@ -138,7 +138,7 @@ const Index = () => {
       {/* Our Team Section */}
       <section id="team" className="container mx-auto px-4 py-20">
         <div className="text-center mb-12">
-          <h2 className="font-display text-3xl font-bold mb-4">Meet Our Team</h2>
+          <h2 className="font-regular text-3xl font-bold mb-4">Meet Our Team</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Meet the passionate professionals behind Legacy Vault, dedicated to protecting and growing your family's wealth
           </p>
@@ -172,7 +172,7 @@ const Index = () => {
       {/* Testimonials */}
       <section id="testimonials" className="container mx-auto px-4 py-20">
         <div className="text-center mb-12">
-          <h2 className="font-display text-3xl font-bold mb-4">Trusted by South African Families</h2>
+          <h2 className="font-regular text-3xl font-bold mb-4">Trusted by South African Families</h2>
           <div className="flex items-center justify-center gap-1 mb-4">
             {[1, 2, 3, 4, 5].map(i => <Star key={i} className="h-5 w-5 fill-accent text-accent" />)}
             <span className="ml-2 text-muted-foreground">4.9/5 from 500+ reviews</span>
@@ -249,7 +249,7 @@ const Index = () => {
       <section className="container mx-auto px-4 py-20">
         <Card className="bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
           <CardContent className="p-12 text-center">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-regular text-3xl md:text-4xl font-bold mb-4">
               Ready to Secure Your Family's Legacy?
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
