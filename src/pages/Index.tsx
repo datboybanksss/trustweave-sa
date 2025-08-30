@@ -144,6 +144,38 @@ const Index = () => {
         </BentoGrid>
       </section>
 
+      {/* Wealth Calculator Section */}
+      <section id="wealth-calculator" className="container mx-auto px-4 py-20">
+        <div className="text-center mb-12">
+          <h2 className="font-display text-3xl font-bold mb-4">Wealth Calculator</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            A key feature within wealth planning is understanding your current financial position. 
+            We have a live wealth calculator on our dashboard that provides real-time insights into your financial health.
+          </p>
+        </div>
+        
+        <div className="flex flex-col items-center gap-8">
+          <WealthCalculatorDemo />
+          
+          {/* Responsive Dashboard Images */}
+          <div className="w-full max-w-6xl">            
+            {/* Tablet & Desktop View */}
+            <img 
+              src="/lovable-uploads/b4acf58a-1d8d-4777-a1f1-120bc08963b2.png"
+              alt="Dashboard - Desktop & Tablet View"
+              className="hidden md:block w-full h-auto rounded-lg shadow-2xl border border-border"
+            />
+            
+            {/* Mobile View */}
+            <img 
+              src="/lovable-uploads/e5f9ed14-62be-4a1f-87aa-59845dddbf5f.png"
+              alt="Dashboard - Mobile View"
+              className="block md:hidden w-full h-auto rounded-lg shadow-2xl border border-border"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Our Team Section */}
       <section id="team" className="container mx-auto px-4 py-20">
         <div className="text-center mb-12">
@@ -176,38 +208,6 @@ const Index = () => {
             }
           ]}
         />
-      </section>
-
-      {/* Wealth Calculator Section */}
-      <section id="wealth-calculator" className="container mx-auto px-4 py-20">
-        <div className="text-center mb-12">
-          <h2 className="font-display text-3xl font-bold mb-4">Wealth Calculator</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            A key feature within wealth planning is understanding your current financial position. 
-            We have a live wealth calculator on our dashboard that provides real-time insights into your financial health.
-          </p>
-        </div>
-        
-        <div className="flex flex-col items-center gap-8">
-          <WealthCalculatorDemo />
-          
-          {/* Responsive Dashboard Images */}
-          <div className="w-full max-w-6xl">            
-            {/* Tablet & Desktop View */}
-            <img 
-              src="/lovable-uploads/b4acf58a-1d8d-4777-a1f1-120bc08963b2.png"
-              alt="Dashboard - Desktop & Tablet View"
-              className="hidden md:block w-full h-auto rounded-lg shadow-2xl border border-border"
-            />
-            
-            {/* Mobile View */}
-            <img 
-              src="/lovable-uploads/e5f9ed14-62be-4a1f-87aa-59845dddbf5f.png"
-              alt="Dashboard - Mobile View"
-              className="block md:hidden w-full h-auto rounded-lg shadow-2xl border border-border"
-            />
-          </div>
-        </div>
       </section>
 
       {/* Testimonials */}
