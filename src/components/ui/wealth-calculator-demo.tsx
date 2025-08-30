@@ -45,6 +45,7 @@ export default function WealthCalculatorDemo() {
         <Button 
           size="lg" 
           className="bg-primary hover:bg-primary/90 text-primary-foreground"
+          onClick={() => window.open('https://legacybuilder.smartwill.io/system/portal/calculator/index.php', '_blank')}
         >
           Click me !
         </Button>
