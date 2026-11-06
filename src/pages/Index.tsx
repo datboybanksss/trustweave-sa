@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight } from "lucide-react";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
-import legacyLogo from "@/assets/legacy-builder-logo.png";
 import { ResponsiveNavigation } from "@/components/shared/ResponsiveNavigation";
 import { Hero } from "@/components/ui/animated-hero";
 import { useNavigate } from "react-router-dom";
