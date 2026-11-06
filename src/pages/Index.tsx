@@ -72,16 +72,6 @@ const Index = () => {
           />
           
           <BentoCard
-            name="Crypto Verification"
-            description="Advanced cryptocurrency holdings verification with wallet address validation, KYC integration, and ownership proof to prevent fraud."
-            href="/crypto"
-            cta="Verify Holdings"
-            background={<div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-orange-500/5" />}
-            Icon={FileText}
-            className="lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-3"
-          />
-          
-          <BentoCard
             name="Education Academy"
             description="Master wealth planning with 6 comprehensive video modules, interactive quizzes, and completion certificates for trust management."
             href="/education"
@@ -98,7 +88,7 @@ const Index = () => {
             cta="Generate Report"
             background={<div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-purple-500/5" />}
             Icon={FileText}
-            className="lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4"
+            className="lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4"
           />
         </BentoGrid>
       </section>
