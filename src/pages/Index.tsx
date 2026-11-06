@@ -263,9 +263,6 @@ const Index = () => {
         <div className="container mx-auto px-4 py-12">
           <div className="grid gap-8 md:grid-cols-4">
             <div className="md:col-span-2">
-      <div className="flex items-center">
-        <img src={legacyLogo} alt="Legacy Builder" className="h-10 w-auto" />
-      </div>
               <p className="text-muted-foreground mb-4 max-w-md">
                 Empowering South African families and legal professionals to build, 
                 protect, and transfer generational wealth through innovative trust and wealth management solutions.
