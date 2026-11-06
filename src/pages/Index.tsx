@@ -88,7 +88,7 @@ const Index = () => {
             cta="Generate Report"
             background={<div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-purple-500/5" />}
             Icon={FileText}
-            className="lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4"
+            className="lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4"
           />
         </BentoGrid>
       </section>
