@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight } from "lucide-react";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
-import legacyLogo from "@/assets/legacy-builder-logo.png";
 import { ResponsiveNavigation } from "@/components/shared/ResponsiveNavigation";
 import { Hero } from "@/components/ui/animated-hero";
 import { useNavigate } from "react-router-dom";
@@ -263,9 +262,6 @@ const Index = () => {
         <div className="container mx-auto px-4 py-12">
           <div className="grid gap-8 md:grid-cols-4">
             <div className="md:col-span-2">
-      <div className="flex items-center">
-        <img src={legacyLogo} alt="Legacy Builder" className="h-10 w-auto" />
-      </div>
               <p className="text-muted-foreground mb-4 max-w-md">
                 Empowering South African families and legal professionals to build, 
                 protect, and transfer generational wealth through innovative trust and wealth management solutions.
