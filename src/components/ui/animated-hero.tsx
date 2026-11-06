@@ -51,7 +51,7 @@ function Hero() {
             <Button size="lg" className="gap-4" variant="hero" onClick={() => navigate('/consultation')}>
               Jump on a call <PhoneCall className="w-4 h-4" />
             </Button>
-            <Button size="lg" className="gap-4" onClick={() => navigate('/signup')}>
+            <Button size="lg" className="gap-4" onClick={() => window.open('https://legacybuilder.smartwill.io/system/portal/mbw/signup.php', '_blank')}>
               Sign up here <MoveRight className="w-4 h-4" />
             </Button>
           </div>
