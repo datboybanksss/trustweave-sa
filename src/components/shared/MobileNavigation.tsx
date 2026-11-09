@@ -59,7 +59,9 @@ export function MobileNavigation() {
         className="flex items-center cursor-pointer"
         onClick={() => handleNavigation('/')}
       >
-        <img src={legacyLogo} alt="Legacy Builder" className="h-8 w-auto" />
+        <span className="flex items-center rounded-full bg-[#1a2e1f] px-3 py-1.5">
+          <img src={legacyLogo} alt="Legacy Builder" className="h-6 w-auto" />
+        </span>
       </div>
 
       {/* Mobile Menu */}
@@ -76,7 +78,9 @@ export function MobileNavigation() {
             {/* Header */}
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center">
-                <img src={legacyLogo} alt="Legacy Builder" className="h-8 w-auto" />
+                <span className="flex items-center rounded-full bg-[#1a2e1f] px-3 py-1.5">
+                  <img src={legacyLogo} alt="Legacy Builder" className="h-6 w-auto" />
+                </span>
               </div>
               <DrawerClose asChild>
                 <Button variant="ghost" size="sm" className="p-2">
