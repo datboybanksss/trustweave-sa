@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useI18n } from "@/components/i18n/I18nProvider";
 import { LANGUAGES } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import legacyLogo from "@/assets/legacy-builder-logo.png";
+import legacyLogo from "@/assets/legacy-builder-logo-transparent.png";
 
 export function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,7 +59,9 @@ export function MobileNavigation() {
         className="flex items-center cursor-pointer"
         onClick={() => handleNavigation('/')}
       >
-        <img src={legacyLogo} alt="Legacy Builder" className="h-8 w-auto" />
+        <span className="flex items-center rounded-full bg-[#1a2e1f] px-3 py-1.5">
+          <img src={legacyLogo} alt="Legacy Builder" className="h-6 w-auto" />
+        </span>
       </div>
 
       {/* Mobile Menu */}
@@ -76,7 +78,9 @@ export function MobileNavigation() {
             {/* Header */}
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center">
-                <img src={legacyLogo} alt="Legacy Builder" className="h-8 w-auto" />
+                <span className="flex items-center rounded-full bg-[#1a2e1f] px-3 py-1.5">
+                  <img src={legacyLogo} alt="Legacy Builder" className="h-6 w-auto" />
+                </span>
               </div>
               <DrawerClose asChild>
                 <Button variant="ghost" size="sm" className="p-2">
