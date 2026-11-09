@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useI18n } from "@/components/i18n/I18nProvider";
 import { LANGUAGES } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import legacyLogo from "@/assets/legacy-builder-logo.png";
+import legacyLogo from "@/assets/legacy-builder-logo-transparent.png";
 
 export function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);

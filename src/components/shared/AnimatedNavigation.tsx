@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { Shield, TrendingUp, FileText, Star, Globe } from "lucide-react";
 import { useI18n } from "@/components/i18n/I18nProvider";
 import { LANGUAGES } from "@/lib/i18n";
+import { Link } from "react-router-dom";
+import legacyLogo from "@/assets/legacy-builder-logo-transparent.png";
 
 export function AnimatedNavigation() {
   return (
@@ -23,6 +25,11 @@ function Navbar({ className }: { className?: string }) {
       className={cn("fixed top-10 inset-x-0 max-w-4xl mx-auto z-[100]", className)}
     >
       <Menu setActive={setActive}>
+        <Link to="/" className="flex items-center mr-2" aria-label="Legacy Builder home">
+          <span className="flex items-center rounded-full bg-[#1a2e1f] px-4 py-2">
+            <img src={legacyLogo} alt="Legacy Builder" className="h-6 w-auto" />
+          </span>
+        </Link>
         <MenuItem setActive={setActive} active={active} item={t('nav.platform')}>
           <div className="text-sm grid grid-cols-2 gap-6 p-4">
             <IconProductItem
