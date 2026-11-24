@@ -18,7 +18,7 @@ const Index = () => {
       <Hero />
 
       <section className="container mx-auto px-4 pb-20">
-        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
           <Card className="border-forest/15 bg-sand/25 shadow-elegant">
             <CardContent className="flex h-full flex-col p-8">
               <FileText className="h-8 w-8 text-forest" aria-hidden="true" />
@@ -55,7 +55,7 @@ const Index = () => {
           <Card className="bg-card/80">
             <CardContent className="flex h-full flex-col p-7">
               <FileText className="h-7 w-7 text-primary" aria-hidden="true" />
-              <h3 className="mt-5 font-regular text-2xl font-semibold">{t("services.willTitle")}</h3>
+              <h3 className="mt-5 break-words font-regular text-2xl font-semibold">{t("services.willTitle")}</h3>
               <p className="mt-3 flex-1 leading-relaxed text-muted-foreground">{t("services.willBody")}</p>
               <a href={WILL_URL} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 font-medium text-primary hover:underline">
                 {t("common.createMyWill")} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -65,7 +65,7 @@ const Index = () => {
           <Card className="bg-card/80">
             <CardContent className="flex h-full flex-col p-7">
               <Shield className="h-7 w-7 text-primary" aria-hidden="true" />
-              <h3 className="mt-5 font-regular text-2xl font-semibold">{t("services.trustTitle")}</h3>
+              <h3 className="mt-5 break-words font-regular text-2xl font-semibold">{t("services.trustTitle")}</h3>
               <p className="mt-3 flex-1 leading-relaxed text-muted-foreground">{t("services.trustBody")}</p>
               <Link to="/trust-enquiry" className="mt-6 inline-flex items-center gap-2 font-medium text-primary hover:underline">
                 {t("common.enquireTrust")} <ChevronRight className="h-4 w-4" aria-hidden="true" />
@@ -75,7 +75,7 @@ const Index = () => {
           <Card id="education" className="scroll-mt-28 bg-card/80">
             <CardContent className="flex h-full flex-col p-7">
               <BookOpen className="h-7 w-7 text-primary" aria-hidden="true" />
-              <h3 className="mt-5 font-regular text-2xl font-semibold">{t("services.educationTitle")}</h3>
+              <h3 className="mt-5 break-words font-regular text-2xl font-semibold">{t("services.educationTitle")}</h3>
               <p className="mt-3 flex-1 leading-relaxed text-muted-foreground">{t("services.educationBody")}</p>
               <a href="#how-it-works" className="mt-6 inline-flex items-center gap-2 font-medium text-primary hover:underline">
                 {t("services.educationLink")} <ChevronRight className="h-4 w-4" aria-hidden="true" />
@@ -94,21 +94,21 @@ const Index = () => {
           <Card className="border-forest/15 bg-sand/20">
             <CardContent className="p-7">
               <span className="text-sm font-semibold uppercase tracking-wide text-primary">{t("how.step1")}</span>
-              <h3 className="mt-3 font-regular text-2xl font-semibold">{t("how.step1Title")}</h3>
+              <h3 className="mt-3 break-words font-regular text-2xl font-semibold">{t("how.step1Title")}</h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">{t("how.step1Body")}</p>
             </CardContent>
           </Card>
           <Card className="border-forest/15 bg-sand/20">
             <CardContent className="p-7">
               <span className="text-sm font-semibold uppercase tracking-wide text-primary">{t("how.step2")}</span>
-              <h3 className="mt-3 font-regular text-2xl font-semibold">{t("how.step2Title")}</h3>
+              <h3 className="mt-3 break-words font-regular text-2xl font-semibold">{t("how.step2Title")}</h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">{t("how.step2Body")}</p>
             </CardContent>
           </Card>
           <Card className="border-forest/15 bg-sand/20">
             <CardContent className="p-7">
               <span className="text-sm font-semibold uppercase tracking-wide text-primary">{t("how.step3")}</span>
-              <h3 className="mt-3 font-regular text-2xl font-semibold">{t("how.step3Title")}</h3>
+              <h3 className="mt-3 break-words font-regular text-2xl font-semibold">{t("how.step3Title")}</h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">{t("how.step3Body")}</p>
             </CardContent>
           </Card>

@@ -18,9 +18,9 @@ import {
   trustEnquirySchema,
   type TrustEnquiryFormValues,
 } from "@/lib/trust-enquiry";
-import legacyLogo from "@/assets/legacy-builder-logo-transparent.png";
 import { useI18n } from "@/components/i18n/I18nProvider";
 import { LanguageSelector } from "@/components/shared/LanguageSelector";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 import { usePublicPageTitle } from "@/hooks/usePublicPageTitle";
 
 const fieldClassName = "mt-2 flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:text-sm";
@@ -131,8 +131,12 @@ export default function TrustEnquiry() {
     <div className="min-h-screen bg-background">
       <header className="border-b border-forest/10 bg-sand/35">
         <div className="container mx-auto flex min-h-20 flex-wrap items-center justify-between gap-3 px-4 py-3">
-          <Link to="/" aria-label={t("nav.homeAria")} className="inline-flex rounded-full bg-forest px-4 py-2">
-            <img src={legacyLogo} alt="LegacyBuilder" className="h-7 w-auto" />
+          <Link
+            to="/"
+            aria-label={t("nav.homeAria")}
+            className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
+            <BrandLogo />
           </Link>
           <div className="flex items-center gap-2">
             <LanguageSelector className="px-3" />

@@ -4,10 +4,10 @@ import { MobileNavigation } from "./MobileNavigation";
 export function ResponsiveNavigation() {
   return (
     <>
-      <div className="lg:hidden">
+      <div className="xl:hidden">
         <MobileNavigation />
       </div>
-      <div className="hidden lg:block">
+      <div className="hidden xl:block">
         <AnimatedNavigation />
       </div>
     </>

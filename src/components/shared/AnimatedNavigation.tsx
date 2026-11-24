@@ -4,9 +4,9 @@ import { Menu } from "@/components/ui/navbar-menu";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/components/i18n/I18nProvider";
 import { Link } from "react-router-dom";
-import legacyLogo from "@/assets/legacy-builder-logo-transparent.png";
 import { CALCULATOR_URL, WILL_URL } from "@/lib/trust-enquiry";
 import { LanguageSelector } from "./LanguageSelector";
+import { BrandLogo } from "./BrandLogo";
 
 export function AnimatedNavigation() {
   return (
@@ -22,12 +22,15 @@ function Navbar({ className }: { className?: string }) {
   const linkClassName = "whitespace-nowrap text-sm text-foreground transition-colors hover:text-primary";
 
   return (
-    <div className={cn("fixed inset-x-0 top-10 z-[100] mx-auto max-w-5xl", className)}>
+    <div className={cn("fixed inset-x-0 top-10 z-[100] mx-auto max-w-7xl px-4", className)}>
       <Menu setActive={setActive}>
-        <Link to="/" className="mr-2 flex items-center" aria-label={t("nav.homeAria")} onMouseEnter={() => setActive(null)}>
-          <span className="flex items-center rounded-full bg-[#1a2e1f] px-4 py-2">
-            <img src={legacyLogo} alt="LegacyBuilder" className="h-6 w-auto" />
-          </span>
+        <Link
+          to="/"
+          className="mr-2 inline-flex items-center rounded-sm py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          aria-label={t("nav.homeAria")}
+          onMouseEnter={() => setActive(null)}
+        >
+          <BrandLogo />
         </Link>
         <Link to="/" className={linkClassName} onMouseEnter={() => setActive(null)}>{t("nav.home")}</Link>
         <a href={WILL_URL} target="_blank" rel="noopener noreferrer" className={linkClassName} onMouseEnter={() => setActive(null)}>

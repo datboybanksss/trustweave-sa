@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { BookOpen, Calculator, FileText, Home, Menu, Shield, X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useI18n } from "@/components/i18n/I18nProvider";
-import legacyLogo from "@/assets/legacy-builder-logo-transparent.png";
 import { CALCULATOR_URL, WILL_URL } from "@/lib/trust-enquiry";
 import { LanguageSelector } from "./LanguageSelector";
+import { BrandLogo } from "./BrandLogo";
 
 export function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +22,13 @@ export function MobileNavigation() {
 
   return (
     <div className="flex items-center justify-between border-b bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <button type="button" className="flex items-center" onClick={() => handleNavigation("/")} aria-label={t("nav.homeAria")}>
-        <span className="flex items-center rounded-full bg-[#1a2e1f] px-3 py-1.5">
-          <img src={legacyLogo} alt="LegacyBuilder" className="h-6 w-auto" />
-        </span>
-      </button>
+      <Link
+        to="/"
+        className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        aria-label={t("nav.homeAria")}
+      >
+        <BrandLogo />
+      </Link>
 
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
         <DrawerTrigger asChild>
@@ -37,10 +39,15 @@ export function MobileNavigation() {
 
         <DrawerContent className="max-h-[90vh]">
           <div className="overflow-y-auto px-4 py-6">
-            <div className="mb-8 flex items-center justify-between">
-              <span className="flex items-center rounded-full bg-[#1a2e1f] px-3 py-1.5">
-                <img src={legacyLogo} alt="LegacyBuilder" className="h-6 w-auto" />
-              </span>
+            <div className="mb-8 flex items-center justify-between gap-4">
+              <Link
+                to="/"
+                onClick={() => setIsOpen(false)}
+                className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                aria-label={t("nav.homeAria")}
+              >
+                <BrandLogo />
+              </Link>
               <DrawerClose asChild>
                 <Button variant="ghost" size="sm" className="p-2" aria-label={t("nav.closeMenu")}>
                   <X className="h-6 w-6" />

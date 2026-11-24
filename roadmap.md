@@ -24,3 +24,8 @@
 - [x] Test locale completeness, language persistence/fallbacks, form preservation, backend privacy, and responsive selector behavior
 - [x] Commit the verified preview changes without publishing
 - [x] Correct semantic mistranslations using the supplied official terminology, add focused regressions, and rerun language/form checks without publishing
+
+## Public header branding
+
+- [x] Reuse the exact transparent logo as a forest-green silhouette without capsules across desktop, mobile/drawer, and trust-enquiry headers
+- [x] Verify artwork proportions, accessible home links, language switching, and 320/390/768/1280 layouts; do not publish
