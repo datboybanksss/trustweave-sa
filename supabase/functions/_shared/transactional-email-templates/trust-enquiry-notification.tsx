@@ -87,7 +87,7 @@ export const template = {
     fullName: 'TEST Thandi Example',
     email: 'test@example.com',
     phone: '+27 82 123 4567',
-    primaryGoal: 'Family planning',
+    primaryGoal: 'Planning for my family',
     preferredContact: 'email',
     preferredLanguage: 'af',
     province: 'gauteng',

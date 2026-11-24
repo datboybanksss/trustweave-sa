@@ -43,7 +43,7 @@ const bodySchema = z.object({
 }).strict()
 
 const goalLabels = {
-  family_planning: 'Family planning',
+  family_planning: 'Planning for my family',
   business_succession: 'Business succession',
   property_investments: 'Property or investments',
   review_existing_trust: 'Review an existing trust',
