@@ -73,7 +73,7 @@ describe("public translations", () => {
       nso: "Peakanyo ya bokamoso bja lapa la ka",
       st: "Ho rera bokamoso ba lelapa la ka",
       tn: "Thulaganyo ya isago ya lelapa la me",
-      ve: "U pulana vhudzisa ha muṱa wanga",
+      ve: "U dzudzanya vhumatshelo ha muṱa wanga",
       ts: "Ku pulana nkarhi lowu taka wa ndyangu wa mina",
     };
     for (const [code, value] of Object.entries(expected)) {
@@ -92,7 +92,7 @@ describe("public translations", () => {
       nso: "Ga ke na bonnete, ke hloka tlhahlo",
       st: "Ha ke na bonnete, ke hloka tataiso",
       tn: "Ga ke na bonnete, ke tlhoka kaelo",
-      ve: "A thi na vhutendeli, ndi ṱoḓa thusedzo",
+      ve: "A thi zwi ḓivhi zwavhuḓi; ndi ṱoḓa thuso",
       ts: "A ndzi tiyisisi, ndzi lava nkongomiso",
     };
     for (const [code, value] of Object.entries(expected)) {
