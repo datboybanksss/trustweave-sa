@@ -34,7 +34,7 @@ function Navbar({ className }: { className?: string }) {
           <div className="text-sm grid grid-cols-2 gap-6 p-4">
             <IconProductItem
               title={t('platform.trustBuilder')}
-              href="/trust-builder"
+              href="/trust-enquiry"
               Icon={Shield}
               description={t('platform.trustBuilderDesc')}
             />
@@ -62,7 +62,7 @@ function Navbar({ className }: { className?: string }) {
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink to="/individual">Individual Families</HoveredLink>
             <HoveredLink to="/partner">Legal Professionals</HoveredLink>
-            <HoveredLink to="/consultation">Wealth Consultation</HoveredLink>
+            <HoveredLink to="/trust-enquiry">Trust Enquiry</HoveredLink>
             <HoveredLink to="/crypto">Crypto Verification</HoveredLink>
           </div>
         </MenuItem>
@@ -70,7 +70,7 @@ function Navbar({ className }: { className?: string }) {
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink to="/education">{t('nav.education')}</HoveredLink>
             <HoveredLink to="/pricing">{t('nav.pricing')}</HoveredLink>
-            <HoveredLink to="/consultation">{t('nav.consultation')}</HoveredLink>
+            <HoveredLink to="/trust-enquiry">Trust Enquiry</HoveredLink>
             <HoveredLink to="/support">Help & Support</HoveredLink>
           </div>
         </MenuItem>

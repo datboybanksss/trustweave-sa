@@ -14,13 +14,117 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      trust_enquiries: {
+        Row: {
+          consent: boolean
+          consent_version: string
+          consented_at: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          intended_timeframe: string | null
+          is_test: boolean
+          message: string | null
+          notification_error: string | null
+          notification_status: string
+          notified_at: string | null
+          phone: string
+          preferred_contact_method: string
+          primary_goal: string
+          province: string | null
+          source_page: string
+          status: string
+          submission_key: string
+          updated_at: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          consent: boolean
+          consent_version: string
+          consented_at: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          intended_timeframe?: string | null
+          is_test?: boolean
+          message?: string | null
+          notification_error?: string | null
+          notification_status?: string
+          notified_at?: string | null
+          phone: string
+          preferred_contact_method: string
+          primary_goal: string
+          province?: string | null
+          source_page?: string
+          status?: string
+          submission_key: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          consent?: boolean
+          consent_version?: string
+          consented_at?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          intended_timeframe?: string | null
+          is_test?: boolean
+          message?: string | null
+          notification_error?: string | null
+          notification_status?: string
+          notified_at?: string | null
+          phone?: string
+          preferred_contact_method?: string
+          primary_goal?: string
+          province?: string | null
+          source_page?: string
+          status?: string
+          submission_key?: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Relationships: []
+      }
+      trust_enquiry_rate_limits: {
+        Row: {
+          rate_key: string
+          request_count: number
+          updated_at: string
+          window_started_at: string
+        }
+        Insert: {
+          rate_key: string
+          request_count?: number
+          updated_at?: string
+          window_started_at: string
+        }
+        Update: {
+          rate_key?: string
+          request_count?: number
+          updated_at?: string
+          window_started_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      consume_trust_enquiry_rate_limit: {
+        Args: { _limit: number; _rate_key: string; _window_start: string }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never

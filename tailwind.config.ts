@@ -66,6 +66,8 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
+				forest: 'hsl(var(--forest))',
+				sand: 'hsl(var(--sand))',
 				success: {
 					DEFAULT: 'hsl(var(--success))',
 					foreground: 'hsl(var(--primary-foreground))'

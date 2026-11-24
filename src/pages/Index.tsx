@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight } from "lucide-react";
+import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight, ArrowUpRight } from "lucide-react";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { ResponsiveNavigation } from "@/components/shared/ResponsiveNavigation";
 import { Hero } from "@/components/ui/animated-hero";
 import { useNavigate } from "react-router-dom";
 import WealthCalculatorDemo from "@/components/ui/wealth-calculator-demo";
+import { WILL_URL } from "@/lib/trust-enquiry";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -19,6 +20,41 @@ const Index = () => {
       
       {/* Hero Section */}
       <Hero />
+
+      {/* Will and trust paths */}
+      <section aria-label="Will and trust options" className="container mx-auto px-4 pb-20">
+        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
+          <Card className="border-forest/15 bg-sand/25 shadow-elegant">
+            <CardContent className="flex h-full flex-col p-8">
+              <FileText className="h-8 w-8 text-forest" aria-hidden="true" />
+              <h2 className="mt-5 font-regular text-2xl font-bold text-forest">Create your will online</h2>
+              <p className="mt-3 flex-1 leading-relaxed text-muted-foreground">
+                Continue to LegacyBuilder’s secure online will service, where you can create your will through SmartWill. The service opens in a new tab.
+              </p>
+              <Button asChild className="mt-6 w-fit bg-forest text-sand hover:bg-forest/90">
+                <a href={WILL_URL} target="_blank" rel="noopener noreferrer">
+                  Create my will <ArrowUpRight aria-hidden="true" />
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="border-forest bg-forest shadow-elegant">
+            <CardContent className="flex h-full flex-col p-8">
+              <Shield className="h-8 w-8 text-sand" aria-hidden="true" />
+              <h2 className="mt-5 font-regular text-2xl font-bold text-sand">Enquire about a trust</h2>
+              <p className="mt-3 flex-1 leading-relaxed text-sand/80">
+                Leave your details and a few brief goals. The LegacyBuilder team will contact you about arranging a suitable trust and discussing the next steps.
+              </p>
+              <Button asChild className="mt-6 w-fit bg-sand text-forest hover:bg-sand/90">
+                <button type="button" onClick={() => navigate('/trust-enquiry')}>
+                  Enquire about a trust <ChevronRight aria-hidden="true" />
+                </button>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section id="features" className="container mx-auto px-4 py-20">
@@ -33,7 +69,7 @@ const Index = () => {
           <BentoCard
             name="Trust Builder"
             description="Step-by-step trust creation wizard with legal templates and compliance checks. Generate living & testamentary trusts with automated document generation."
-            href="/trust-builder"
+            href="/trust-enquiry"
             cta="Build Trust"
             background={<div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5" />}
             Icon={Shield}
@@ -249,8 +285,8 @@ const Index = () => {
               <Button size="lg" onClick={() => navigate('/signup')}>
                 Start Your Free Trial Today
               </Button>
-              <Button variant="outline" size="lg" onClick={() => navigate('/consultation')}>
-                Book a Consultation
+              <Button variant="outline" size="lg" onClick={() => navigate('/trust-enquiry')}>
+                Enquire about a trust
               </Button>
             </div>
           </CardContent>

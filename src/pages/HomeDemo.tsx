@@ -70,7 +70,7 @@ const HomeDemo = () => {
           <BentoCard
             name="Trust Builder"
             description="Step-by-step trust creation wizard with legal templates, compliance checks, and automated document generation for South African trusts."
-            href="/trust-builder"
+            href="/trust-enquiry"
             cta="Build Trust"
             background={<div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5" />}
             Icon={Shield}
@@ -341,8 +341,8 @@ const HomeDemo = () => {
               <Button size="lg" onClick={() => navigate('/signup')}>
                 Start Your Free Trial Today
               </Button>
-              <Button variant="outline" size="lg" onClick={() => navigate('/consultation')}>
-                Book a Consultation
+              <Button variant="outline" size="lg" onClick={() => navigate('/trust-enquiry')}>
+                Enquire about a trust
               </Button>
             </div>
           </CardContent>

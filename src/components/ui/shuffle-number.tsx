@@ -21,10 +21,10 @@ export default function AnimatedNumberRandom({
 
   return (
     <>
-      <span className="flex items-center justify-center gap-2">
+      <span className="flex max-w-full flex-col items-center justify-center gap-2 min-[420px]:flex-row">
         <NumberFlow
           value={value}
-          className="text-5xl font-semibold"
+          className="text-3xl font-semibold sm:text-5xl"
           format={{ style: "currency", currency: "ZAR" }}
         />
         <motion.span

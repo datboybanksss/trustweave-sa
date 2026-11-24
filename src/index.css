@@ -32,6 +32,10 @@ All colors MUST be HSL.
     --accent: 46 62% 52%;
     --accent-foreground: 222 47% 11%;
 
+    /* LegacyBuilder forest green and sand */
+    --forest: 137 33% 18%;
+    --sand: 40 44% 84%;
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 

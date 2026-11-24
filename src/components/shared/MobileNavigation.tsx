@@ -30,7 +30,7 @@ export function MobileNavigation() {
   };
 
   const platformItems = [
-    { title: "Trust Builder", href: "/trust-builder", icon: Shield },
+    { title: "Trust Builder", href: "/trust-enquiry", icon: Shield },
     { title: "Wealth Tracking", href: "/wealth", icon: TrendingUp },
     { title: "Document Vault", href: "/documents", icon: FileText },
     { title: "Education Academy", href: "/education", icon: Star },
@@ -172,9 +172,9 @@ export function MobileNavigation() {
                     <Button 
                       variant="outline" 
                       className="w-full h-12"
-                      onClick={() => handleNavigation('/consultation')}
+                      onClick={() => handleNavigation('/trust-enquiry')}
                     >
-                      Book Consultation
+                      Enquire about a trust
                     </Button>
                   </div>
                 </>

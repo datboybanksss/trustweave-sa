@@ -13,7 +13,7 @@ export const PublicNavigation = () => (
       <div className="hidden md:flex items-center gap-6">
         <NavLink to="/" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Home</NavLink>
         <NavLink to="/pricing" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Pricing</NavLink>
-        <NavLink to="/consultation" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Consultation</NavLink>
+        <NavLink to="/trust-enquiry" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Trust Enquiry</NavLink>
         <NavLink to="/education" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Education</NavLink>
       </div>
       <div className="flex items-center gap-3">

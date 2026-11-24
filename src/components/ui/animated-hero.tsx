@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { MoveRight, PhoneCall } from "lucide-react";
+import { MoveRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { WILL_URL } from "@/lib/trust-enquiry";
 function Hero() {
-  const navigate = useNavigate();
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(() => ["Easy", "Fun", "Understandable"], []);
   useEffect(() => {
@@ -47,12 +47,16 @@ function Hero() {
               The comprehensive platform for South African families and legal professionals to create trusts, manage wealth, and protect generational assets with confidence and ease.
             </p>
           </div>
-          <div className="flex flex-row gap-3">
-            <Button size="lg" className="gap-4" variant="hero" onClick={() => navigate('/consultation')}>
-              Jump on a call <PhoneCall className="w-4 h-4" />
+          <div className="flex w-full flex-col gap-3 px-4 sm:w-auto sm:flex-row">
+            <Button asChild size="lg" className="w-full gap-4 sm:w-auto" variant="hero">
+              <Link to="/trust-enquiry">
+                Enquire about a trust <ShieldCheck className="w-4 h-4" />
+              </Link>
             </Button>
-            <Button size="lg" className="gap-4" onClick={() => window.open('https://legacybuilder.smartwill.io/system/portal/mbw/signup.php', '_blank')}>
-              Sign up here <MoveRight className="w-4 h-4" />
+            <Button asChild size="lg" className="w-full gap-4 sm:w-auto">
+              <a href={WILL_URL} target="_blank" rel="noopener noreferrer">
+                Create my will <MoveRight className="w-4 h-4" />
+              </a>
             </Button>
           </div>
         </div>
