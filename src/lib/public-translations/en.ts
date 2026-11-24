@@ -93,7 +93,7 @@ export const publicEnglish = {
   "form.submit": "Send my enquiry",
   "form.sending": "Sending your enquiry…",
 
-  "options.goal.familyPlanning": "Family planning",
+  "options.goal.familyPlanning": "Planning for my family",
   "options.goal.businessSuccession": "Business succession",
   "options.goal.propertyInvestments": "Property or investments",
   "options.goal.reviewExistingTrust": "Review an existing trust",

@@ -42,6 +42,82 @@ describe("public translations", () => {
     expect(dictionaries.size).toBe(expectedCodes.length);
   });
 
+  it("uses the reviewed estate-will and trust terminology in navigation", () => {
+    const terms: Record<string, [string, string]> = {
+      af: ["testament", "trust"],
+      zu: ["incwadi yefa", "thrasti"],
+      xh: ["umyolelo", "thrasti"],
+      nr: ["incwadi yelifa", "thrasti"],
+      ss: ["incwadzi yelifa", "thrasti"],
+      nso: ["wili", "therasete"],
+      st: ["wili", "traste"],
+      tn: ["lokwalokaboboswa", "trasete"],
+      ve: ["wiḽi", "vhufareli"],
+      ts: ["papilandzhaka", "thirasiti"],
+    };
+    for (const [code, [will, trust]] of Object.entries(terms)) {
+      const dictionary = publicDictionaries[code as keyof typeof publicDictionaries];
+      expect(dictionary["common.createMyWill"].toLocaleLowerCase(), code).toContain(will);
+      expect(dictionary["nav.trustEnquiry"].toLocaleLowerCase(), code).toContain(trust);
+    }
+  });
+
+  it("keeps the family goal about planning for the family's future", () => {
+    const expected: Record<string, string> = {
+      en: "Planning for my family",
+      af: "Beplanning vir my gesin",
+      zu: "Ukuhlela ikusasa lomndeni wami",
+      xh: "Ukucwangcisa ikamva losapho lwam",
+      nr: "Ukuhlela ikusasa lomndeni wami",
+      ss: "Kuhlela ikusasa lomndeni wami",
+      nso: "Peakanyo ya bokamoso bja lapa la ka",
+      st: "Ho rera bokamoso ba lelapa la ka",
+      tn: "Thulaganyo ya isago ya lelapa la me",
+      ve: "U pulana vhudzisa ha muṱa wanga",
+      ts: "Ku pulana nkarhi lowu taka wa ndyangu wa mina",
+    };
+    for (const [code, value] of Object.entries(expected)) {
+      expect(publicDictionaries[code as keyof typeof publicDictionaries]["options.goal.familyPlanning"], code).toBe(value);
+    }
+  });
+
+  it("uses uncertainty and guidance rather than payment, pain, or broken certainty wording", () => {
+    const expected: Record<string, string> = {
+      en: "Not sure, I need guidance",
+      af: "Onseker, ek het leiding nodig",
+      zu: "Angiqinisekanga, ngidinga isiqondiso",
+      xh: "Andiqinisekanga, ndifuna isikhokelo",
+      nr: "Angiqinisekanga, ngidinga isiqondiso",
+      ss: "Angiqinisekanga, ngidzinga sikhombisi",
+      nso: "Ga ke na bonnete, ke hloka tlhahlo",
+      st: "Ha ke na bonnete, ke hloka tataiso",
+      tn: "Ga ke na bonnete, ke tlhoka kaelo",
+      ve: "A thi na vhutendeli, ndi ṱoḓa thusedzo",
+      ts: "A ndzi tiyisisi, ndzi lava nkongomiso",
+    };
+    for (const [code, value] of Object.entries(expected)) {
+      expect(publicDictionaries[code as keyof typeof publicDictionaries]["options.goal.guidance"], code).toBe(value);
+    }
+  });
+
+  it("confirms receipt rather than saying or finding the enquiry in Nguni locales", () => {
+    for (const code of ["zu", "nr"] as const) {
+      expect(publicDictionaries[code]["status.successTitle"], code).toBe("Umbuzo wakho wamukelwe");
+      expect(publicDictionaries[code]["status.successBody"], code).toContain("umbuzo wakho wamukelwe");
+      expect(publicDictionaries[code]["services.educationBody"], code).toContain("onolwazi ngazo");
+    }
+    expect(publicDictionaries.ss["status.successTitle"]).toBe("Umbuzo wakho wemukelwe");
+    expect(publicDictionaries.ss["status.successBody"]).toContain("umbuzo wakho wemukelwe");
+    expect(publicDictionaries.xh["status.successTitle"]).toBe("Umbuzo wakho wamkelwe");
+  });
+
+  it("uses coherent password wording in Setswana and Sepedi privacy guidance", () => {
+    for (const code of ["tn", "nso"] as const) {
+      expect(publicDictionaries[code]["form.messageGuidance"], code).toContain("mafoko a sephiri");
+      expect(publicDictionaries[code]["privacy.body2"], code).toContain("mafoko a sephiri");
+    }
+  });
+
   it("defaults invalid or unavailable saved language choices to English without throwing", () => {
     expect(readStoredLanguage({ getItem: () => "not-supported" })).toBe("en");
     expect(readStoredLanguage({ getItem: () => "tn" })).toBe("tn");

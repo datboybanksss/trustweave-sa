@@ -84,7 +84,7 @@ export const af: PublicDictionary = {
   "form.website": "Webwerf",
   "form.submit": "Stuur my navraag",
   "form.sending": "Stuur tans jou navraag…",
-  "options.goal.familyPlanning": "Gesinsbeplanning",
+  "options.goal.familyPlanning": "Beplanning vir my gesin",
   "options.goal.businessSuccession": "Sakeopvolging",
   "options.goal.propertyInvestments": "Eiendom of beleggings",
   "options.goal.reviewExistingTrust": "Hersien ’n bestaande trust",

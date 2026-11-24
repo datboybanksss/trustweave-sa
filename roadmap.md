@@ -23,3 +23,4 @@
 - [x] Persist validated preferred_language with enquiries and include it in the prepared owner notification
 - [x] Test locale completeness, language persistence/fallbacks, form preservation, backend privacy, and responsive selector behavior
 - [x] Commit the verified preview changes without publishing
+- [x] Correct semantic mistranslations using the supplied official terminology, add focused regressions, and rerun language/form checks without publishing
