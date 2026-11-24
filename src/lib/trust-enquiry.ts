@@ -85,3 +85,4 @@ export const trustEnquiryDefaults: TrustEnquiryFormValues = {
 };
 
 export const WILL_URL = "https://legacybuilder.smartwill.io/system/portal/mbw/signup.php";
+export const CALCULATOR_URL = "https://legacybuilder.smartwill.io/system/portal/calculator/index.php";

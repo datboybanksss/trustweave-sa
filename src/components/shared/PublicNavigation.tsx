@@ -1,29 +1,37 @@
 import { NavLink } from "react-router-dom";
-import legacyLogo from "@/assets/legacy-builder-logo.png";
-import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "./LanguageSelector";
+import { CALCULATOR_URL, WILL_URL } from "@/lib/trust-enquiry";
 
-export const PublicNavigation = () => (
-  <header className="sticky top-0 z-30 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-    <nav className="container mx-auto flex h-16 items-center justify-between">
-      <div className="flex items-center gap-2">
-        <img src="/lovable-uploads/885bd18f-abdd-483f-9669-ac03004d6f3b.png" alt="Legacy Builder favicon" className="h-10 w-auto" loading="eager"/>
-        <span className="font-bold text-lg">Legacy Vault</span>
-      </div>
-      <div className="hidden md:flex items-center gap-6">
-        <NavLink to="/" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Home</NavLink>
-        <NavLink to="/pricing" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Pricing</NavLink>
-        <NavLink to="/trust-enquiry" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Trust Enquiry</NavLink>
-        <NavLink to="/education" className={({isActive})=>isActive?"text-primary": "hover:text-primary transition-colors"}>Education</NavLink>
-      </div>
-      <div className="flex items-center gap-3">
-        <LanguageSelector />
-        <Button variant="premium" size="sm" className="hidden md:inline-flex" onClick={() => window.location.href = '/signup'}>
-          Get Started
-        </Button>
+export const PublicNavigation = () => {
+  return (
+    <nav className="sticky top-0 z-50 border-b bg-card/95 backdrop-blur-md">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <NavLink to="/" className="flex items-center gap-2">
+          <img src="/favicon.png" alt="LegacyBuilder" className="h-10 w-10 rounded-lg object-contain" />
+          <span className="text-lg font-bold">LegacyBuilder</span>
+        </NavLink>
+
+        <div className="hidden items-center gap-5 md:flex">
+          <NavLink to="/" className={({ isActive }) => isActive ? "text-primary" : "transition-colors hover:text-primary"}>
+            Home
+          </NavLink>
+          <a href={WILL_URL} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-primary">
+            Will creation
+          </a>
+          <NavLink to="/trust-enquiry" className={({ isActive }) => isActive ? "text-primary" : "transition-colors hover:text-primary"}>
+            Trust enquiry
+          </NavLink>
+          <a href={CALCULATOR_URL} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-primary">
+            Estate calculator
+          </a>
+          <a href="/#how-it-works" className="hidden transition-colors hover:text-primary lg:block">
+            How it works
+          </a>
+          <LanguageSelector />
+        </div>
       </div>
     </nav>
-  </header>
-);
+  );
+};
 
 export default PublicNavigation;

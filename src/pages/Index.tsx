@@ -1,27 +1,26 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Check, Shield, Users, FileText, TrendingUp, Star, ChevronRight, ArrowUpRight } from "lucide-react";
-import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  ArrowUpRight,
+  BookOpen,
+  Calculator,
+  ChevronRight,
+  FileText,
+  Shield,
+  UsersRound,
+} from "lucide-react";
 import { ResponsiveNavigation } from "@/components/shared/ResponsiveNavigation";
 import { Hero } from "@/components/ui/animated-hero";
-import { useNavigate } from "react-router-dom";
-import WealthCalculatorDemo from "@/components/ui/wealth-calculator-demo";
-import { WILL_URL } from "@/lib/trust-enquiry";
+import { Link } from "react-router-dom";
+import { CALCULATOR_URL, WILL_URL } from "@/lib/trust-enquiry";
 
 const Index = () => {
-  const navigate = useNavigate();
-
-  // Show landing page content for non-logged-in users
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
       <ResponsiveNavigation />
-      
-      {/* Hero Section */}
+
       <Hero />
 
-      {/* Will and trust paths */}
       <section aria-label="Will and trust options" className="container mx-auto px-4 pb-20">
         <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
           <Card className="border-forest/15 bg-sand/25 shadow-elegant">
@@ -29,7 +28,7 @@ const Index = () => {
               <FileText className="h-8 w-8 text-forest" aria-hidden="true" />
               <h2 className="mt-5 font-regular text-2xl font-bold text-forest">Create your will online</h2>
               <p className="mt-3 flex-1 leading-relaxed text-muted-foreground">
-                Continue to LegacyBuilder’s secure online will service, where you can create your will through SmartWill. The service opens in a new tab.
+                Continue to the SmartWill online will service to create your will. The service opens in a new tab.
               </p>
               <Button asChild className="mt-6 w-fit bg-forest text-sand hover:bg-forest/90">
                 <a href={WILL_URL} target="_blank" rel="noopener noreferrer">
@@ -44,291 +43,186 @@ const Index = () => {
               <Shield className="h-8 w-8 text-sand" aria-hidden="true" />
               <h2 className="mt-5 font-regular text-2xl font-bold text-sand">Enquire about a trust</h2>
               <p className="mt-3 flex-1 leading-relaxed text-sand/80">
-                Leave your details and a few brief goals. The LegacyBuilder team will contact you about arranging a suitable trust and discussing the next steps.
+                Share your details and goals for personal follow-up. The LegacyBuilder team can discuss your trust planning needs and, where appropriate, help you connect with relevant professionals.
               </p>
               <Button asChild className="mt-6 w-fit bg-sand text-forest hover:bg-sand/90">
-                <button type="button" onClick={() => navigate('/trust-enquiry')}>
+                <Link to="/trust-enquiry">
                   Enquire about a trust <ChevronRight aria-hidden="true" />
-                </button>
+                </Link>
               </Button>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="container mx-auto px-4 py-20">
-        <div className="text-center mb-12">
-          <h2 className="font-regular text-3xl font-bold mb-4">Everything You Need</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive wealth management and trust planning tools designed for South African families
+      <section id="services" className="container mx-auto scroll-mt-28 px-4 py-20">
+        <div className="mb-12 text-center">
+          <h2 className="mb-4 font-regular text-3xl font-bold">Estate planning guidance for your next step</h2>
+          <p className="mx-auto max-w-2xl text-muted-foreground">
+            Practical education and guidance for South African families and business owners, with clear ways to begin.
           </p>
         </div>
 
-        <BentoGrid className="lg:grid-rows-3">
-          <BentoCard
-            name="Trust Builder"
-            description="Step-by-step trust creation wizard with legal templates and compliance checks. Generate living & testamentary trusts with automated document generation."
-            href="/trust-enquiry"
-            cta="Build Trust"
-            background={<div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5" />}
-            Icon={Shield}
-            className="lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3"
-          />
-          
-          <BentoCard
-            name="Document Vault"
-            description="Secure storage for all your wealth documents with automatic value extraction, crypto verification, and property tracking."
-            href="/documents"
-            cta="View Vault"
-            background={<div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent/5" />}
-            Icon={FileText}
-            className="lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2"
-          />
-          
-          <BentoCard
-            name="Wealth Tracking"
-            description="Real-time portfolio monitoring with professional analytics, net worth calculations, asset allocation charts, and growth projections."
-            href="/wealth"
-            cta="Track Wealth"
-            background={<div className="absolute inset-0 bg-gradient-to-br from-success/10 to-success/5" />}
-            Icon={TrendingUp}
-            className="lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2"
-          />
-          
-          <BentoCard
-            name="Client Management"
-            description="For legal professionals: manage multiple client portfolios, track AUM, and generate professional reports from one powerful dashboard."
-            href="/partner"
-            cta="Manage Clients"
-            background={<div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5" />}
-            Icon={Users}
-            className="lg:col-start-2 lg:col-end-3 lg:row-start-2 lg:row-end-4"
-          />
-          
-          <BentoCard
-            name="Education Academy"
-            description="Master wealth planning with 6 comprehensive video modules, interactive quizzes, and completion certificates for trust management."
-            href="/education"
-            cta="Start Learning"
-            background={<div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent/5" />}
-            Icon={Star}
-            className="lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4"
-          />
-          
-          <BentoCard
-            name="Professional Reports"
-            description="Generate comprehensive PDF reports with wealth summaries, trust structures, and compliance documentation for clients."
-            href="/reports"
-            cta="Generate Report"
-            background={<div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-purple-500/5" />}
-            Icon={FileText}
-            className="lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4"
-          />
-        </BentoGrid>
-      </section>
-
-      {/* Wealth Calculator Section */}
-      <section id="wealth-calculator" className="container mx-auto px-4 py-20">
-        <div className="text-center mb-12">
-          <h2 className="font-regular text-3xl font-bold mb-4">Wealth Calculator</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            A key feature within wealth planning is understanding your current financial position. 
-            We have a live wealth calculator on our dashboard that provides real-time insights into your financial health.
-          </p>
-        </div>
-        
-        <div className="flex flex-col items-center gap-8">
-          <WealthCalculatorDemo />
-          
-          {/* Responsive Dashboard Images */}
-          <div className="w-full max-w-6xl">            
-            {/* Tablet & Desktop View */}
-            <img 
-              src="/lovable-uploads/b4acf58a-1d8d-4777-a1f1-120bc08963b2.png"
-              alt="Dashboard - Desktop & Tablet View"
-              className="hidden md:block w-full h-auto rounded-lg shadow-2xl border border-border"
-            />
-            
-            {/* Mobile View */}
-            <img 
-              src="/lovable-uploads/e5f9ed14-62be-4a1f-87aa-59845dddbf5f.png"
-              alt="Dashboard - Mobile View"
-              className="block md:hidden w-full h-auto rounded-lg shadow-2xl border border-border"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Our Team Section */}
-      <section id="team" className="container mx-auto px-4 py-20">
-        <div className="text-center mb-12">
-          <h2 className="font-regular text-3xl font-bold mb-4">Meet Our Team</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Meet the passionate professionals behind Legacy Vault, dedicated to protecting and growing your family's wealth
-          </p>
-        </div>
-        
-        <AnimatedTestimonials
-          autoplay={true}
-          testimonials={[
-            {
-              quote: "Visionary entrepreneur passionate about democratizing wealth management for South African families. With extensive experience in fintech and financial planning, I founded Legacy Vault to bridge the gap between complex financial instruments and everyday investors, ensuring every family can build and protect generational wealth.",
-              name: "Israel Noko",
-              designation: "Founder & CEO",
-              src: "/lovable-uploads/d8b8bfa5-3945-48a8-92c5-44b16eff24d9.png"
-            },
-            {
-              quote: "Expert wealth manager dedicated to creating personalized financial strategies for high-net-worth families. With deep knowledge of South African investment markets and trust structures, I help clients optimize their portfolios while ensuring compliance with local regulations and tax efficiency.",
-              name: "Mark Waspe",
-              designation: "Co-founder & Wealth Manager",
-              src: "/lovable-uploads/f998ca84-e406-4ed6-bc3b-f98340ecba2c.png"
-            },
-            {
-              quote: "Innovative product strategist focused on building cutting-edge financial technology solutions. I lead our development team in creating intuitive, secure platforms that transform complex wealth management processes into seamless user experiences, always prioritizing data security and user privacy.",
-              name: "Kgosi Noko",
-              designation: "Head of Product Development",
-              src: "/lovable-uploads/4922c87b-b7f0-4e04-acaa-280ec6c455c1.png"
-            }
-          ]}
-        />
-      </section>
-
-      {/* Testimonials */}
-      <section id="testimonials" className="container mx-auto px-4 py-20">
-        <div className="text-center mb-12">
-          <h2 className="font-regular text-3xl font-bold mb-4">Trusted by South African Families</h2>
-          <div className="flex items-center justify-center gap-1 mb-4">
-            {[1, 2, 3, 4, 5].map(i => <Star key={i} className="h-5 w-5 fill-accent text-accent" />)}
-            <span className="ml-2 text-muted-foreground">4.9/5 from 500+ reviews</span>
-          </div>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-3">
-          <Card className="bg-card/80 backdrop-blur">
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-1 mb-3">
-                {[1, 2, 3, 4, 5].map(i => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
-              </div>
-              <p className="text-muted-foreground mb-4">
-                "Legacy Builder helped us create a comprehensive family trust structure. 
-                The crypto verification feature gave us confidence in our digital assets."
+        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
+          <Card className="bg-card/80">
+            <CardContent className="flex h-full flex-col p-7">
+              <FileText className="h-7 w-7 text-primary" aria-hidden="true" />
+              <h3 className="mt-5 font-regular text-2xl font-semibold">Will creation</h3>
+              <p className="mt-3 flex-1 leading-relaxed text-muted-foreground">
+                Use the SmartWill online service to create your will and record your wishes.
               </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                  <span className="font-bold text-primary">JS</span>
-                </div>
-                <div>
-                  <p className="font-semibold">Jan Smith</p>
-                  <p className="text-sm text-muted-foreground">Cape Town</p>
-                </div>
-              </div>
+              <a
+                href={WILL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-2 font-medium text-primary hover:underline"
+              >
+                Create my will <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
             </CardContent>
           </Card>
 
-          <Card className="bg-card/80 backdrop-blur">
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-1 mb-3">
-                {[1, 2, 3, 4, 5].map(i => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
-              </div>
-              <p className="text-muted-foreground mb-4">
-                "As a legal professional, the client management features are exceptional. 
-                I can handle multiple families efficiently with professional reporting."
+          <Card className="bg-card/80">
+            <CardContent className="flex h-full flex-col p-7">
+              <Shield className="h-7 w-7 text-primary" aria-hidden="true" />
+              <h3 className="mt-5 font-regular text-2xl font-semibold">Trust planning</h3>
+              <p className="mt-3 flex-1 leading-relaxed text-muted-foreground">
+                Tell us what you would like to explore. We will follow up to discuss your needs and relevant professional support.
               </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                  <span className="font-bold text-primary">MP</span>
-                </div>
-                <div>
-                  <p className="font-semibold">Maria Pretorius</p>
-                  <p className="text-sm text-muted-foreground">Johannesburg Attorney</p>
-                </div>
-              </div>
+              <Link to="/trust-enquiry" className="mt-6 inline-flex items-center gap-2 font-medium text-primary hover:underline">
+                Enquire about a trust <ChevronRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
             </CardContent>
           </Card>
 
-          <Card className="bg-card/80 backdrop-blur">
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-1 mb-3">
-                {[1, 2, 3, 4, 5].map(i => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
-              </div>
-              <p className="text-muted-foreground mb-4">
-                "The education modules were invaluable. I learned so much about trust planning 
-                and felt confident making informed decisions about our family's future."
+          <Card id="education" className="scroll-mt-28 bg-card/80">
+            <CardContent className="flex h-full flex-col p-7">
+              <BookOpen className="h-7 w-7 text-primary" aria-hidden="true" />
+              <h3 className="mt-5 font-regular text-2xl font-semibold">Estate planning education</h3>
+              <p className="mt-3 flex-1 leading-relaxed text-muted-foreground">
+                Learn about the roles of wills and trusts so you can prepare for informed conversations about your family or business.
               </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                  <span className="font-bold text-primary">TM</span>
-                </div>
-                <div>
-                  <p className="font-semibold">Thabo Mthembu</p>
-                  <p className="text-sm text-muted-foreground">Durban</p>
-                </div>
-              </div>
+              <a href="#how-it-works" className="mt-6 inline-flex items-center gap-2 font-medium text-primary hover:underline">
+                See how it works <ChevronRight className="h-4 w-4" aria-hidden="true" />
+              </a>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* Call to Action */}
+      <section id="how-it-works" className="container mx-auto scroll-mt-28 px-4 py-20">
+        <div className="mb-12 text-center">
+          <h2 className="mb-4 font-regular text-3xl font-bold">How it works</h2>
+          <p className="mx-auto max-w-2xl text-muted-foreground">
+            Choose the path that matches what you want to do today.
+          </p>
+        </div>
+        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
+          <Card className="border-forest/15 bg-sand/20">
+            <CardContent className="p-7">
+              <span className="text-sm font-semibold uppercase tracking-wide text-primary">Step 1</span>
+              <h3 className="mt-3 font-regular text-2xl font-semibold">Choose your path</h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground">
+                Create a will through SmartWill, or submit a trust enquiry for personal follow-up.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="border-forest/15 bg-sand/20">
+            <CardContent className="p-7">
+              <span className="text-sm font-semibold uppercase tracking-wide text-primary">Step 2</span>
+              <h3 className="mt-3 font-regular text-2xl font-semibold">Take the first practical step</h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground">
+                Complete your will through the online SmartWill service, or share a few brief details about your trust planning goals.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="border-forest/15 bg-sand/20">
+            <CardContent className="p-7">
+              <span className="text-sm font-semibold uppercase tracking-wide text-primary">Step 3</span>
+              <h3 className="mt-3 font-regular text-2xl font-semibold">Discuss your trust needs</h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground">
+                For trust enquiries, the LegacyBuilder team will discuss your goals and help connect you with relevant professionals where appropriate.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <section id="estate-calculator" className="container mx-auto scroll-mt-28 px-4 py-20">
+        <Card className="mx-auto max-w-5xl overflow-hidden border-forest/15 bg-sand/25 shadow-elegant">
+          <CardContent className="flex flex-col gap-7 p-8 md:flex-row md:items-center md:p-10">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-forest text-sand">
+              <Calculator className="h-7 w-7" aria-hidden="true" />
+            </div>
+            <div className="flex-1">
+              <h2 className="font-regular text-3xl font-bold text-forest">Estate calculator</h2>
+              <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
+                Use the online calculator to explore your current estate planning position and consider your next steps. The calculator opens in a new tab.
+              </p>
+            </div>
+            <Button asChild className="w-fit bg-forest text-sand hover:bg-forest/90">
+              <a href={CALCULATOR_URL} target="_blank" rel="noopener noreferrer">
+                Open estate calculator <ArrowUpRight aria-hidden="true" />
+              </a>
+            </Button>
+          </CardContent>
+        </Card>
+      </section>
+
       <section className="container mx-auto px-4 py-20">
-        <Card className="bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
-          <CardContent className="p-12 text-center">
-            <h2 className="font-regular text-3xl md:text-4xl font-bold mb-4">
-              Ready to Secure Your Family's Legacy?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join thousands of South African families who trust Legacy Builder 
-              to protect and grow their generational wealth.
+        <Card className="border-primary/20 bg-gradient-to-r from-primary/10 to-accent/10">
+          <CardContent className="p-8 text-center md:p-12">
+            <UsersRound className="mx-auto mb-5 h-8 w-8 text-primary" aria-hidden="true" />
+            <h2 className="mb-4 font-regular text-3xl font-bold md:text-4xl">Ready to take the next step?</h2>
+            <p className="mx-auto mb-8 max-w-2xl text-xl text-muted-foreground">
+              Create your will online or tell us what you would like to explore through trust planning.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" onClick={() => navigate('/signup')}>
-                Start Your Free Trial Today
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
+              <Button asChild size="lg">
+                <a href={WILL_URL} target="_blank" rel="noopener noreferrer">
+                  Create my will <ArrowUpRight aria-hidden="true" />
+                </a>
               </Button>
-              <Button variant="outline" size="lg" onClick={() => navigate('/trust-enquiry')}>
-                Enquire about a trust
+              <Button asChild variant="outline" size="lg">
+                <Link to="/trust-enquiry">Enquire about a trust</Link>
               </Button>
             </div>
           </CardContent>
         </Card>
       </section>
 
-      {/* Footer */}
       <footer className="border-t bg-card/50">
         <div className="container mx-auto px-4 py-12">
-          <div className="grid gap-8 md:grid-cols-4">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div className="md:col-span-2">
-              <p className="text-muted-foreground mb-4 max-w-md">
-                Empowering South African families and legal professionals to build, 
-                protect, and transfer generational wealth through innovative trust and wealth management solutions.
+              <p className="mb-3 font-regular text-xl font-semibold text-forest">LegacyBuilder</p>
+              <p className="mb-4 max-w-md text-muted-foreground">
+                Estate planning education and guidance for South African families and business owners.
               </p>
             </div>
-            
+
             <div>
-              <h3 className="font-semibold mb-4">Platform</h3>
+              <h3 className="mb-4 font-semibold">Estate planning</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>Trust Builder</li>
-                <li>Document Vault</li>
-                <li>Wealth Tracking</li>
-                <li>Crypto Verification</li>
-                <li>Education Academy</li>
+                <li><a className="hover:text-primary" href={WILL_URL} target="_blank" rel="noopener noreferrer">Will creation</a></li>
+                <li><Link className="hover:text-primary" to="/trust-enquiry">Trust enquiry</Link></li>
+                <li><a className="hover:text-primary" href={CALCULATOR_URL} target="_blank" rel="noopener noreferrer">Estate calculator</a></li>
+                <li><a className="hover:text-primary" href="#how-it-works">How it works</a></li>
               </ul>
             </div>
-            
+
             <div>
-              <h3 className="font-semibold mb-4">Support</h3>
+              <h3 className="mb-4 font-semibold">Contact & information</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li>Help Center</li>
-                <li>Documentation</li>
-                <li>Contact Support</li>
-                <li>Privacy Policy</li>
-                <li>Terms of Service</li>
+                <li><a className="hover:text-primary" href="mailto:mylegacy@legacybuilder.co.za">mylegacy@legacybuilder.co.za</a></li>
+                <li><Link className="hover:text-primary" to="/trust-enquiry#privacy-information">Privacy information</Link></li>
+                <li><a className="hover:text-primary" href="#education">Estate planning education</a></li>
               </ul>
             </div>
           </div>
-          
-          <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 Legacy Builder. All rights reserved. | Company Registration: 2024/123456/07</p>
+
+          <div className="mt-8 border-t pt-8 text-center text-muted-foreground">
+            <p>&copy; 2026 LegacyBuilder. All rights reserved.</p>
           </div>
         </div>
       </footer>

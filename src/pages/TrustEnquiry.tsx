@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -68,6 +68,14 @@ export default function TrustEnquiry() {
   });
   const messageLength = watch("message")?.length ?? 0;
 
+  useEffect(() => {
+    if (window.location.hash !== "#privacy-information") return;
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById("privacy-information")?.scrollIntoView({ block: "start" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
   const onSubmit = async (values: TrustEnquiryFormValues) => {
     if (submissionInFlight.current) return;
     submissionInFlight.current = true;
@@ -126,7 +134,7 @@ export default function TrustEnquiry() {
             </div>
             <h1 className="font-regular text-4xl tracking-tight text-forest md:text-5xl">Let’s plan your trust</h1>
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Tell us what you would like to arrange. Leave your details and the LegacyBuilder team will contact you to discuss a suitable trust and the next steps.
+              Tell us what you would like to explore. Leave your details and the LegacyBuilder team will contact you to discuss your trust planning goals and, where appropriate, help you connect with relevant professionals.
             </p>
           </div>
         </section>

@@ -1,14 +1,15 @@
-import React from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { AnimatedNavigation } from "./AnimatedNavigation";
 import { MobileNavigation } from "./MobileNavigation";
 
 export function ResponsiveNavigation() {
-  const isMobile = useIsMobile();
-
   return (
     <>
-      {isMobile ? <MobileNavigation /> : <AnimatedNavigation />}
+      <div className="lg:hidden">
+        <MobileNavigation />
+      </div>
+      <div className="hidden lg:block">
+        <AnimatedNavigation />
+      </div>
     </>
   );
 }
