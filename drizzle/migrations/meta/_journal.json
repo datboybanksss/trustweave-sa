@@ -15,6 +15,13 @@
       "when": 1795521356066,
       "tag": "0001_add_trust_enquiry_rate_limiter",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795522050623,
+      "tag": "0002_add_trust_enquiry_preferred_language",
+      "breakpoints": true
     }
   ]
 }

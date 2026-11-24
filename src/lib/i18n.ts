@@ -1,124 +1,97 @@
-export type LanguageCode = 'en' | 'af' | 'zu' | 'xh' | 'nr' | 'ss' | 'nso' | 'st' | 'tn' | 've' | 'ts';
-
-export interface TranslationData {
-  app: {
-    brand: string;
-  };
-  nav: {
-    home: string;
-    dashboard: string;
-    education: string;
-    login: string;
-    signup: string;
-    platform: string;
-    solutions: string;
-    resources: string;
-    consultation: string;
-    pricing: string;
-  };
-  greeting: {
-    goodDay: string;
-    yourLegacy: string;
-  };
-  cta: {
-    getStarted: string;
-    goToDashboard: string;
-    startLearning: string;
-    createTrust: string;
-    uploadDocument: string;
-    bookConsultation: string;
-  };
-  thankyou: {
-    partnerMsg: string;
-    individualMsg: string;
-    trial: string;
-  };
-  partner: {
-    portal: string;
-    totalAUM: string;
-    allClients: string;
-    addNewClient: string;
-  };
-  individual: {
-    netWorth: string;
-    assets: string;
-    debts: string;
-    trusts: string;
-    compliance: string;
-    totalPortfolio: string;
-  };
-  actions: {
-    createTrust: string;
-    uploadDocument: string;
-    bookConsultation: string;
-    connectBank: string;
-    generateReport: string;
-    scheduleMeeting: string;
-  };
-  dashboard: {
-    recentActivity: string;
-    assetAllocation: string;
-    upcomingEvents: string;
-    quickStats: string;
-  };
-  platform: {
-    trustBuilder: string;
-    trustBuilderDesc: string;
-    wealthTracking: string;
-    wealthTrackingDesc: string;
-    documentVault: string;
-    documentVaultDesc: string;
-    compliance: string;
-    complianceDesc: string;
-  };
-}
+export type LanguageCode = "en" | "af" | "zu" | "xh" | "nr" | "ss" | "nso" | "st" | "tn" | "ve" | "ts";
 
 export const LANGUAGES = [
-  { code: 'en' as const, label: 'English', flag: '🇬🇧' },
-  { code: 'af' as const, label: 'Afrikaans', flag: '🇿🇦' },
-  { code: 'zu' as const, label: 'isiZulu', flag: '🇿🇦' },
-  { code: 'xh' as const, label: 'isiXhosa', flag: '🇿🇦' },
-  { code: 'nr' as const, label: 'isiNdebele', flag: '🇿🇦' },
-  { code: 'ss' as const, label: 'siSwati', flag: '🇿🇦' },
-  { code: 'nso' as const, label: 'Sepedi', flag: '🇿🇦' },
-  { code: 'st' as const, label: 'Sesotho', flag: '🇿🇦' },
-  { code: 'tn' as const, label: 'Setswana', flag: '🇿🇦' },
-  { code: 've' as const, label: 'Tshivenda', flag: '🇿🇦' },
-  { code: 'ts' as const, label: 'Xitsonga', flag: '🇿🇦' },
-] as const;
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "af", label: "Afrikaans", flag: "🇿🇦" },
+  { code: "zu", label: "isiZulu", flag: "🇿🇦" },
+  { code: "xh", label: "isiXhosa", flag: "🇿🇦" },
+  { code: "nr", label: "isiNdebele", flag: "🇿🇦" },
+  { code: "ss", label: "siSwati", flag: "🇿🇦" },
+  { code: "nso", label: "Sepedi", flag: "🇿🇦" },
+  { code: "st", label: "Sesotho", flag: "🇿🇦" },
+  { code: "tn", label: "Setswana", flag: "🇿🇦" },
+  { code: "ve", label: "Tshivenda", flag: "🇿🇦" },
+  { code: "ts", label: "Xitsonga", flag: "🇿🇦" },
+] as const satisfies ReadonlyArray<{ code: LanguageCode; label: string; flag: string }>;
 
-// Translation cache
-const translationCache = new Map<LanguageCode, TranslationData>();
+export const LANGUAGE_TAGS: Record<LanguageCode, string> = {
+  en: "en",
+  af: "af",
+  zu: "zu",
+  xh: "xh",
+  nr: "nr",
+  ss: "ss",
+  nso: "nso",
+  st: "st",
+  tn: "tn",
+  ve: "ve",
+  ts: "ts",
+};
 
-export async function loadTranslations(lang: LanguageCode): Promise<TranslationData> {
-  if (translationCache.has(lang)) {
-    return translationCache.get(lang)!;
-  }
+export const LANGUAGE_STORAGE_KEY = "lang";
 
+export function isLanguageCode(value: unknown): value is LanguageCode {
+  return typeof value === "string" && LANGUAGES.some((language) => language.code === value);
+}
+
+export function readStoredLanguage(storage?: Pick<Storage, "getItem"> | null): LanguageCode {
   try {
-    const response = await fetch(`/locales/${lang}.json`);
-    if (!response.ok) {
-      throw new Error(`Failed to load translations for ${lang}`);
-    }
-    const translations = await response.json();
-    translationCache.set(lang, translations);
-    return translations;
-  } catch (error) {
-    console.error(`Error loading translations for ${lang}:`, error);
-    // Fallback to English
-    if (lang !== 'en') {
-      return loadTranslations('en');
-    }
-    throw error;
+    const saved = storage?.getItem(LANGUAGE_STORAGE_KEY);
+    return isLanguageCode(saved) ? saved : "en";
+  } catch {
+    return "en";
+  }
+}
+
+export function saveStoredLanguage(storage: Pick<Storage, "setItem"> | null | undefined, lang: LanguageCode) {
+  try {
+    storage?.setItem(LANGUAGE_STORAGE_KEY, lang);
+  } catch {
+    // The selected language still works for this session when storage is unavailable.
   }
 }
 
 export function interpolate(template: string, variables: Record<string, string | number> = {}): string {
-  return template.replace(/\{(\w+)\}/g, (match, key) => {
-    return variables[key]?.toString() || match;
-  });
+  return template.replace(/\{(\w+)\}/g, (match, key) => variables[key]?.toString() ?? match);
 }
 
-export function getNestedValue(obj: any, path: string): string {
-  return path.split('.').reduce((current, key) => current?.[key], obj) || path;
+export function getNestedValue(obj: unknown, path: string): string | undefined {
+  const value = path.split(".").reduce<unknown>((current, key) => {
+    if (!current || typeof current !== "object") return undefined;
+    return (current as Record<string, unknown>)[key];
+  }, obj);
+  return typeof value === "string" ? value : undefined;
 }
+
+// Existing dashboard components continue to have an English fallback while the
+// current public journey uses the complete bundled dictionaries above.
+export const legacyEnglishTranslations = {
+  app: { brand: "LegacyBuilder" },
+  nav: {
+    home: "Home", dashboard: "Dashboard", education: "Education", login: "Sign in", signup: "Sign up",
+    platform: "Platform", solutions: "Solutions", resources: "Resources", consultation: "Consultation", pricing: "Pricing",
+  },
+  greeting: { goodDay: "Good day, {name}", yourLegacy: "Your legacy at a glance" },
+  cta: {
+    getStarted: "Get Started", goToDashboard: "Go to Dashboard", startLearning: "Start Learning",
+    createTrust: "Create New Trust", uploadDocument: "Upload Document", bookConsultation: "Book Consultation",
+  },
+  thankyou: {
+    partnerMsg: "Your partner account has been created successfully. You can now manage multiple client portfolios.",
+    individualMsg: "Your personal account has been created successfully. Start building your legacy today.",
+    trial: "Your 7-day free trial has started! You have full access to all features until {date}.",
+  },
+  partner: { portal: "Partner Portal", totalAUM: "Total AUM", allClients: "All Clients Overview", addNewClient: "Add New Client" },
+  individual: { netWorth: "Net Worth", assets: "Total Assets", debts: "Total Debts", trusts: "Active Trusts", compliance: "Compliance", totalPortfolio: "Total portfolio" },
+  actions: {
+    createTrust: "Create Trust", uploadDocument: "Upload Document", bookConsultation: "Book Consultation",
+    connectBank: "Connect Bank", generateReport: "Generate Report", scheduleMeeting: "Schedule Meeting",
+  },
+  dashboard: { recentActivity: "Recent Activity", assetAllocation: "Asset Allocation", upcomingEvents: "Upcoming Events", quickStats: "Quick Statistics" },
+  platform: {
+    trustBuilder: "Trust Builder", trustBuilderDesc: "Create and manage family trusts with guided workflows",
+    wealthTracking: "Wealth Tracking", wealthTrackingDesc: "Monitor your assets and portfolio performance",
+    documentVault: "Document Vault", documentVaultDesc: "Secure storage for all your important documents",
+    compliance: "Compliance", complianceDesc: "Stay compliant with regulatory requirements",
+  },
+} as const;

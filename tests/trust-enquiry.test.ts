@@ -1,6 +1,6 @@
 // @ts-expect-error Bun supplies this module when running the test file with `bun test`.
 import { describe, expect, it } from "bun:test";
-import { trustEnquiryDefaults, trustEnquirySchema } from "../src/lib/trust-enquiry";
+import { preferredLanguageSchema, trustEnquiryDefaults, trustEnquirySchema } from "../src/lib/trust-enquiry";
 
 const validEnquiry = {
   ...trustEnquiryDefaults,
@@ -46,5 +46,16 @@ describe("trust enquiry validation", () => {
   it("allows exactly 2,000 message characters and rejects 2,001", () => {
     expect(trustEnquirySchema.safeParse({ ...validEnquiry, message: "a".repeat(2000) }).success).toBe(true);
     expect(trustEnquirySchema.safeParse({ ...validEnquiry, message: "a".repeat(2001) }).success).toBe(false);
+  });
+
+  it("defaults preferred language to English for backward-compatible clients", () => {
+    expect(preferredLanguageSchema.parse(undefined)).toBe("en");
+  });
+
+  it("accepts every supported language and rejects unsupported language codes", () => {
+    for (const code of ["en", "af", "zu", "xh", "nr", "ss", "nso", "st", "tn", "ve", "ts"]) {
+      expect(preferredLanguageSchema.parse(code)).toBe(code);
+    }
+    expect(preferredLanguageSchema.safeParse("fr").success).toBe(false);
   });
 });

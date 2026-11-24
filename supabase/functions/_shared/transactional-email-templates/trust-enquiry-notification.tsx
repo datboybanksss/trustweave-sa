@@ -9,6 +9,7 @@ interface Props {
   phone?: string
   primaryGoal?: string
   preferredContact?: string
+  preferredLanguage?: string
   province?: string
   intendedTimeframe?: string
   message?: string
@@ -21,6 +22,17 @@ const timeframeLabels: Record<string, string> = {
   exploring: 'Still exploring',
 }
 
+const languageLabels: Record<string, string> = {
+  en: 'English', af: 'Afrikaans', zu: 'isiZulu', xh: 'isiXhosa', nr: 'isiNdebele', ss: 'siSwati',
+  nso: 'Sepedi', st: 'Sesotho', tn: 'Setswana', ve: 'Tshivenda', ts: 'Xitsonga',
+}
+
+const provinceLabels: Record<string, string> = {
+  eastern_cape: 'Eastern Cape', free_state: 'Free State', gauteng: 'Gauteng', kwazulu_natal: 'KwaZulu-Natal',
+  limpopo: 'Limpopo', mpumalanga: 'Mpumalanga', northern_cape: 'Northern Cape', north_west: 'North West',
+  western_cape: 'Western Cape', outside_south_africa: 'Outside South Africa',
+}
+
 const Email = ({
   enquiryId,
   fullName,
@@ -28,6 +40,7 @@ const Email = ({
   phone,
   primaryGoal,
   preferredContact,
+  preferredLanguage,
   province,
   intendedTimeframe,
   message,
@@ -47,7 +60,8 @@ const Email = ({
           <Text style={detail}><strong>Phone:</strong> {phone || 'Not provided'}</Text>
           <Text style={detail}><strong>Primary goal:</strong> {primaryGoal || 'Not provided'}</Text>
           <Text style={detail}><strong>Preferred contact:</strong> {preferredContact || 'Not provided'}</Text>
-          {province && <Text style={detail}><strong>Province:</strong> {province}</Text>}
+          <Text style={detail}><strong>Website language:</strong> {languageLabels[preferredLanguage || 'en'] || 'English'}</Text>
+          {province && <Text style={detail}><strong>Province:</strong> {provinceLabels[province] || province}</Text>}
           {intendedTimeframe && <Text style={detail}><strong>Timeframe:</strong> {timeframeLabels[intendedTimeframe] || intendedTimeframe}</Text>}
         </Section>
         {message && (
@@ -75,7 +89,8 @@ export const template = {
     phone: '+27 82 123 4567',
     primaryGoal: 'Family planning',
     preferredContact: 'email',
-    province: 'Gauteng',
+    preferredLanguage: 'af',
+    province: 'gauteng',
     intendedTimeframe: 'within_3_months',
     message: '[TEST] This is a synthetic enquiry used to verify the notification layout.',
     isTest: true,

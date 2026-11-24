@@ -31,6 +31,7 @@ export type Database = {
           notified_at: string | null
           phone: string
           preferred_contact_method: string
+          preferred_language: string
           primary_goal: string
           province: string | null
           source_page: string
@@ -57,6 +58,7 @@ export type Database = {
           notified_at?: string | null
           phone: string
           preferred_contact_method: string
+          preferred_language?: string
           primary_goal: string
           province?: string | null
           source_page?: string
@@ -83,6 +85,7 @@ export type Database = {
           notified_at?: string | null
           phone?: string
           preferred_contact_method?: string
+          preferred_language?: string
           primary_goal?: string
           province?: string | null
           source_page?: string

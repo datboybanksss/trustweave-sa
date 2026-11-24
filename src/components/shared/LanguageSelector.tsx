@@ -1,73 +1,64 @@
-import { useState } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { Settings } from "lucide-react";
-import { useTranslation } from "@/hooks/useTranslation";
-import { ApiKeyModal } from "./ApiKeyModal";
+import { Check, ChevronDown, Globe } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useI18n } from "@/components/i18n/I18nProvider";
+import { LANGUAGES, type LanguageCode } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
 
-type Lang = "en" | "af" | "zu" | "xh" | "st" | "tn" | "ts" | "ss" | "ve" | "nr" | "nso";
+export const LanguageSelector = ({ className }: { className?: string }) => {
+  const { lang, setLang, t } = useI18n();
+  const currentLanguage = LANGUAGES.find((language) => language.code === lang) ?? LANGUAGES[0];
 
-const languages = [
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'af', name: 'Afrikaans', flag: '🇿🇦' },
-  { code: 'zu', name: 'isiZulu', flag: '🇿🇦' },
-  { code: 'xh', name: 'isiXhosa', flag: '🇿🇦' },
-  { code: 'st', name: 'Sesotho', flag: '🇿🇦' },
-  { code: 'tn', name: 'Setswana', flag: '🇿🇦' },
-  { code: 'ts', name: 'Xitsonga', flag: '🇿🇦' },
-  { code: 'ss', name: 'siSwati', flag: '🇿🇦' },
-  { code: 've', name: 'Tshivenda', flag: '🇿🇦' },
-  { code: 'nr', name: 'isiNdebele', flag: '🇿🇦' },
-  { code: 'nso', name: 'Sepedi', flag: '🇿🇦' }
-] as const;
-
-export const LanguageSelector = () => {
-  const { lang, setLang, apiKey } = useTranslation();
-  const [showApiModal, setShowApiModal] = useState(false);
-
-  const handleLanguageChange = (newLang: Lang) => {
-    if (newLang !== "en" && !apiKey.trim()) {
-      setShowApiModal(true);
-      return;
-    }
-    setLang(newLang);
+  const selectLanguage = (code: LanguageCode) => {
+    if (code !== lang) setLang(code);
   };
 
   return (
-    <>
-      <div className="flex items-center gap-2">
-        <Select value={lang} onValueChange={(v) => handleLanguageChange(v as Lang)}>
-          <SelectTrigger className="w-32">
-            <SelectValue placeholder="Language" />
-          </SelectTrigger>
-          <SelectContent>
-            {languages.map(language => (
-              <SelectItem key={language.code} value={language.code}>
-                <span className="flex items-center gap-2">
-                  <span>{language.flag}</span>
-                  <span>{language.name}</span>
-                </span>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        {lang !== "en" && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setShowApiModal(true)}
-            className="p-2 h-8 w-8"
-            title="Translation Settings"
-          >
-            <Settings className="h-3 w-3" />
-          </Button>
+    <DropdownMenu modal={false}>
+      <DropdownMenuTrigger
+        className={cn(
+          "inline-flex h-10 max-w-full items-center justify-center gap-2 rounded-full border border-forest/20 bg-background px-3 text-sm font-medium text-foreground shadow-sm outline-none transition-colors hover:bg-sand/40 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          className,
         )}
-      </div>
-      
-      <ApiKeyModal 
-        open={showApiModal} 
-        onOpenChange={setShowApiModal} 
-      />
-    </>
+        aria-label={`${t("nav.languageSelector")}: ${currentLanguage.label}`}
+      >
+        <Globe className="h-4 w-4 shrink-0 text-forest" aria-hidden="true" />
+        <span className="max-w-28 truncate">{currentLanguage.label}</span>
+        <ChevronDown className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="end"
+        sideOffset={8}
+        collisionPadding={8}
+        className="z-[140] max-h-[min(26rem,calc(100dvh-1rem))] w-[min(18rem,calc(100vw-1rem))] overflow-y-auto overscroll-contain border-forest/20 bg-background p-1.5 text-foreground opacity-100 shadow-elegant"
+        aria-label={t("nav.selectLanguage")}
+      >
+        <DropdownMenuLabel className="px-3 py-2 text-forest">{t("nav.selectLanguage")}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {LANGUAGES.map((language) => {
+          const selected = language.code === lang;
+          return (
+            <DropdownMenuItem
+              key={language.code}
+              onSelect={() => selectLanguage(language.code)}
+              aria-current={selected ? "true" : undefined}
+              className={cn(
+                "flex min-h-10 cursor-pointer items-center justify-between gap-3 rounded-md px-3 py-2.5 text-foreground focus:bg-sand/50 focus:text-foreground",
+                selected && "bg-sand/60 font-semibold text-forest",
+              )}
+            >
+              <span lang={language.code}>{language.label}</span>
+              {selected && <Check className="h-4 w-4 shrink-0 text-forest" aria-hidden="true" />}
+            </DropdownMenuItem>
+          );
+        })}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

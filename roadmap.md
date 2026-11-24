@@ -14,3 +14,12 @@
 - [x] Replace unsupported testimonials, statistics, product marketing, and consultation content
 - [x] Point public navigation and footer links only to genuine destinations
 - [x] Verify the refreshed desktop/mobile public journey and working links; do not publish
+
+## Public language implementation
+
+- [x] Bundle complete current-public dictionaries for all 11 existing language codes with English fallback
+- [x] Localise public navigation, homepage, trust form, validation/status messages, success, privacy, and not-found content
+- [x] Replace API-key-gated public selectors with one accessible shared selector on home and trust pages
+- [x] Persist validated preferred_language with enquiries and include it in the prepared owner notification
+- [x] Test locale completeness, language persistence/fallbacks, form preservation, backend privacy, and responsive selector behavior
+- [x] Commit the verified preview changes without publishing

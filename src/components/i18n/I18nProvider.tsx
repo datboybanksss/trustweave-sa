@@ -1,9 +1,19 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { LanguageCode, TranslationData, loadTranslations, interpolate, getNestedValue } from '@/lib/i18n';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import {
+  LANGUAGE_TAGS,
+  getNestedValue,
+  interpolate,
+  isLanguageCode,
+  legacyEnglishTranslations,
+  readStoredLanguage,
+  saveStoredLanguage,
+  type LanguageCode,
+} from "@/lib/i18n";
+import { publicDictionaries, publicEnglish, type PublicDictionary, type PublicTranslationKey } from "@/lib/public-translations";
 
 interface I18nContextType {
   lang: LanguageCode;
-  translations: TranslationData | null;
+  translations: PublicDictionary;
   setLang: (lang: LanguageCode) => void;
   t: (key: string, variables?: Record<string, string | number>) => string;
   isLoading: boolean;
@@ -11,73 +21,57 @@ interface I18nContextType {
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
-interface I18nProviderProps {
-  children: ReactNode;
+function initialLanguage(): LanguageCode {
+  try {
+    return readStoredLanguage(window.localStorage);
+  } catch {
+    return "en";
+  }
 }
 
-export function I18nProvider({ children }: I18nProviderProps) {
-  const [lang, setLangState] = useState<LanguageCode>(() => {
-    // Only read from localStorage, no auto-detect
-    const saved = localStorage.getItem('lang') as LanguageCode;
-    return saved || 'en';
-  });
-  
-  const [translations, setTranslations] = useState<TranslationData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+export function I18nProvider({ children }: { children: ReactNode }) {
+  const [lang, setLangState] = useState<LanguageCode>(initialLanguage);
 
-  const setLang = async (newLang: LanguageCode) => {
-    setIsLoading(true);
+  const setLang = useCallback((newLang: LanguageCode) => {
+    if (!isLanguageCode(newLang)) return;
+    setLangState(newLang);
     try {
-      const newTranslations = await loadTranslations(newLang);
-      setTranslations(newTranslations);
-      setLangState(newLang);
-      localStorage.setItem('lang', newLang);
-    } catch (error) {
-      console.error('Failed to change language:', error);
-    } finally {
-      setIsLoading(false);
+      saveStoredLanguage(window.localStorage, newLang);
+    } catch {
+      // The in-memory choice still applies when browser storage is unavailable.
     }
-  };
-
-  const t = (key: string, variables?: Record<string, string | number>): string => {
-    if (!translations) return key;
-    
-    const value = getNestedValue(translations, key);
-    if (value === key) {
-      // Key not found, return the key itself
-      return key;
-    }
-    
-    return variables ? interpolate(value, variables) : value;
-  };
-
-  // Load initial translations
-  useEffect(() => {
-    const loadInitial = async () => {
-      try {
-        const initialTranslations = await loadTranslations(lang);
-        setTranslations(initialTranslations);
-      } catch (error) {
-        console.error('Failed to load initial translations:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadInitial();
   }, []);
 
-  return (
-    <I18nContext.Provider value={{ lang, translations, setLang, t, isLoading }}>
-      {children}
-    </I18nContext.Provider>
-  );
+  useEffect(() => {
+    document.documentElement.lang = LANGUAGE_TAGS[lang];
+  }, [lang]);
+
+  const t = useCallback((key: string, variables?: Record<string, string | number>): string => {
+    let value: string | undefined;
+    if (key in publicEnglish) {
+      const publicKey = key as PublicTranslationKey;
+      value = publicDictionaries[lang][publicKey] || publicEnglish[publicKey];
+    } else {
+      // Safe compatibility for legacy dashboard keys, never used as a public placeholder.
+      value = getNestedValue(legacyEnglishTranslations, key);
+    }
+    if (!value) return key;
+    return variables ? interpolate(value, variables) : value;
+  }, [lang]);
+
+  const value = useMemo<I18nContextType>(() => ({
+    lang,
+    translations: publicDictionaries[lang],
+    setLang,
+    t,
+    isLoading: false,
+  }), [lang, setLang, t]);
+
+  return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }
 
 export function useI18n() {
   const context = useContext(I18nContext);
-  if (context === undefined) {
-    throw new Error('useI18n must be used within an I18nProvider');
-  }
+  if (!context) throw new Error("useI18n must be used within an I18nProvider");
   return context;
 }

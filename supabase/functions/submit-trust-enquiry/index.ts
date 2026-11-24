@@ -26,6 +26,7 @@ const bodySchema = z.object({
     }),
   primaryGoal: z.enum(['family_planning', 'business_succession', 'property_investments', 'review_existing_trust', 'guidance']),
   preferredContact: z.enum(['email', 'phone', 'whatsapp']),
+  preferredLanguage: z.enum(['en', 'af', 'zu', 'xh', 'nr', 'ss', 'nso', 'st', 'tn', 've', 'ts']).default('en'),
   province: optionalText(100),
   intendedTimeframe: z.preprocess(
     (value) => value === '' || value === undefined ? null : value,
@@ -146,6 +147,7 @@ Deno.serve(async (request) => {
       phone: values.phone,
       primary_goal: values.primaryGoal,
       preferred_contact_method: values.preferredContact,
+      preferred_language: values.preferredLanguage,
       province: values.province || null,
       intended_timeframe: values.intendedTimeframe || null,
       message: values.message || null,
@@ -204,6 +206,7 @@ Deno.serve(async (request) => {
             phone: values.phone,
             primaryGoal: goalLabels[values.primaryGoal],
             preferredContact: values.preferredContact,
+            preferredLanguage: values.preferredLanguage,
             province: values.province || '',
             intendedTimeframe: values.intendedTimeframe || '',
             message: values.message || '',
