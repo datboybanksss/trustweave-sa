@@ -24,6 +24,7 @@ import { BrandLogo } from "@/components/shared/BrandLogo";
 import { usePublicPageTitle } from "@/hooks/usePublicPageTitle";
 
 const fieldClassName = "mt-2 flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:text-sm";
+const PRIVACY_EMAIL = "mylegacy@legacybuilder.co.za";
 
 const validationKeys: Record<string, string> = {
   "Please enter your full name.": "validation.fullNameRequired",
@@ -66,6 +67,8 @@ export default function TrustEnquiry() {
   const submissionInFlight = useRef(false);
   const { lang, t } = useI18n();
   usePublicPageTitle("meta.trustTitle");
+  const privacyBody3 = t("privacy.body3");
+  const privacyEmailIndex = privacyBody3.indexOf(PRIVACY_EMAIL);
   const {
     register,
     handleSubmit,
@@ -287,7 +290,20 @@ export default function TrustEnquiry() {
                 <div className="mt-4 space-y-3 leading-relaxed text-muted-foreground">
                   <p>{t("privacy.body1")}</p>
                   <p>{t("privacy.body2")}</p>
-                  <p>{t("privacy.body3")} <a href="mailto:mylegacy@legacybuilder.co.za" className="break-all font-medium text-forest underline underline-offset-4">mylegacy@legacybuilder.co.za</a>.</p>
+                  <p>
+                    {privacyEmailIndex === -1 ? (
+                      <>
+                        {privacyBody3}{" "}
+                        <a href={`mailto:${PRIVACY_EMAIL}`} className="break-all font-medium text-forest underline underline-offset-4">{PRIVACY_EMAIL}</a>.
+                      </>
+                    ) : (
+                      <>
+                        {privacyBody3.slice(0, privacyEmailIndex)}
+                        <a href={`mailto:${PRIVACY_EMAIL}`} className="break-all font-medium text-forest underline underline-offset-4">{PRIVACY_EMAIL}</a>
+                        {privacyBody3.slice(privacyEmailIndex + PRIVACY_EMAIL.length)}
+                      </>
+                    )}
+                  </p>
                 </div>
               </div>
             </div>
